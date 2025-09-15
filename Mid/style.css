@@ -1,0 +1,180 @@
+@import url(https://fonts.cdnfonts.com/css/mestizo-font);
+@import url(https://fonts.cdnfonts.com/css/bodoniflf);
+@import url(https://fonts.googleapis.com/css2?family=Antic+Didone&family=Jim+Nightshade&family=Ovo&family=Viaoda+Libre&display=swap);
+.creed-card,
+.quote,
+body {
+  display: flex;
+}
+html{
+  scroll-behavior: smooth;
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-image: url("../public/bg-1.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: #e0dcdc;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: linear-gradient(to right, #0f0f0f 8%, #371919 100%);
+
+
+}
+.main-container {
+  padding: 40px 20px;
+  /* margin:40px 20px; */
+  width: 100%;
+  max-width: 1920px;
+}
+.page-header h1 {
+  font-family: "Mestizo Font", sans-serif;
+  font-size: 7rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 80px;
+  letter-spacing: 5px;
+}
+.title-white {
+  color: #f0f0f0;
+  text-shadow: 2px 3px 4px rgba(0, 0, 0, 0.7);
+}
+.title-red {
+  color: #ab0000;
+  text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000,
+    2px 2px 0 #000, 4px 4px 5px rgba(0, 0, 0, 0.8);
+}
+.creed-cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+.creed-card {
+  background-color: #290e11;
+  border: 3px solid #dbb92c;
+  border-radius: 60px;
+  padding: 40px 35px;
+  width: 450px;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 0 40px 5px rgba(219, 185, 44, 0.45);
+}
+.creed-card h2 {
+  font-family: BodoniFLF, sans-serif;
+  font-size: 3.6em;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #f0f0f0;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5),
+    0 0 5px rgba(255, 255, 255, 0.8);
+}
+.creed-card li,
+.quote {
+  font-family: Ovo, serif;
+}
+.card-icon {
+  height: 180px;
+  margin-bottom: 22px;
+}
+.quote {
+  font-size: 1.7rem;
+  color: #dbb92c;
+  margin-bottom: 16px;
+  height: 60px;
+  width: 80%;
+  align-items: center;
+}
+.laurel-icon {
+  margin-top: -80px;
+  width: 340px;
+  margin-bottom: -32px;
+}
+.creed-card ul {
+  list-style: none;
+  padding: 0 0 0 25px;
+  text-align: left;
+  width: 100%;
+}
+.creed-card li {
+  color: #dbb92c;
+  margin-bottom: 12px;
+  font-size: 1.35rem;
+  position: relative;
+}
+.creed-card li::before {
+  content: "•";
+  color: #dbb92c;
+  font-weight: 700;
+  position: absolute;
+  left: -20px;
+  font-size: 1.2rem;
+}
+@media (max-width: 992px) {
+  body {
+
+  }
+  .page-header h1 {
+    font-size: 4rem;
+    margin-bottom: 60px;
+  }
+  .creed-cards-container {
+    gap: 40px;
+  }
+  .creed-card {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px 25px;
+    border-radius: 40px;
+  }
+  .creed-card h2 {
+    font-size: 2.8em;
+  }
+  .card-icon {
+    height: 140px;
+  }
+  .quote {
+    font-size: 1.3rem;
+    align-self: center;
+    justify-content: center;
+    height: auto;
+    margin-bottom: 18px;
+    width: 65%;
+  }
+  .laurel-icon {
+    margin-top: -65px;
+    width: 280px;
+    margin-bottom: -25px;
+  }
+  .creed-card li {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 480px) {
+  .page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 40px;
+  }
+  .creed-card h2 {
+    font-size: 2.2em;
+  }
+  .card-icon {
+    height: 120px;
+  }
+}
+
+@media (max-width:376px) {
+.creed-card{
+  width: 97%;
+}
+
+}

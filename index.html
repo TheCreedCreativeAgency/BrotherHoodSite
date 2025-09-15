@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know The Creed</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./Footer/style.css">
+    <link rel="stylesheet" href="./Mid/style.css">
+    <style>
+        .video-container {
+    position: relative;
+    width: 92%;
+    max-width: 1600px;
+    margin: 30px auto;
+    background-color: #220b0b;
+    padding: 0.5rem;
+    border-radius: 0.8rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+        .hero-video-section {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 0; /* Remove existing margin */
+}
+
+video {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.hero-video-section:hover .video-controls,
+.video-controls:focus-within {
+    opacity: 1;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    padding: 5px;
+    transition: transform 0.2s ease;
+}
+
+.control-btn:hover {
+    transform: scale(1.1);
+    color: #d8b375; /* Optional: adds a hover color */
+}
+
+.control-btn svg {
+    display: block;
+    width: 30px;
+    height: 30px;
+}
+        .video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px 15px; /* Add horizontal padding for spacing */
+    display: flex;
+    justify-content: space-between; /* This spreads the icons to the left and right */
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.controls-left,
+.controls-right {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Adjust spacing between icons */
+}
+    </style>
+</head>
+
+<body>
+
+
+
+    <div class="top">
+        <img src="public/text.png" alt="" id="text">
+        <img src="public/spartan.png" alt="" id="spartan">
+
+    </div>
+    <div class="video-container">
+        <div class="hero-video-section">
+            <video muted loop playsinline autoplay id="header-video">
+                <source src="./Assets/vido.mp4" type="video/mp4">
+            </video>
+            <div class="video-controls">
+                <div class="controls-left">
+                    <button id="play-pause-btn" class="control-btn" title="Play/Pause">
+                        <svg id="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-play">
+                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                        </svg>
+                        <svg id="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pause" style="display: none;">
+                            <rect x="6" y="4" width="4" height="16"></rect>
+                            <rect x="14" y="4" width="4" height="16"></rect>
+                        </svg>
+                    </button>
+                </div>
+                <div class="controls-right">
+                    <button id="mute-unmute-btn" class="control-btn" title="Mute/Unmute">
+                        <svg id="volume-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-2">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                        <svg id="mute-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-volume-x" style="display: none;">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <line x1="23" y1="9" x2="17" y2="15"></line>
+                            <line x1="17" y1="9" x2="23" y2="15"></line>
+                        </svg>
+                    </button>
+                    <button id="fullscreen-btn" class="control-btn" title="Fullscreen">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-maximize">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="join" href="https://matrix.to/#/#the-creed-landing:matrix.the-creed.org" style="text-decoration: none;" target="_blank">
+        Join the Creed
+    </a>
+    <div class="main-container" style="padding:40px 25px">
+        <header class="page-header">
+            <h1>
+                <span class="title-white">KNOW THE</span>
+                <span class="title-red"> CREED...</span>
+            </h1>
+        </header>
+
+        <main class="creed-cards-container">
+            <div class="creed-card">
+                <h2>Unity</h2>
+                <img src="../public/unity.png" alt="Two soldiers standing together" class="card-icon">
+                <p class="quote">"And No King stood alone"</p>
+                <img src="../public/wings.png" alt="Laurel wreath" class="laurel-icon">
+                <ul>
+                    <li>Divided we fall, united we rise.</li>
+                    <li>We thrive when brothers join hands</li>
+                    <li>Shared discipline, loyalty, and destiny.</li>
+                </ul>
+            </div>
+
+            <div class="creed-card">
+                <h2>Faith</h2>
+                <img src="../public/faith.png" alt="Spartan helmet" class="card-icon">
+                <p class="quote">"Trust god and let him guide your blade"</p>
+                <img src="../public/wings.png" alt="Laurel wreath" class="laurel-icon">
+                <ul>
+                    <li>Without Faith, We Fall</li>
+                    <li>Faith is the Flame that guides</li>
+                    <li>Faith is your spear</li>
+                </ul>
+            </div>
+
+            <div class="creed-card">
+                <h2>Discipline</h2>
+                <img src="../public//discipline.png" alt="Spartan shield" class="card-icon">
+                <p class="quote">"Persevere when others falter"</p>
+                <img src="../public/wings.png" alt="Laurel wreath" class="laurel-icon">
+                <ul>
+                    <li>Freedom is Earned Through Discipline</li>
+                    <li>Discipline is the Backbone</li>
+                    <li>Discipline Turns Men Into Legends</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <video autoplay muted loop id="myVideo">
+        <source src="../public/footer.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="image-overlay">
+    </div>
+    <div class="main-container-footer">
+        <header class="site-header">
+            <img src="../public/icon.png" alt="The Creed Logo" class="logo">
+            <span>The Creed</span>
+        </header>
+
+        <main>
+            <section class="newsletter-signup">
+                <h1>SIGN UP FOR THE CREED'S</h1>
+                <h2 class="subtitle"><span>Newsletter</span>...</h2>
+
+                <form class="signup-form">
+                    <input type="email" placeholder="Enter your email...">
+                    <button type="submit" class="btn-text">Get Notified...</button>
+                </form>
+            </section>
+
+            <section class="faq-section">
+                <div class="faq-header">
+                    <img src="../public/warrior-right.png" alt="Soldier silhouette" class="soldier">
+                    <div class="faq-title">
+                        <h3>Frequently Asked</h3>
+                        <p><span>Questions</span>...</p>
+                    </div>
+                    <img src="../public/warrior-left.png" alt="Soldier silhouette" class="soldier">
+                </div>
+
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Requirements</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p><b>God Fearing</b> - they must embrace humility and guilt where God may punish. Believing
+                                in a power higher than human will change a person to be positively contributing as an
+                                asset. <br>
+
+                                <b>Extreme Sense Of Justice</b> - Justice is difficult to classify and mark. Justice
+                                should come with patience and absolute confidence with critical thinking. A calm and
+                                collected approach with common sense is required. <br>
+
+                                <b>Selflessness</b> - You yourself are your own priority. Seek help or benefit people.
+                                Numbers are what makes situations a game changer. By seeking help, you become very well
+                                treated. By giving help, you also become very well treated. <br>
+
+                                <b>Stoic</b> - Emotional manipulation is psychologically penetrated everywhere and it
+                                destroys our sense of control. Always utilise apathy and patience. <br>
+
+                                <b>Rational</b> - Similar to the last requirement, apathy and patience is utmost
+                                required to evaluate true senses. <br>
+
+                                <b>Faithful</b> - Stress and other emotions deeply paralyse us. It is how the whole
+                                world works. Close your mouth, do what is necessary. If it doesn't work, don't worry.
+                                Mistakes are inevitable. <br>
+
+                                <b>Disciplined</b> - Similar to the last point, you need to recognise destruction
+                                happens overnight but creation never happens overnight. <br>
+
+                                <b>United</b> - Tough bonds are hard to break. You must be capable of keeping tough
+                                bonds and to keep fortifying it. <br>
+
+                                <b>No Avarice</b> - Having your own rewards is one thing. Greed is another thing. Greed
+                                inhibits diversity and variety of success. Envy will quickly destroy you if you're not
+                                careful. <br>
+
+                                If you keep too much money to yourself, you will lose your business. Then your
+                                character. Then your money. <br>
+
+                                Jews/Zionists/Believers of the works of degeneracy are strictly prohibited to enter.
+                                <br>
+
+                                All of these principles are wholly non-negotiable. Any discrepancies or disparity in
+                                above principles shall be met with fury and hard punishment for a lifetime. <br>
+                                We will not hesitate to implement a Dishonourble Discharge. <br>
+
+                                We value integrity. We will not be afraid to act where truly necessary. If people had no
+                                integrity Satan himself would be sitting next to God. <br>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Values</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Along with unity, faith and discipline - we value a strong, and able character. A
+                                character not bound by no influence, A character not afraid stand first in line for
+                                duty. <br>
+                                We require Brothers that bring greatness to the table. <br>
+
+                                Idleness and imparticipation is frowned upon and will land you out of the Creed by
+                                exile.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Why are we different</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>We arent a brotherhood limited to just "talk" we take actionable steps across the world
+                                to make sure we become an immovable object where evil is concerned. <br>
+                                We will not hesitate to lay down our lives and love for our brothers - the elites have
+                                pioneered against us to be in a state of disunity and and distrustful ness - while they
+                                sit united in there throne of lies. <br>
+                                You must be united, you must fight or you will be forgotten. <br>
+
+                                War with ourselves for a good cause, War against the oppressors is what we stand for.
+                                <br>
+
+                                Its what The Creed stands for...</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Application Process</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>Click on our self hosted Space where you can learn more about the application process:
+                                <br>
+                            <a href="https://matrix.to/#/#the-creed-landing:matrix.the-creed.org">Click Here to Apply</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Age Limit And Must Have(s)</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>
+                                <b>Age Limit:</b> 18+ <br>
+                                You must have a means to support yourself i.e your own business or job.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <span>Pool Funds Deposit</span>
+                            <span class="plus-icon">+</span>
+                        </div>
+                        <div class="accordion-content">
+                            <p>We have paypal. <br>
+                                We have crypto <b>(RECOMMENDED)</b>. <br>
+                                And for big amounts (500 plus) we have also have Western Union Cash.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+    </div>
+
+    <footer class="site-footer-final">
+        <div class="footer-container">
+            <div class="footer-logo-area">
+                <img src="../public/icon.png" alt="The Creed Logo" class="footer-logo">
+                <span class="footer-logo-text">The Creed</span>
+            </div>
+
+            <div class="footer-center-area">
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="#">Newsletter</a></li>
+                        <li><a href="#">ToC</a></li>
+                        <li><a href="#">Our Policies</a></li>
+                        <li><a href="#">Our Laws</a></li>
+                    </ul>
+                </nav>
+                <p class="footer-quote">"Better to die on your feet than to live on your knees"</p>
+            </div>
+
+            <div class="footer-social-area">
+                <a href="#" aria-label="Instagram">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#d8b375" stroke-width="1.5"
+                        stroke-linecap="round" stroke-linejoin="round" class="social-icon">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Get video and control elements
+const video = document.getElementById('header-video');
+const playPauseBtn = document.getElementById('play-pause-btn');
+const playIcon = document.getElementById('play-icon');
+const pauseIcon = document.getElementById('pause-icon');
+const muteUnmuteBtn = document.getElementById('mute-unmute-btn');
+const volumeIcon = document.getElementById('volume-icon');
+const muteIcon = document.getElementById('mute-icon');
+const fullscreenBtn = document.getElementById('fullscreen-btn');
+
+// Function to toggle play/pause
+const togglePlayPause = () => {
+    if (video.paused || video.ended) {
+        video.play();
+        playIcon.style.display = 'none';
+        pauseIcon.style.display = 'block';
+    } else {
+        video.pause();
+        playIcon.style.display = 'block';
+        pauseIcon.style.display = 'none';
+    }
+};
+
+// Function to toggle mute/unmute
+const toggleMuteUnmute = () => {
+    video.muted = !video.muted;
+    if (video.muted) {
+        volumeIcon.style.display = 'none';
+        muteIcon.style.display = 'block';
+    } else {
+        volumeIcon.style.display = 'block';
+        muteIcon.style.display = 'none';
+    }
+};
+
+// Function to toggle fullscreen
+const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) { /* Firefox */
+            video.mozRequestFullScreen();
+        } else if (video.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) { /* IE/Edge */
+            video.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { /* Firefox */
+            document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE/Edge */
+            document.msExitFullscreen();
+        }
+    }
+};
+
+// Add event listeners
+video.addEventListener('click', togglePlayPause);
+playPauseBtn.addEventListener('click', togglePlayPause);
+muteUnmuteBtn.addEventListener('click', toggleMuteUnmute);
+fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+// Update button icons when video state changes
+video.addEventListener('play', () => {
+    playIcon.style.display = 'none';
+    pauseIcon.style.display = 'block';
+});
+video.addEventListener('pause', () => {
+    playIcon.style.display = 'block';
+    pauseIcon.style.display = 'none';
+});
+video.addEventListener('volumechange', () => {
+    if (video.muted) {
+        volumeIcon.style.display = 'none';
+        muteIcon.style.display = 'block';
+    } else {
+        volumeIcon.style.display = 'block';
+        muteIcon.style.display = 'none';
+    }
+});
+        document.addEventListener('DOMContentLoaded', function () {
+            const accordionItems = document.querySelectorAll('.accordion-item');
+
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                header.addEventListener('click', () => {
+                    const currentlyActive = document.querySelector('.accordion-item.active');
+
+                    // If there is an active item and it's not the one we just clicked, close it.
+                    if (currentlyActive && currentlyActive !== item) {
+                        currentlyActive.classList.remove('active');
+                    }
+
+                    // Toggle the active state of the clicked item.
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
