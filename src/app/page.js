@@ -1,5 +1,6 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import './creed-styles.css';
 
 export default function Home() {
@@ -83,8 +84,8 @@ export default function Home() {
     <div>
       {/* Top Section */}
       <div className="top">
-        <img src="/text.png" alt="" id="text" />
-        <img src="/spartan.png" alt="" id="spartan" />
+        <Image src="/text.png" alt="The Creed text" id="text" width={300} height={100} />
+        <Image src="/spartan.png" alt="Spartan warrior" id="spartan" width={200} height={200} />
       </div>
 
       {/* Video Container */}
@@ -179,9 +180,9 @@ export default function Home() {
         <main className="creed-cards-container">
           <div className="creed-card">
             <h2>Unity</h2>
-            <img src="/unity.png" alt="Two soldiers standing together" className="card-icon" />
-            <p className="quote">"And No King stood alone"</p>
-            <img src="/wings.png" alt="Laurel wreath" className="laurel-icon" />
+            <Image src="/unity.png" alt="Two soldiers standing together" className="card-icon" width={80} height={80} />
+            <p className="quote">&ldquo;And No King stood alone&rdquo;</p>
+            <Image src="/wings.png" alt="Laurel wreath" className="laurel-icon" width={40} height={40} />
             <ul>
               <li>Divided we fall, united we rise.</li>
               <li>We thrive when brothers join hands</li>
@@ -191,9 +192,9 @@ export default function Home() {
 
           <div className="creed-card">
             <h2>Faith</h2>
-            <img src="/faith.png" alt="Spartan helmet" className="card-icon" />
-            <p className="quote">"Trust god and let him guide your blade"</p>
-            <img src="/wings.png" alt="Laurel wreath" className="laurel-icon" />
+            <Image src="/faith.png" alt="Spartan helmet" className="card-icon" width={80} height={80} />
+            <p className="quote">&ldquo;Trust god and let him guide your blade&rdquo;</p>
+            <Image src="/wings.png" alt="Laurel wreath" className="laurel-icon" width={40} height={40} />
             <ul>
               <li>Without Faith, We Fall</li>
               <li>Faith is the Flame that guides</li>
@@ -203,9 +204,9 @@ export default function Home() {
 
           <div className="creed-card">
             <h2>Discipline</h2>
-            <img src="/discipline.png" alt="Spartan shield" className="card-icon" />
-            <p className="quote">"Persevere when others falter"</p>
-            <img src="/wings.png" alt="Laurel wreath" className="laurel-icon" />
+            <Image src="/discipline.png" alt="Spartan shield" className="card-icon" width={80} height={80} />
+            <p className="quote">&ldquo;Persevere when others falter&rdquo;</p>
+            <Image src="/wings.png" alt="Laurel wreath" className="laurel-icon" width={40} height={40} />
             <ul>
               <li>Freedom is Earned Through Discipline</li>
               <li>Discipline is the Backbone</li>
@@ -225,13 +226,13 @@ export default function Home() {
       {/* Footer Content */}
       <div className="main-container-footer">
         <header className="site-header">
-          <img src="/icon.png" alt="The Creed Logo" className="logo" />
+          <Image src="/icon.png" alt="The Creed Logo" className="logo" width={40} height={40} />
           <span>The Creed</span>
         </header>
 
         <main>
           <section className="newsletter-signup">
-            <h1>SIGN UP FOR THE CREED'S</h1>
+            <h1>SIGN UP FOR THE CREED&apos;S</h1>
             <h2 className="subtitle"><span>Newsletter</span>...</h2>
 
             <form className="signup-form">
@@ -242,12 +243,12 @@ export default function Home() {
 
           <section className="faq-section">
             <div className="faq-header">
-              <img src="/warrior-right.png" alt="Soldier silhouette" className="soldier" />
+              <Image src="/warrior-right.png" alt="Soldier silhouette" className="soldier" width={100} height={150} />
               <div className="faq-title">
                 <h3>Frequently Asked</h3>
                 <p><span>Questions</span>...</p>
               </div>
-              <img src="/warrior-left.png" alt="Soldier silhouette" className="soldier" />
+              <Image src="/warrior-left.png" alt="Soldier silhouette" className="soldier" width={100} height={150} />
             </div>
 
             <div className="accordion">
@@ -280,7 +281,7 @@ export default function Home() {
                     required to evaluate true senses. <br />
 
                     <b>Faithful</b> - Stress and other emotions deeply paralyse us. It is how the whole
-                    world works. Close your mouth, do what is necessary. If it doesn't work, don't worry.
+                    world works. Close your mouth, do what is necessary. If it doesn&apos;t work, don&apos;t worry.
                     Mistakes are inevitable. <br />
 
                     <b>Disciplined</b> - Similar to the last point, you need to recognise destruction
@@ -290,7 +291,7 @@ export default function Home() {
                     bonds and to keep fortifying it. <br />
 
                     <b>No Avarice</b> - Having your own rewards is one thing. Greed is another thing. Greed
-                    inhibits diversity and variety of success. Envy will quickly destroy you if you're not
+                    inhibits diversity and variety of success. Envy will quickly destroy you if you&apos;re not
                     careful. <br />
 
                     If you keep too much money to yourself, you will lose your business. Then your
@@ -339,7 +340,7 @@ export default function Home() {
                 </div>
                 <div className="accordion-content">
                   <p>
-                    We arent a brotherhood limited to just "talk" we take actionable steps across the world
+                    We arent a brotherhood limited to just &ldquo;talk&rdquo; we take actionable steps across the world
                     to make sure we become an immovable object where evil is concerned. <br />
                     We will not hesitate to lay down our lives and love for our brothers - the elites have
                     pioneered against us to be in a state of disunity and and distrustful ness - while they
@@ -410,7 +411,7 @@ export default function Home() {
       <footer className="site-footer-final">
         <div className="footer-container">
           <div className="footer-logo-area">
-            <img src="/icon.png" alt="The Creed Logo" className="footer-logo" />
+            <Image src="/icon.png" alt="The Creed Logo" className="footer-logo" width={30} height={30} />
             <span className="footer-logo-text">The Creed</span>
           </div>
 
@@ -423,7 +424,7 @@ export default function Home() {
                 <li><a href="#">Our Laws</a></li>
               </ul>
             </nav>
-            <p className="footer-quote">"Better to die on your feet than to live on your knees"</p>
+            <p className="footer-quote">&ldquo;Better to die on your feet than to live on your knees&rdquo;</p>
           </div>
 
           <div className="footer-social-area">

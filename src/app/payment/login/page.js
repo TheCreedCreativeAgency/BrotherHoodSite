@@ -120,7 +120,7 @@ export default function SubscriptionLogin() {
         {/* Footer Links */}
         <div className="mt-8 text-center space-y-3">
           <p className="text-white/50 text-sm">
-            Don't have an account?{' '}
+            Don&apos;t have an account?{' '}
             <Link href="/payment/signup" className="text-yellow-400 hover:text-yellow-300 font-semibold transition-colors">
               Sign up here
             </Link>

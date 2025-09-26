@@ -1,11 +1,11 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import '../figma-styles.css';
 
-export default function SubscribePage() {
+function SubscribeContent() {
   const { data: session } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -210,5 +210,30 @@ export default function SubscribePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function SubscribePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
+        <div className="relative z-10 flex flex-col items-center w-full max-w-md">
+          <div className="logo-container">
+            <div className="logo-outer">
+              <div className="greek-key-border"></div>
+              <div className="logo-inner">
+                <span className="logo-lambda">Λ</span>
+              </div>
+            </div>
+          </div>
+          <div className="enhanced-glass rounded-3xl p-8 w-full relative text-center">
+            <h1 className="text-2xl font-bold text-white mb-4">Loading...</h1>
+            <p className="text-white/60">Please wait while we load your subscription page</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <SubscribeContent />
+    </Suspense>
   );
 }
