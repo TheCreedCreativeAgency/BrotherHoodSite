@@ -1,0 +1,437 @@
+/* Pixel-perfect Figma styles for Creed payment interface */
+
+/* Glassmorphism effects - exact from reference */
+.glass-card {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.25) 0%, rgba(160, 82, 45, 0.15) 50%, rgba(218, 165, 32, 0.1) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(218, 165, 32, 0.3);
+  box-shadow: 0 0 0 2px rgba(218, 165, 32, 0.1);
+}
+
+/* Logo with Greek key pattern - pixel perfect */
+.logo-container {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  margin-bottom: 48px;
+}
+
+.logo-outer {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid #8B4513;
+  background: linear-gradient(135deg, #A0522D 0%, #8B4513 50%, #654321 100%);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.logo-inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8B4513 0%, #654321 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #DAA520;
+}
+
+.greek-key-border {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  bottom: 6px;
+  border: 1.5px solid #DAA520;
+  border-radius: 50%;
+  opacity: 0.7;
+  background: linear-gradient(45deg, transparent 30%, rgba(218, 165, 32, 0.1) 50%, transparent 70%);
+}
+
+.logo-lambda {
+  font-size: 28px;
+  font-weight: 900;
+  color: #DAA520;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Payment slider styles */
+.payment-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  outline: none;
+  position: relative;
+}
+
+.payment-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #DAA520;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.payment-slider::-moz-range-thumb {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #DAA520;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Circular amount display */
+.amount-circle {
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #DAA520 0%, #B8860B 50%, #DAA520 100%);
+  border: 4px solid #DAA520;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.amount-display {
+  font-size: 6rem;
+  font-weight: 900;
+  color: white;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.amount-label {
+  font-size: 1.125rem;
+  color: #F5DEB3;
+  margin-bottom: 4px;
+}
+
+.amount-currency {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #F0E68C;
+}
+
+/* Top navigation bar */
+.top-nav {
+  background: rgba(139, 69, 19, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(218, 165, 32, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(218, 165, 32, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Payment method buttons */
+.payment-method-btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border: 2px solid #DAA520;
+  transition: all 0.3s ease;
+}
+
+.payment-method-btn.visa {
+  background: #1E40AF;
+  color: white;
+}
+
+.payment-method-btn.visa:hover {
+  background: #1D4ED8;
+}
+
+.payment-method-btn.crypto {
+  background: #DAA520;
+  color: white;
+}
+
+.payment-method-btn.crypto:hover {
+  background: #B8860B;
+}
+
+/* Pay button with fingerprint */
+.pay-button {
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.3) 0%, rgba(184, 134, 11, 0.3) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(218, 165, 32, 0.4);
+  padding: 24px 48px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: white;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.pay-button:hover {
+  background: linear-gradient(135deg, rgba(218, 165, 32, 0.4) 0%, rgba(184, 134, 11, 0.4) 100%);
+}
+
+.fingerprint-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  opacity: 0.2;
+}
+
+/* Background gradients - exact Figma colors */
+.creed-bg {
+  background: linear-gradient(135deg, #371C1C 0%, #121212 100%);
+  position: relative;
+}
+
+.creed-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 25% 25%, rgba(218, 165, 32, 0.05) 0%, transparent 50%),
+              radial-gradient(circle at 75% 75%, rgba(139, 69, 19, 0.03) 0%, transparent 60%),
+              radial-gradient(circle at 50% 50%, rgba(160, 82, 45, 0.02) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .amount-circle {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .amount-display {
+    font-size: 4rem;
+  }
+  
+  .logo-container {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .logo-inner {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Animation for slider dot */
+.slider-dot {
+  transition: left 0.2s ease;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(218, 165, 32, 0.6);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(218, 165, 32, 0.8);
+}
+
+/* Subscription page specific styles */
+.subscription-info {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Enhanced button styles for subscription */
+.subscription-btn {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.3) 0%, rgba(160, 82, 45, 0.2) 50%, rgba(218, 165, 32, 0.15) 100%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.subscription-btn:hover {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.4) 0%, rgba(160, 82, 45, 0.3) 50%, rgba(218, 165, 32, 0.25) 100%);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Status indicator */
+.status-active {
+  color: #10B981;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
+}
+
+/* Enhanced glassmorphism for better depth */
+.enhanced-glass {
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.25) 0%, rgba(160, 82, 45, 0.15) 50%, rgba(218, 165, 32, 0.1) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Radial payment interface */
+.radial-payment-container {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.radial-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #DAA520 0%, #DAA520 10%, rgba(255,255,255,0.1) 10%, rgba(255,255,255,0.1) 100%);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.radial-slider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, #371C1C 0%, #121212 100%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.radial-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #DAA520;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  cursor: grab;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.radial-handle:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.radial-handle:active {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.radial-amount-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: white;
+}
+
+.radial-amount-value {
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 8px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.radial-amount-label {
+  font-size: 1.125rem;
+  color: #F5DEB3;
+  margin-bottom: 4px;
+  font-weight: 300;
+}
+
+.radial-amount-currency {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #F0E68C;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Radial slider instruction */
+.radial-instruction {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.radial-instruction-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+  margin-bottom: 8px;
+}
+
+.radial-instruction-dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  margin: 0 auto;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
