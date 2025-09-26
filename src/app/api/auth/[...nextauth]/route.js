@@ -1,13 +1,9 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
+import { db } from "@/lib/supabase";
 import bcrypt from "bcrypt";
 
-const prisma = new PrismaClient();
-
 export const authOptions = {
-  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -16,13 +12,16 @@ export const authOptions = {
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
-        });
-        if (user && await bcrypt.compare(credentials.password, user.password)) {
-          return { id: user.id, email: user.email };
+        try {
+          const user = await db.getUserByEmail(credentials.email);
+          if (user && await bcrypt.compare(credentials.password, user.password)) {
+            return { id: user.id, email: user.email };
+          }
+          return null;
+        } catch (error) {
+          console.error('Auth error:', error);
+          return null;
         }
-        return null;
       }
     })
   ],

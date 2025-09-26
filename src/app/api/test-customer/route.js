@@ -1,10 +1,9 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { PrismaClient } from "@prisma/client";
+import { db } from "../../../lib/supabase";
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const prisma = new PrismaClient();
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -14,16 +13,14 @@ export async function GET() {
 
   try {
     // Find user
-    let user = await prisma.user.findUnique({
-      where: { email: session.user.email }
-    });
+    let user = await db.getUserByEmail(session.user.email);
 
     if (!user) {
       return new Response(JSON.stringify({ error: 'User not found' }), { status: 404 });
     }
 
     // Create Stripe customer if not exists
-    let customerId = user.stripeCustomerId;
+    let customerId = user.stripe_customer_id;
     
     if (!customerId) {
       const customer = await stripe.customers.create({
@@ -35,10 +32,7 @@ export async function GET() {
 
       customerId = customer.id;
 
-      await prisma.user.update({
-        where: { id: user.id },
-        data: { stripeCustomerId: customerId },
-      });
+      await db.updateUser(user.id, { stripe_customer_id: customerId });
     }
 
     // Get customer details from Stripe

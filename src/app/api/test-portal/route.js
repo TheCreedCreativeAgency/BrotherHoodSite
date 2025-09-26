@@ -1,10 +1,9 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
-import { PrismaClient } from "@prisma/client";
+import { db } from "../../../lib/supabase";
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-const prisma = new PrismaClient();
 
 export async function GET() {
   const session = await getServerSession(authOptions);
@@ -14,32 +13,30 @@ export async function GET() {
 
   try {
     // Find user
-    const user = await prisma.user.findUnique({
-      where: { email: session.user.email }
-    });
+    const user = await db.getUserByEmail(session.user.email);
 
-    if (!user || !user.stripeCustomerId) {
+    if (!user || !user.stripe_customer_id) {
       return new Response(JSON.stringify({ error: 'No Stripe customer found' }), { status: 404 });
     }
 
     // Get customer details
-    const customer = await stripe.customers.retrieve(user.stripeCustomerId);
+    const customer = await stripe.customers.retrieve(user.stripe_customer_id);
     
     // Get charges
     const charges = await stripe.charges.list({
-      customer: user.stripeCustomerId,
+      customer: user.stripe_customer_id,
       limit: 10,
     });
 
     // Get invoices
     const invoices = await stripe.invoices.list({
-      customer: user.stripeCustomerId,
+      customer: user.stripe_customer_id,
       limit: 10,
     });
 
     // Get payment methods
     const paymentMethods = await stripe.paymentMethods.list({
-      customer: user.stripeCustomerId,
+      customer: user.stripe_customer_id,
       type: 'card',
     });
 

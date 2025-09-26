@@ -1,6 +1,5 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
-import Image from 'next/image';
 import './creed-styles.css';
 
 export default function Home() {
@@ -84,8 +83,8 @@ export default function Home() {
     <div>
       {/* Top Section */}
       <div className="top">
-        <Image src="/text.png" alt="The Creed text" id="text" width={300} height={100} />
-        <Image src="/spartan.png" alt="Spartan warrior" id="spartan" width={200} height={200} />
+        <img src="/text.png" alt="The Creed text" id="text" />
+        <img src="/spartan.png" alt="Spartan warrior" id="spartan" />
       </div>
 
       {/* Video Container */}
@@ -175,14 +174,14 @@ export default function Home() {
             <span className="title-white">KNOW THE</span>
             <span className="title-red"> CREED...</span>
           </h1>
-        </header>
+      </header>
 
         <main className="creed-cards-container">
           <div className="creed-card">
             <h2>Unity</h2>
-            <Image src="/unity.png" alt="Two soldiers standing together" className="card-icon" width={80} height={80} />
+            <img src="/unity.png" alt="Two soldiers standing together" className="card-icon" />
             <p className="quote">&ldquo;And No King stood alone&rdquo;</p>
-            <Image src="/wings.png" alt="Laurel wreath" className="laurel-icon" width={40} height={40} />
+            <img src="/wings.png" alt="Laurel wreath" className="laurel-icon" />
             <ul>
               <li>Divided we fall, united we rise.</li>
               <li>We thrive when brothers join hands</li>
@@ -192,28 +191,28 @@ export default function Home() {
 
           <div className="creed-card">
             <h2>Faith</h2>
-            <Image src="/faith.png" alt="Spartan helmet" className="card-icon" width={80} height={80} />
+            <img src="/faith.png" alt="Spartan helmet" className="card-icon" />
             <p className="quote">&ldquo;Trust god and let him guide your blade&rdquo;</p>
-            <Image src="/wings.png" alt="Laurel wreath" className="laurel-icon" width={40} height={40} />
+            <img src="/wings.png" alt="Laurel wreath" className="laurel-icon" />
             <ul>
               <li>Without Faith, We Fall</li>
               <li>Faith is the Flame that guides</li>
               <li>Faith is your spear</li>
             </ul>
-          </div>
+        </div>
 
           <div className="creed-card">
             <h2>Discipline</h2>
-            <Image src="/discipline.png" alt="Spartan shield" className="card-icon" width={80} height={80} />
+            <img src="/discipline.png" alt="Spartan shield" className="card-icon" />
             <p className="quote">&ldquo;Persevere when others falter&rdquo;</p>
-            <Image src="/wings.png" alt="Laurel wreath" className="laurel-icon" width={40} height={40} />
+            <img src="/wings.png" alt="Laurel wreath" className="laurel-icon" />
             <ul>
               <li>Freedom is Earned Through Discipline</li>
               <li>Discipline is the Backbone</li>
               <li>Discipline Turns Men Into Legends</li>
             </ul>
-          </div>
-        </main>
+        </div>
+      </main>
       </div>
 
       {/* Footer Video */}
@@ -226,7 +225,7 @@ export default function Home() {
       {/* Footer Content */}
       <div className="main-container-footer">
         <header className="site-header">
-          <Image src="/icon.png" alt="The Creed Logo" className="logo" width={40} height={40} />
+          <img src="/icon.png" alt="The Creed Logo" className="logo" />
           <span>The Creed</span>
         </header>
 
@@ -243,12 +242,12 @@ export default function Home() {
 
           <section className="faq-section">
             <div className="faq-header">
-              <Image src="/warrior-right.png" alt="Soldier silhouette" className="soldier" width={100} height={150} />
+              <img src="/warrior-right.png" alt="Soldier silhouette" className="soldier" />
               <div className="faq-title">
                 <h3>Frequently Asked</h3>
                 <p><span>Questions</span>...</p>
               </div>
-              <Image src="/warrior-left.png" alt="Soldier silhouette" className="soldier" width={100} height={150} />
+              <img src="/warrior-left.png" alt="Soldier silhouette" className="soldier" />
             </div>
 
             <div className="accordion">
@@ -411,7 +410,7 @@ export default function Home() {
       <footer className="site-footer-final">
         <div className="footer-container">
           <div className="footer-logo-area">
-            <Image src="/icon.png" alt="The Creed Logo" className="footer-logo" width={30} height={30} />
+            <img src="/icon.png" alt="The Creed Logo" className="footer-logo" />
             <span className="footer-logo-text">The Creed</span>
           </div>
 

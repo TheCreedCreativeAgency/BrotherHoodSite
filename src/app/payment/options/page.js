@@ -1,16 +1,43 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react'; // Added useCallback
 import { useRouter } from 'next/navigation';
 import '../figma-styles.css';
 
 export default function SubscriptionOptions() {
-  const [amount, setAmount] = useState(10);
+  const [amount, setAmount] = useState(10.00); // Numeric amount for logic (e.g., 10.00)
+  const [textInputValue, setTextInputValue] = useState('10.00'); // String for the input field (e.g., "10.00", "5", "5.")
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [dragging, setDragging] = useState(false);
   const router = useRouter();
+  const inputRef = useRef(null); // Ref for the input element
+
+  // --- Utility function to format a number as a currency string ---
+  const formatAmountToString = useCallback((value) => {
+    // If value is NaN or null/undefined, default to 0 for formatting purposes
+    const num = parseFloat(value);
+    if (isNaN(num)) return '0.00';
+    return num.toFixed(2);
+  }, []);
+
+  // --- Effect to keep textInputValue in sync with amount when amount changes ---
+  // (e.g., from radial slider or initial load)
+  useEffect(() => {
+    // Only update if not dragging AND the current text input value doesn't already
+    // match the formatted numeric amount. This prevents overwriting user's typing.
+    const formattedAmount = formatAmountToString(amount);
+    if (!dragging && textInputValue !== formattedAmount) {
+        setTextInputValue(formattedAmount);
+    }
+  }, [amount, dragging, textInputValue, formatAmountToString]);
+
 
   const handleRadialDrag = (e) => {
+    e.preventDefault();
+    setDragging(true);
+  };
+
+  const handleTouchStart = (e) => {
     e.preventDefault();
     setDragging(true);
   };
@@ -18,32 +45,123 @@ export default function SubscriptionOptions() {
   const handleRadialMove = (e) => {
     if (!dragging) return;
     
+    // Prevent default touch behavior for smoother dragging on mobile
+    if (e.type === 'touchmove') {
+      e.preventDefault();
+    }
+
     const rect = e.currentTarget.getBoundingClientRect();
     const centerX = rect.left + rect.width / 2;
     const centerY = rect.top + rect.height / 2;
     
-    const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+    // Handle both mouse and touch events
+    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+    
+    const angle = Math.atan2(clientY - centerY, clientX - centerX);
     const degrees = (angle * 180 / Math.PI + 360) % 360;
     
-    const newAmount = Math.round(degrees / 3.6);
-    setAmount(Math.max(1, Math.min(100, newAmount)));
+    // Smooth calculation with decimal precision
+    let newAmount = Math.max(1, Math.min(100, degrees / 3.6));
+    newAmount = Math.round(newAmount * 100) / 100; // Round to 2 decimal places
+
+    setAmount(newAmount);
+    // When dragging, we want the text input to reflect the *slider's* value immediately.
+    setTextInputValue(formatAmountToString(newAmount));
   };
 
-  React.useEffect(() => {
+  const handleTextInput = (e) => {
+    const value = e.target.value;
+
+    // 1. Immediately update the input's displayed string value
+    setTextInputValue(value);
+
+    // 2. Parse and validate for the numeric `amount` state
+    const numValue = parseFloat(value);
+
+    if (!isNaN(numValue)) {
+      // Clamp the numeric value, but don't aggressively round while typing
+      // e.g., allow "5." to be typed before "5.50"
+      let clampedValue = Math.max(1, Math.min(100, numValue));
+
+      // Only setAmount if it's a valid number and it's different enough
+      // to avoid infinite loops if it's already clamped.
+      if (amount !== clampedValue) {
+        setAmount(clampedValue);
+      }
+    } else if (value === '') {
+      // If the input is empty, reset the numeric amount to 0
+      setAmount(0);
+    }
+    // If `isNaN(numValue)` and `value` is not empty (e.g., typing "abc"),
+    // `amount` will retain its last valid value until `onBlur` cleans it up.
+  };
+
+  const handleInputBlur = (e) => {
+    let numValue = parseFloat(textInputValue);
+
+    // If empty or invalid, reset to default
+    if (textInputValue === '' || isNaN(numValue) || numValue < 1) {
+      setAmount(10.00);
+      setTextInputValue('10.00');
+    } else {
+      // Ensure the amount is within bounds and formatted
+      numValue = Math.max(1, Math.min(100, numValue));
+      const finalFormattedAmount = Math.round(numValue * 100) / 100;
+      setAmount(finalFormattedAmount);
+      setTextInputValue(formatAmountToString(finalFormattedAmount));
+    }
+  };
+
+  // Keep the mouse/touch event listeners for dragging
+  useEffect(() => {
     const handleMouseUp = () => setDragging(false);
+    const handleTouchEnd = () => setDragging(false);
+    const handleMouseMove = (e) => {
+      if (dragging) {
+        handleRadialMove(e);
+      }
+    };
+    const handleTouchMove = (e) => {
+      if (dragging) {
+        handleRadialMove(e);
+      }
+    };
+    
     document.addEventListener('mouseup', handleMouseUp);
-    return () => document.removeEventListener('mouseup', handleMouseUp);
-  }, []);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('touchend', handleTouchEnd);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
+    return () => {
+      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, [dragging, handleRadialMove]); // Dependency on handleRadialMove is important due to useCallback
+
 
   const handleCheckout = async () => {
     setLoading(true);
     setMessage('');
 
+    // Ensure the final amount sent is correctly formatted and within bounds
+    // We use the `amount` state here as it's the validated numeric value.
+    const finalAmount = Math.max(1, Math.min(100, amount));
+    const amountInCents = Math.round(finalAmount * 100); // Convert to cents
+
+    if (amountInCents < 100) { // Minimum 1 dollar (100 cents)
+      setMessage('Subscription amount must be at least $1.00');
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: amount * 100 }), // Convert to cents
+        body: JSON.stringify({ amount: amountInCents }),
       });
       
       const data = await res.json();
@@ -51,10 +169,10 @@ export default function SubscriptionOptions() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        setMessage('Failed to create checkout session.');
+        setMessage(data.error || 'Failed to create checkout session. Please try again.');
       }
     } catch (err) {
-      setMessage(`Error: ${err.message}`);
+      setMessage(`Network error: ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -62,60 +180,11 @@ export default function SubscriptionOptions() {
 
   return (
     <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
-      {/* Top Bar - Pixel perfect */}
-      <div className="absolute top-6 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="top-nav rounded-2xl px-6 py-3">
-          <div className="flex space-x-6">
-            {/* Payment Icon */}
-            <div className="flex items-center space-x-2 text-yellow-400">
-              <div className="nav-icon">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
-                  <path fillRule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <span className="text-xs font-semibold">Payment</span>
-            </div>
-            {/* Profile Icon */}
-            <div className="flex items-center space-x-2 text-yellow-400">
-              <div className="nav-icon">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <span className="text-xs font-semibold">Profile</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* Main Payment Card - Pixel perfect */}
       <div className="relative z-10 glass-card rounded-3xl p-8 w-full max-w-3xl">
-        {/* Header Section */}
-        <div className="flex justify-between items-start mb-10">
-          {/* Left Section - Logo and Payment Methods */}
-          <div className="flex items-start space-x-4">
-            {/* Logo */}
-            <div className="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center shadow-lg">
-              <span className="text-white text-lg font-bold">^</span>
-            </div>
-            
-            {/* Payment Methods */}
-            <div>
-              <h1 className="text-white/70 text-xs font-semibold mb-3 tracking-wider">PAYMENT METHODS</h1>
-              <div className="flex space-x-3">
-                <button className="payment-method-btn visa text-xs px-3 py-2">
-                  VISA
-                </button>
-                <button className="payment-method-btn crypto flex items-center space-x-1 text-xs px-3 py-2">
-                  <span className="text-sm">₿</span>
-                  <span>CRYPTO</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Section - Close Button */}
+        {/* Header Section - Only Close Button */}
+        <div className="flex justify-end items-start mb-10">
           <button 
             onClick={() => router.back()}
             className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors text-lg font-bold"
@@ -140,13 +209,36 @@ export default function SubscriptionOptions() {
                 style={{
                   background: `conic-gradient(from 0deg, #DAA520 0%, #DAA520 ${amount * 3.6}deg, rgba(255,255,255,0.1) ${amount * 3.6}deg, rgba(255,255,255,0.1) 360deg)`
                 }}
-                onMouseDown={(e) => handleRadialDrag(e)}
-                onMouseMove={(e) => handleRadialMove(e)}
+                onMouseDown={handleRadialDrag}
+                onMouseMove={handleRadialMove}
                 onMouseUp={() => setDragging(false)}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleRadialMove}
+                onTouchEnd={() => setDragging(false)}
               >
                 <div className="radial-amount-display">
                   <div className="radial-amount-value">
-                    {amount.toString().padStart(2, '0')}
+                    <input
+                      ref={inputRef} // Assign the ref
+                      type="text" // Use text type for better manual input control
+                      inputMode="decimal" // Suggests a decimal keyboard on mobile
+                      min="1"
+                      max="100"
+                      step="0.01"
+                      value={textInputValue} // This is the controlled component value
+                      onChange={handleTextInput}
+                      onBlur={handleInputBlur}
+                      onClick={(e) => e.stopPropagation()} // Prevent radial drag from starting if clicking input
+                      onFocus={(e) => {
+                        e.target.select(); // Select all text on focus
+                        // Optionally, if the value is "0.00" or similar, clear it for typing
+                        if (parseFloat(textInputValue) === 0) {
+                            setTextInputValue('');
+                        }
+                      }}
+                      className="radial-center-input"
+                      placeholder="10.00"
+                    />
                   </div>
                   <div className="radial-amount-label">Per Month</div>
                   <div className="radial-amount-currency">USD</div>
@@ -162,21 +254,12 @@ export default function SubscriptionOptions() {
           </div>
         </div>
 
-        {/* Bottom Section - Pay Button and Profile */}
-        <div className="flex justify-between items-end">
-          {/* Profile Icon */}
-          <div className="flex items-center space-x-2 text-yellow-400">
-            <div className="w-10 h-10 bg-yellow-400/20 rounded-lg flex items-center justify-center">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-              </svg>
-            </div>
-          </div>
-
+        {/* Bottom Section - Only Pay Button */}
+        <div className="flex justify-center items-end">
           {/* Pay Button - Pixel perfect with fingerprint */}
           <button
             onClick={handleCheckout}
-            disabled={loading}
+            disabled={loading || amount < 1} // Disable if loading or amount is less than $1
             className="pay-button flex flex-col items-center space-y-1 relative"
           >
             <svg className="fingerprint-icon" fill="currentColor" viewBox="0 0 20 20">
