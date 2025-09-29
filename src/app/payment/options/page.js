@@ -42,33 +42,6 @@ export default function SubscriptionOptions() {
     setDragging(true);
   };
 
-  const handleRadialMove = (e) => {
-    if (!dragging) return;
-    
-    // Prevent default touch behavior for smoother dragging on mobile
-    if (e.type === 'touchmove') {
-      e.preventDefault();
-    }
-
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    // Handle both mouse and touch events
-    const clientX = e.clientX || (e.touches && e.touches[0].clientX);
-    const clientY = e.clientY || (e.touches && e.touches[0].clientY);
-    
-    const angle = Math.atan2(clientY - centerY, clientX - centerX);
-    const degrees = (angle * 180 / Math.PI + 360) % 360;
-    
-    // Smooth calculation with decimal precision
-    let newAmount = Math.max(1, Math.min(100, degrees / 3.6));
-    newAmount = Math.round(newAmount * 100) / 100; // Round to 2 decimal places
-
-    setAmount(newAmount);
-    // When dragging, we want the text input to reflect the *slider's* value immediately.
-    setTextInputValue(formatAmountToString(newAmount));
-  };
 
   const handleTextInput = (e) => {
     const value = e.target.value;
@@ -113,18 +86,54 @@ export default function SubscriptionOptions() {
     }
   };
 
-  // Keep the mouse/touch event listeners for dragging
+  // Global mouse/touch event listeners for dragging
   useEffect(() => {
     const handleMouseUp = () => setDragging(false);
     const handleTouchEnd = () => setDragging(false);
     const handleMouseMove = (e) => {
       if (dragging) {
-        handleRadialMove(e);
+        // Get the radial slider element
+        const radialSlider = document.querySelector('.radial-slider');
+        if (radialSlider) {
+          const rect = radialSlider.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          
+          const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+          let degrees = (angle * 180 / Math.PI + 90) % 360; // Start from top (90 degrees offset)
+          if (degrees < 0) degrees += 360;
+          
+          // Convert degrees to amount (0-360 degrees = 1-100 dollars)
+          let newAmount = (degrees / 360) * 99 + 1; // Scale from 1 to 100
+          newAmount = Math.max(1, Math.min(100, newAmount));
+          newAmount = Math.round(newAmount * 100) / 100; // Round to 2 decimal places
+
+          setAmount(newAmount);
+          setTextInputValue(formatAmountToString(newAmount));
+        }
       }
     };
     const handleTouchMove = (e) => {
       if (dragging) {
-        handleRadialMove(e);
+        e.preventDefault();
+        const radialSlider = document.querySelector('.radial-slider');
+        if (radialSlider) {
+          const rect = radialSlider.getBoundingClientRect();
+          const centerX = rect.left + rect.width / 2;
+          const centerY = rect.top + rect.height / 2;
+          
+          const touch = e.touches[0];
+          const angle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
+          let degrees = (angle * 180 / Math.PI + 90) % 360;
+          if (degrees < 0) degrees += 360;
+          
+          let newAmount = (degrees / 360) * 99 + 1;
+          newAmount = Math.max(1, Math.min(100, newAmount));
+          newAmount = Math.round(newAmount * 100) / 100;
+
+          setAmount(newAmount);
+          setTextInputValue(formatAmountToString(newAmount));
+        }
       }
     };
     
@@ -139,7 +148,8 @@ export default function SubscriptionOptions() {
       document.removeEventListener('touchend', handleTouchEnd);
       document.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [dragging, handleRadialMove]); // Dependency on handleRadialMove is important due to useCallback
+  }, [dragging, formatAmountToString]);
+
 
 
   const handleCheckout = async () => {
@@ -179,42 +189,35 @@ export default function SubscriptionOptions() {
   };
 
   return (
-    <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
+    <div className="min-h-screen creed-bg flex items-center justify-center py-8 px-4 relative overflow-hidden">
 
       {/* Main Payment Card - Pixel perfect */}
-      <div className="relative z-10 glass-card rounded-3xl p-8 w-full max-w-3xl">
-        {/* Header Section - Only Close Button */}
-        <div className="flex justify-end items-start mb-10">
-          <button 
-            onClick={() => router.back()}
-            className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center text-white hover:bg-red-700 transition-colors text-lg font-bold"
+      <div className="relative z-10 login-card-new rounded-3xl py-10 px-8 w-full max-w-xl">
+        {/* Logo - Centered, half in and half out */}
+        <div className="flex justify-center mt-[-50]">
+          <div 
+            className="logo-container-new cursor-pointer"
+            onClick={() => router.push('/payment/subscription')}
           >
-            ×
-          </button>
+            <img src="/login.png" alt="Logo" className="logo-image-new mt-[-50]" />
+          </div>
         </div>
 
         {/* Center Section - Radial Amount Selection */}
         <div className="flex justify-center mb-10">
           <div className="relative">
             {/* Radial instruction */}
-            <div className="radial-instruction">
-              <p className="radial-instruction-text">rotate the dial</p>
-              <div className="radial-instruction-dot"></div>
-            </div>
+
             
             {/* Radial Payment Interface */}
             <div className="radial-payment-container">
               <div 
                 className="radial-slider"
                 style={{
-                  background: `conic-gradient(from 0deg, #DAA520 0%, #DAA520 ${amount * 3.6}deg, rgba(255,255,255,0.1) ${amount * 3.6}deg, rgba(255,255,255,0.1) 360deg)`
+                  background: `conic-gradient(from -90deg, #DAA520 0%, #DAA520 ${((amount - 1) / 99) * 360}deg, rgba(255,255,255,0.1) ${((amount - 1) / 99) * 360}deg, rgba(255,255,255,0.1) 360deg)`
                 }}
                 onMouseDown={handleRadialDrag}
-                onMouseMove={handleRadialMove}
-                onMouseUp={() => setDragging(false)}
                 onTouchStart={handleTouchStart}
-                onTouchMove={handleRadialMove}
-                onTouchEnd={() => setDragging(false)}
               >
                 <div className="radial-amount-display">
                   <div className="radial-amount-value">
@@ -240,13 +243,13 @@ export default function SubscriptionOptions() {
                       placeholder="10.00"
                     />
                   </div>
-                  <div className="radial-amount-label">Per Month</div>
-                  <div className="radial-amount-currency">USD</div>
+                  <div className="radial-amount-label font-light">Per Month</div>
+                  <div className="radial-amount-currency font-light">USD</div>
                 </div>
                 <div 
                   className="radial-handle"
                   style={{
-                    transform: `translate(-50%, -50%) rotate(${amount * 3.6}deg) translateY(-150px)`
+                    transform: `translate(-50%, -50%) rotate(${((amount - 1) / 99) * 360 - 90}deg) translateY(-150px)`
                   }}
                 ></div>
               </div>
@@ -260,7 +263,7 @@ export default function SubscriptionOptions() {
           <button
             onClick={handleCheckout}
             disabled={loading || amount < 1} // Disable if loading or amount is less than $1
-            className="pay-button flex flex-col items-center space-y-1 relative"
+            className="pay-button flex flex-col items-center space-y-1 relative font-light"
           >
             <svg className="fingerprint-icon" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10 1a9 9 0 100 18 9 9 0 000-18zM8 6a2 2 0 114 0 2 2 0 01-4 0zm2 8a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -271,7 +274,7 @@ export default function SubscriptionOptions() {
 
         {/* Error Message */}
         {message && (
-          <div className="mt-4 bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-xl backdrop-blur-sm text-center text-sm">
+          <div className="mt-4 bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-xl backdrop-blur-sm text-center text-sm font-light">
             {message}
           </div>
         )}

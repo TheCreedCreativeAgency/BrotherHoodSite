@@ -2,11 +2,17 @@
 
 /* Glassmorphism effects - exact from reference */
 .glass-card {
-  background: linear-gradient(135deg, rgba(55, 28, 28, 0.25) 0%, rgba(18, 18, 18, 0.15) 50%, rgba(218, 165, 32, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(55, 28, 28, 0.25) 0%,
+    rgba(18, 18, 18, 0.15) 50%,
+    rgba(218, 165, 32, 0.1) 100%
+  );
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .glass-input {
@@ -35,8 +41,8 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 3px solid #8B4513;
-  background: linear-gradient(135deg, #A0522D 0%, #8B4513 50%, #654321 100%);
+  border: 3px solid #8b4513;
+  background: linear-gradient(135deg, #a0522d 0%, #8b4513 50%, #654321 100%);
   position: relative;
   overflow: hidden;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -54,7 +60,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #DAA520;
+  border: 2px solid #daa520;
 }
 
 .greek-key-border {
@@ -63,16 +69,21 @@
   left: 6px;
   right: 6px;
   bottom: 6px;
-  border: 1.5px solid #DAA520;
+  border: 1.5px solid #daa520;
   border-radius: 50%;
   opacity: 0.7;
-  background: linear-gradient(45deg, transparent 30%, rgba(218, 165, 32, 0.1) 50%, transparent 70%);
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(218, 165, 32, 0.1) 50%,
+    transparent 70%
+  );
 }
 
 .logo-lambda {
   font-size: 28px;
   font-weight: 900;
-  color: #DAA520;
+  color: #daa520;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -93,7 +104,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #DAA520;
+  background: #daa520;
   cursor: pointer;
   border: 3px solid #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -103,7 +114,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #DAA520;
+  background: #daa520;
   cursor: pointer;
   border: 3px solid #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -114,8 +125,12 @@
   width: 320px;
   height: 320px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(55, 28, 28, 0.8) 0%, rgba(18, 18, 18, 0.8) 100%);
-  border: 4px solid #DAA520;
+  background: linear-gradient(
+    135deg,
+    rgba(55, 28, 28, 0.8) 0%,
+    rgba(18, 18, 18, 0.8) 100%
+  );
+  border: 4px solid #daa520;
   box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
@@ -134,14 +149,14 @@
 
 .amount-label {
   font-size: 1.125rem;
-  color: #F5DEB3;
+  color: #f5deb3;
   margin-bottom: 4px;
 }
 
 .amount-currency {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #F0E68C;
+  color: #f0e68c;
 }
 
 /* Top navigation bar */
@@ -169,45 +184,54 @@
   border-radius: 8px;
   font-weight: 600;
   font-size: 0.875rem;
-  border: 2px solid #DAA520;
+  border: 2px solid #daa520;
   transition: all 0.3s ease;
 }
 
 .payment-method-btn.visa {
-  background: #1E40AF;
+  background: #1e40af;
   color: white;
 }
 
 .payment-method-btn.visa:hover {
-  background: #1D4ED8;
+  background: #1d4ed8;
 }
 
 .payment-method-btn.crypto {
-  background: #DAA520;
+  background: #daa520;
   color: white;
 }
 
 .payment-method-btn.crypto:hover {
-  background: #B8860B;
+  background: #b8860b;
 }
 
 /* Pay button with fingerprint */
 .pay-button {
-  background: linear-gradient(135deg, rgba(55, 28, 28, 0.8) 0%, rgba(18, 18, 18, 0.8) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(55, 28, 28, 0.8) 0%,
+    rgba(18, 18, 18, 0.8) 100%
+  );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 2px solid rgba(218, 165, 32, 0.6);
   padding: 24px 48px;
   border-radius: 16px;
-  font-weight: 700;
+  font-weight: 300;
   font-size: 1.5rem;
-  color: #DAA520;
+  color: #daa520;
+  letter-spacing: 0.5px;
   position: relative;
   transition: all 0.3s ease;
 }
 
 .pay-button:hover {
-  background: linear-gradient(135deg, rgba(218, 165, 32, 0.2) 0%, rgba(184, 134, 11, 0.2) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(218, 165, 32, 0.2) 0%,
+    rgba(184, 134, 11, 0.2) 100%
+  );
   border-color: rgba(218, 165, 32, 0.8);
   color: white;
 }
@@ -224,23 +248,9 @@
 
 /* Background gradients - exact Figma colors */
 .creed-bg {
-  background: linear-gradient(135deg, rgb(55, 28, 28) 0%, rgb(18, 18, 18) 100%);
+  background: linear-gradient(90deg, #121212 0%, #371c1c 100%);
   position: relative;
 }
-
-.creed-bg::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: radial-gradient(circle at 25% 25%, rgba(218, 165, 32, 0.05) 0%, transparent 50%),
-              radial-gradient(circle at 75% 75%, rgba(139, 69, 19, 0.03) 0%, transparent 60%),
-              radial-gradient(circle at 50% 50%, rgba(160, 82, 45, 0.02) 0%, transparent 70%);
-  pointer-events: none;
-}
-
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -248,16 +258,16 @@
     width: 280px;
     height: 280px;
   }
-  
+
   .amount-display {
     font-size: 4rem;
   }
-  
+
   .logo-container {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
   }
-  
+
   .logo-inner {
     width: 56px;
     height: 56px;
@@ -290,7 +300,11 @@
 
 /* Subscription page specific styles */
 .subscription-info {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.04);
@@ -298,34 +312,52 @@
 
 /* Enhanced button styles for subscription */
 .subscription-btn {
-  background: linear-gradient(135deg, rgba(139, 69, 19, 0.3) 0%, rgba(160, 82, 45, 0.2) 50%, rgba(218, 165, 32, 0.15) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(139, 69, 19, 0.3) 0%,
+    rgba(160, 82, 45, 0.2) 50%,
+    rgba(218, 165, 32, 0.15) 100%
+  );
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
 .subscription-btn:hover {
-  background: linear-gradient(135deg, rgba(139, 69, 19, 0.4) 0%, rgba(160, 82, 45, 0.3) 50%, rgba(218, 165, 32, 0.25) 100%);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  background: linear-gradient(
+    135deg,
+    rgba(139, 69, 19, 0.4) 0%,
+    rgba(160, 82, 45, 0.3) 50%,
+    rgba(218, 165, 32, 0.25) 100%
+  );
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
   transform: translateY(-1px);
 }
 
 /* Status indicator */
 .status-active {
-  color: #10B981;
+  color: #10b981;
   font-weight: 600;
   text-shadow: 0 0 8px rgba(16, 185, 129, 0.3);
 }
 
 /* Enhanced glassmorphism for better depth */
 .enhanced-glass {
-  background: linear-gradient(135deg, rgba(139, 69, 19, 0.25) 0%, rgba(160, 82, 45, 0.15) 50%, rgba(218, 165, 32, 0.1) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(139, 69, 19, 0.25) 0%,
+    rgba(160, 82, 45, 0.15) 50%,
+    rgba(218, 165, 32, 0.1) 100%
+  );
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 /* Radial payment interface */
@@ -341,21 +373,27 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, #DAA520 0%, #DAA520 10%, rgba(255,255,255,0.1) 10%, rgba(255,255,255,0.1) 100%);
+  background: conic-gradient(
+    from 0deg,
+    #daa520 0%,
+    #daa520 10%,
+    rgba(255, 255, 255, 0.1) 10%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
   cursor: pointer;
   transition: all 0.1s ease;
   user-select: none;
-  border: 8px solid #371C1C;
+  border: 8px solid #371c1c;
 }
 
 .radial-slider::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   width: 300px;
   height: 300px;
-  background: linear-gradient(135deg, #371C1C 0%, #121212 100%);
+  background: linear-gradient(135deg, #371c1c 0%, #121212 100%);
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -402,7 +440,7 @@
   line-height: 1;
   margin-bottom: 8px;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  color: #DAA520;
+  color: #daa520;
 }
 
 .radial-amount-label {
@@ -410,13 +448,15 @@
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 4px;
   font-weight: 300;
+  letter-spacing: 0.5px;
 }
 
 .radial-amount-currency {
   font-size: 1.5rem;
-  font-weight: 700;
-  color: #DAA520;
+  font-weight: 300;
+  color: #daa520;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
 }
 
 /* Radial slider instruction */
@@ -429,6 +469,8 @@
   color: rgba(255, 255, 255, 0.8);
   font-size: 0.875rem;
   margin-bottom: 8px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
 }
 
 .radial-instruction-dot {
@@ -457,7 +499,7 @@
 }
 
 .radial-text-input:focus {
-  border-color: #DAA520;
+  border-color: #daa520;
   box-shadow: 0 0 0 2px rgba(218, 165, 32, 0.3);
   background: rgba(255, 255, 255, 0.15);
 }
@@ -475,7 +517,7 @@
 .radial-center-input {
   background: transparent;
   border: none;
-  color: #DAA520;
+  color: #daa520;
   font-size: 3rem;
   font-weight: bold;
   text-align: center;
@@ -483,6 +525,7 @@
   outline: none;
   font-family: inherit;
   -moz-appearance: textfield; /* Firefox */
+  appearance: textfield; /* Standard */
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   cursor: text;
   user-select: text;
@@ -508,4 +551,85 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+/* New Login Page Styles - Updated Design */
+.logo-container-new {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: -40px;
+  z-index: 20;
+  transition: transform 0.3s ease;
+}
+
+.logo-container-new:hover {
+  transform: scale(1.05);
+}
+
+.logo-image-new {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
+}
+
+.login-card-new {
+  background: linear-gradient(#371919 0%, #5c3c0b 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  position: relative;
+  z-index: 10;
+}
+
+.login-input {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.login-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(218, 165, 32, 0.4);
+  box-shadow: 0 0 0 2px rgba(218, 165, 32, 0.2);
+}
+
+.login-button {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 69, 19, 0.4) 0%,
+    rgba(160, 82, 45, 0.3) 50%,
+    rgba(218, 165, 32, 0.25) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: -30;
+  margin-top: -8px;
+}
+
+.login-button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 69, 19, 0.5) 0%,
+    rgba(160, 82, 45, 0.4) 50%,
+    rgba(218, 165, 32, 0.35) 100%
+  );
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  opacity: 0.8;
+}
+
+.login-button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }

@@ -13,6 +13,12 @@ export async function POST(request) {
 
   const { amount } = await request.json();
   
+  // Get the current domain dynamically
+  const headers = request.headers;
+  const host = headers.get('host');
+  const protocol = headers.get('x-forwarded-proto') || (host?.includes('localhost') ? 'http' : 'https');
+  const baseUrl = `${protocol}://${host}`;
+  
   if (!amount || amount < 100) { // Minimum $1.00
     return new Response(JSON.stringify({ error: 'Invalid amount' }), { status: 400 });
   }
@@ -68,8 +74,8 @@ export async function POST(request) {
         },
       ],
       mode: 'subscription', // Changed from 'payment' to 'subscription'
-      success_url: `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}?success=true`,
-      cancel_url: `${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/payment?canceled=true`,
+      success_url: `${baseUrl}/payment/subscription?success=true`,
+      cancel_url: `${baseUrl}/payment/subscription?canceled=true`,
       customer: customerId, // Link to existing customer
       subscription_data: {
         metadata: {

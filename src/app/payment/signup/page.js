@@ -61,18 +61,13 @@ export default function SubscriptionSignup() {
   return (
     <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
       <div className="relative z-10 flex flex-col items-center w-full max-w-md">
-        {/* Logo - Pixel perfect */}
-        <div className="logo-container">
-          <div className="logo-outer">
-            <div className="greek-key-border"></div>
-            <div className="logo-inner">
-              <span className="logo-lambda">Λ</span>
-            </div>
-          </div>
+        {/* Logo - Using the provided login.png */}
+        <div className="logo-container-new">
+          <img src="/login.png" alt="Logo" className="logo-image-new" />
         </div>
 
-        {/* Main Signup Card - Pixel perfect glassmorphism */}
-        <div className="glass-card rounded-3xl p-8 w-full relative">
+        {/* Main Signup Card - Updated design */}
+        <div className="login-card-new rounded-3xl py-16 px-12 w-full relative">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
             <div className="relative">
@@ -88,7 +83,7 @@ export default function SubscriptionSignup() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="glass-input w-full pl-12 pr-4 py-4 rounded-2xl text-white placeholder-white/50 focus:outline-none text-base"
+                className="login-input w-full pl-12 pr-4 py-5 rounded-2xl text-white placeholder-white/60 focus:outline-none text-base font-light"
                 placeholder="Email ID"
                 required
               />
@@ -107,7 +102,7 @@ export default function SubscriptionSignup() {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="glass-input w-full pl-12 pr-4 py-4 rounded-2xl text-white placeholder-white/50 focus:outline-none text-base"
+                className="login-input w-full pl-12 pr-4 py-5 rounded-2xl text-white placeholder-white/60 focus:outline-none text-base font-light"
                 placeholder="Password"
                 required
               />
@@ -126,7 +121,7 @@ export default function SubscriptionSignup() {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="glass-input w-full pl-12 pr-4 py-4 rounded-2xl text-white placeholder-white/50 focus:outline-none text-base"
+                className="login-input w-full pl-12 pr-4 py-5 rounded-2xl text-white placeholder-white/60 focus:outline-none text-base font-light"
                 placeholder="Confirm Password"
                 required
               />
@@ -140,26 +135,23 @@ export default function SubscriptionSignup() {
           </form>
         </div>
 
-        {/* Signup Button - Separate from card, pixel perfect */}
+        {/* Signup Button - Updated design */}
         <button
           onClick={handleSubmit}
           disabled={loading}
-          className="mt-6 glass-card text-white font-semibold py-4 px-16 rounded-2xl hover:bg-opacity-20 transition-all duration-300 disabled:opacity-50 text-base"
+          className="login-button text-white font-light py-5 px-32 rounded-2xl hover:bg-opacity-20 transition-all duration-300 disabled:opacity-50 text-base"
         >
           {loading ? 'Creating Account...' : 'Sign Up'}
         </button>
 
         {/* Footer Links */}
         <div className="mt-8 text-center space-y-3">
-          <p className="text-white/50 text-sm">
+          <p className="text-white/60 text-sm font-light">
             Already have an account?{' '}
-            <Link href="/payment/login" className="text-yellow-400 hover:text-yellow-300 font-semibold transition-colors">
+            <Link href="/payment/login" className="text-[#DAA520] font-light transition-colors">
               Sign in here
             </Link>
           </p>
-          <Link href="/" className="text-white/30 hover:text-white/50 text-xs transition-colors">
-            ← Back to Home
-          </Link>
         </div>
       </div>
     </div>

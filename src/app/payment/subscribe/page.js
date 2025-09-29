@@ -27,10 +27,13 @@ function SubscribeContent() {
     const centerY = rect.top + rect.height / 2;
     
     const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-    const degrees = (angle * 180 / Math.PI + 360) % 360;
+    let degrees = (angle * 180 / Math.PI + 90) % 360; // Start from top (90 degrees offset)
+    if (degrees < 0) degrees += 360;
     
-    const newAmount = Math.round(degrees / 3.6);
-    setAmount(Math.max(1, Math.min(100, newAmount)));
+    // Convert degrees to amount (0-360 degrees = 1-100 dollars)
+    let newAmount = (degrees / 360) * 99 + 1; // Scale from 1 to 100
+    newAmount = Math.max(1, Math.min(100, newAmount));
+    setAmount(Math.round(newAmount));
   };
 
   React.useEffect(() => {
@@ -75,23 +78,18 @@ function SubscribeContent() {
     return (
       <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
         <div className="relative z-10 flex flex-col items-center w-full max-w-md">
-          {/* Logo - Pixel perfect */}
-          <div className="logo-container">
-            <div className="logo-outer">
-              <div className="greek-key-border"></div>
-              <div className="logo-inner">
-                <span className="logo-lambda">Λ</span>
-              </div>
-            </div>
+          {/* Logo - Using the provided login.png */}
+          <div className="logo-container-new">
+            <img src="/login.png" alt="Logo" className="logo-image-new" />
           </div>
 
           {/* Access Required Card */}
-          <div className="glass-card rounded-3xl p-8 w-full relative text-center">
-            <h1 className="text-2xl font-bold text-white mb-4">Access Required</h1>
-            <p className="text-white/60 mb-6">Please sign in to continue with your subscription</p>
+          <div className="login-card-new rounded-3xl py-16 px-12 w-full relative text-center">
+            <h1 className="text-2xl font-light text-white mb-4">Access Required</h1>
+            <p className="text-white/60 mb-6 font-light">Please sign in to continue with your subscription</p>
             <Link
               href="/payment/login"
-              className="glass-card text-white font-semibold py-4 px-16 rounded-2xl hover:bg-opacity-20 transition-all duration-300 text-base inline-block"
+              className="login-button text-white font-light py-5 px-32 rounded-2xl hover:bg-opacity-20 transition-all duration-300 text-base inline-block"
             >
               Sign In
             </Link>
@@ -104,33 +102,23 @@ function SubscribeContent() {
   return (
     <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
       <div className="relative z-10 flex flex-col items-center w-full max-w-2xl">
-        {/* Logo - Pixel perfect */}
-        <div className="logo-container">
-          <div className="logo-outer">
-            <div className="greek-key-border"></div>
-            <div className="logo-inner">
-              <span className="logo-lambda">Λ</span>
-            </div>
-          </div>
+        {/* Logo - Using the provided login.png */}
+        <div className="logo-container-new">
+          <img src="/login.png" alt="Logo" className="logo-image-new" />
         </div>
 
         {/* Main Subscription Card - Enhanced glassmorphism */}
-        <div className="enhanced-glass rounded-3xl p-8 w-full relative">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">Complete Your Subscription</h1>
-            <p className="text-white/60">Choose your subscription amount and proceed to payment</p>
-          </div>
+        <div className="login-card-new rounded-3xl py-16 px-12 w-full relative">
 
           {/* Amount Selection */}
           <div className="mb-8">
-            <h2 className="text-xl font-semibold text-white mb-6">Select Amount</h2>
             
             {/* Radial Payment Interface */}
             <div className="flex justify-center mb-6">
               <div className="relative">
                 {/* Radial instruction */}
                 <div className="radial-instruction">
-                  <p className="radial-instruction-text">rotate the dial</p>
+                  <p className="radial-instruction-text font-light">rotate the dial</p>
                   <div className="radial-instruction-dot"></div>
                 </div>
                 
@@ -139,7 +127,7 @@ function SubscribeContent() {
                   <div 
                     className="radial-slider"
                     style={{
-                      background: `conic-gradient(from 0deg, #DAA520 0%, #DAA520 ${amount * 3.6}deg, rgba(255,255,255,0.1) ${amount * 3.6}deg, rgba(255,255,255,0.1) 360deg)`
+                      background: `conic-gradient(from -90deg, #DAA520 0%, #DAA520 ${((amount - 1) / 99) * 360}deg, rgba(255,255,255,0.1) ${((amount - 1) / 99) * 360}deg, rgba(255,255,255,0.1) 360deg)`
                     }}
                     onMouseDown={(e) => handleRadialDrag(e)}
                     onMouseMove={(e) => handleRadialMove(e)}
@@ -155,7 +143,7 @@ function SubscribeContent() {
                     <div 
                       className="radial-handle"
                       style={{
-                        transform: `translate(-50%, -50%) rotate(${amount * 3.6}deg) translateY(-150px)`
+                        transform: `translate(-50%, -50%) rotate(${((amount - 1) / 99) * 360}deg) translateY(-150px)`
                       }}
                     ></div>
                   </div>
@@ -169,7 +157,7 @@ function SubscribeContent() {
             <button
               onClick={handleCheckout}
               disabled={loading}
-              className="pay-button flex flex-col items-center space-y-1 relative"
+              className="pay-button flex flex-col items-center space-y-1 relative font-light"
             >
               <svg className="fingerprint-icon" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 1a9 9 0 100 18 9 9 0 000-18zM8 6a2 2 0 114 0 2 2 0 01-4 0zm2 8a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
@@ -182,31 +170,11 @@ function SubscribeContent() {
 
           {/* Error Message */}
           {message && (
-            <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-xl backdrop-blur-sm text-center text-sm mb-4">
+            <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-xl backdrop-blur-sm text-center text-sm mb-4 font-light">
               {message}
             </div>
           )}
 
-          {/* Security Notice */}
-          <div className="text-center text-white/40 text-xs mb-6">
-            <p>🔒 Secure payment powered by Stripe</p>
-          </div>
-
-          {/* Footer Links */}
-          <div className="flex justify-center space-x-4">
-            <button
-              onClick={() => router.back()}
-              className="glass-card text-white font-semibold py-2 px-6 rounded-xl hover:bg-opacity-20 transition-all duration-300 text-sm"
-            >
-              Back
-            </button>
-            <Link
-              href="/payment/subscription"
-              className="glass-card text-white font-semibold py-2 px-6 rounded-xl hover:bg-opacity-20 transition-all duration-300 text-sm"
-            >
-              Manage Subscription
-            </Link>
-          </div>
         </div>
       </div>
     </div>
@@ -218,17 +186,12 @@ export default function SubscribePage() {
     <Suspense fallback={
       <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
         <div className="relative z-10 flex flex-col items-center w-full max-w-md">
-          <div className="logo-container">
-            <div className="logo-outer">
-              <div className="greek-key-border"></div>
-              <div className="logo-inner">
-                <span className="logo-lambda">Λ</span>
-              </div>
-            </div>
+          <div className="logo-container-new">
+            <img src="/login.png" alt="Logo" className="logo-image-new" />
           </div>
-          <div className="enhanced-glass rounded-3xl p-8 w-full relative text-center">
-            <h1 className="text-2xl font-bold text-white mb-4">Loading...</h1>
-            <p className="text-white/60">Please wait while we load your subscription page</p>
+          <div className="login-card-new rounded-3xl py-16 px-12 w-full relative text-center">
+            <h1 className="text-2xl font-light text-white mb-4">Loading...</h1>
+            <p className="text-white/60 font-light">Please wait while we load your subscription page</p>
           </div>
         </div>
       </div>

@@ -1,8 +1,9 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import PaymentNotification from '../../../components/PaymentNotification';
 import '../figma-styles.css';
 
 export default function SubscriptionManagement() {
@@ -10,6 +11,31 @@ export default function SubscriptionManagement() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [showNotification, setShowNotification] = useState(false);
+  const [notificationType, setNotificationType] = useState('success');
+
+  // Check for payment success/failure parameters
+  useEffect(() => {
+    const success = searchParams.get('success');
+    const canceled = searchParams.get('canceled');
+    
+    if (success === 'true') {
+      setNotificationType('success');
+      setShowNotification(true);
+      // Clear URL parameters
+      window.history.replaceState({}, '', '/payment/subscription');
+    } else if (canceled === 'true') {
+      setNotificationType('failure');
+      setShowNotification(true);
+      // Clear URL parameters
+      window.history.replaceState({}, '', '/payment/subscription');
+    }
+  }, [searchParams]);
+
+  const handleNotificationClose = () => {
+    setShowNotification(false);
+  };
 
   const handleRenewSubscription = () => {
     router.push('/payment/options');
@@ -47,14 +73,9 @@ export default function SubscriptionManagement() {
     return (
       <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
         <div className="relative z-10 flex flex-col items-center w-full max-w-md">
-          {/* Logo - Pixel perfect */}
-          <div className="logo-container">
-            <div className="logo-outer">
-              <div className="greek-key-border"></div>
-              <div className="logo-inner">
-                <span className="logo-lambda">Λ</span>
-              </div>
-            </div>
+          {/* Logo - Using the provided login.png */}
+          <div className="logo-container-new">
+            <img src="/login.png" alt="Logo" className="logo-image-new" />
           </div>
 
           {/* Access Required Card */}
@@ -84,18 +105,13 @@ export default function SubscriptionManagement() {
   return (
     <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
       <div className="relative z-10 flex flex-col items-center w-full max-w-2xl">
-        {/* Logo - Pixel perfect */}
-        <div className="logo-container">
-          <div className="logo-outer">
-            <div className="greek-key-border"></div>
-            <div className="logo-inner">
-              <span className="logo-lambda">Λ</span>
-            </div>
-          </div>
+        {/* Logo - Using the provided login.png */}
+        <div className="logo-container-new">
+          <img src="/login.png" alt="Logo" className="logo-image-new" />
         </div>
 
         {/* Main Subscription Card - Enhanced glassmorphism */}
-        <div className="enhanced-glass rounded-3xl p-8 w-full relative">
+        <div className="login-card-new rounded-3xl p-8 w-full relative">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-white mb-2">Welcome, {session.user?.name || session.user?.email}</h1>
             <p className="text-white/60">Manage your subscription and account</p>
@@ -110,10 +126,6 @@ export default function SubscriptionManagement() {
                 <span className="text-white">{session.user?.email}</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-white/70 font-medium">Status:</span>
-                <span className="status-active">Active</span>
-              </div>
-              <div className="flex justify-between items-center">
                 <span className="text-white/70 font-medium">Member Since:</span>
                 <span className="text-white">{new Date().toLocaleDateString()}</span>
               </div>
@@ -121,25 +133,25 @@ export default function SubscriptionManagement() {
           </div>
 
           {/* Subscription Actions */}
-          <div className="space-y-4 mb-8">
+          <div className="space-y-6">
             <button
               onClick={handleRenewSubscription}
-              className="w-full subscription-btn text-white font-semibold py-4 px-6 rounded-2xl text-lg"
+              className="w-full subscription-btn text-white font-light py-5 px-8 rounded-2xl text-lg "
             >
-              Renew Subscription
+              Subscribe
             </button>
 
             <button
               onClick={handleManageBilling}
               disabled={loading}
-              className="w-full subscription-btn text-white font-semibold py-4 px-6 rounded-2xl disabled:opacity-50 text-lg"
+              className="w-full subscription-btn text-white font-light py-5 px-8 rounded-2xl disabled:opacity-50 text-lg"
             >
-              {loading ? 'Loading...' : 'Manage My Billing'}
+              {loading ? 'Loading...' : 'Manage My Subscription'}
             </button>
 
             <button
               onClick={handleLogout}
-              className="w-full subscription-btn text-white font-semibold py-4 px-6 rounded-2xl text-lg"
+              className="w-full subscription-btn text-white font-light py-5 px-8 rounded-2xl text-lg"
             >
               Logout
             </button>
@@ -152,14 +164,15 @@ export default function SubscriptionManagement() {
             </div>
           )}
 
-          {/* Footer */}
-          <div className="text-center">
-            <Link href="/" className="text-white/40 hover:text-white/60 text-sm transition-colors">
-              ← Back to Home
-            </Link>
-          </div>
         </div>
       </div>
+      
+      {/* Payment Notification Popup */}
+      <PaymentNotification
+        type={notificationType}
+        isVisible={showNotification}
+        onClose={handleNotificationClose}
+      />
     </div>
   );
 }

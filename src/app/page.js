@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef, useEffect } from 'react';
 import './creed-styles.css';
+import IntroWrapper from '../components/IntroWrapper';
 
 export default function Home() {
   const [activeAccordion, setActiveAccordion] = useState(null);
@@ -59,6 +60,7 @@ export default function Home() {
     setActiveAccordion(activeAccordion === index ? null : index);
   };
 
+
   // Video event handlers
   useEffect(() => {
     const video = videoRef.current;
@@ -80,22 +82,23 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      {/* Top Section */}
-      <div className="top">
-        <img src="/text.png" alt="The Creed text" id="text" />
-        <img src="/spartan.png" alt="Spartan warrior" id="spartan" />
-      </div>
+    <IntroWrapper>
+      <div>
+        {/* Top Section */}
+        <div className="top">
+          <img src="/text.png" alt="The Creed text" id="text" />
+          <img src="/spartan.png" alt="Spartan warrior" id="spartan" />
+        </div>
 
       {/* Video Container */}
       <div className="video-container">
         <div className="hero-video-section">
-          <video 
+          <video
             ref={videoRef}
-            muted 
-            loop 
-            playsInline 
-            autoPlay 
+            muted
+            loop
+            playsInline
+            autoPlay
             id="header-video"
             onClick={togglePlayPause}
           >
@@ -103,9 +106,9 @@ export default function Home() {
           </video>
           <div className="video-controls">
             <div className="controls-left">
-              <button 
-                id="play-pause-btn" 
-                className="control-btn" 
+              <button
+                id="play-pause-btn"
+                className="control-btn"
                 title="Play/Pause"
                 onClick={togglePlayPause}
               >
@@ -122,9 +125,9 @@ export default function Home() {
               </button>
             </div>
             <div className="controls-right">
-              <button 
-                id="mute-unmute-btn" 
-                className="control-btn" 
+              <button
+                id="mute-unmute-btn"
+                className="control-btn"
                 title="Mute/Unmute"
                 onClick={toggleMuteUnmute}
               >
@@ -141,9 +144,9 @@ export default function Home() {
                   </svg>
                 )}
               </button>
-              <button 
-                id="fullscreen-btn" 
-                className="control-btn" 
+              <button
+                id="fullscreen-btn"
+                className="control-btn"
                 title="Fullscreen"
                 onClick={toggleFullscreen}
               >
@@ -157,10 +160,10 @@ export default function Home() {
       </div>
 
       {/* Join Button */}
-      <a 
-        className="join" 
-        href="https://matrix.to/#/#the-creed-landing:matrix.the-creed.org" 
-        style={{textDecoration: 'none'}} 
+      <a
+        className="join"
+        href="https://matrix.to/#/#the-creed-landing:matrix.the-creed.org"
+        style={{textDecoration: 'none'}}
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -251,7 +254,7 @@ export default function Home() {
             </div>
 
             <div className="accordion">
-              <div 
+              <div
                 className={`accordion-item ${activeAccordion === 0 ? 'active' : ''}`}
                 onClick={() => toggleAccordion(0)}
               >
@@ -308,7 +311,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div 
+              <div
                 className={`accordion-item ${activeAccordion === 1 ? 'active' : ''}`}
                 onClick={() => toggleAccordion(1)}
               >
@@ -329,7 +332,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div 
+              <div
                 className={`accordion-item ${activeAccordion === 2 ? 'active' : ''}`}
                 onClick={() => toggleAccordion(2)}
               >
@@ -353,7 +356,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div 
+              <div
                 className={`accordion-item ${activeAccordion === 3 ? 'active' : ''}`}
                 onClick={() => toggleAccordion(3)}
               >
@@ -369,7 +372,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div 
+              <div
                 className={`accordion-item ${activeAccordion === 4 ? 'active' : ''}`}
                 onClick={() => toggleAccordion(4)}
               >
@@ -385,7 +388,7 @@ export default function Home() {
                 </div>
               </div>
 
-              <div 
+              <div
                 className={`accordion-item ${activeAccordion === 5 ? 'active' : ''}`}
                 onClick={() => toggleAccordion(5)}
               >
@@ -438,6 +441,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </IntroWrapper>
   );
 }

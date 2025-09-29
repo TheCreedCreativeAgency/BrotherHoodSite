@@ -1,34 +1,73 @@
 'use client';
 import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import IntroWrapper from '../../components/IntroWrapper';
+import PaymentFailed from '../../components/PaymentFailed';
 
 export default function PaymentPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [animationComplete, setAnimationComplete] = useState(false);
+  const [showPaymentFailed, setShowPaymentFailed] = useState(false);
+
+  const handleAnimationComplete = () => {
+    setAnimationComplete(true);
+  };
+
+  // Check for payment cancellation parameter
+  useEffect(() => {
+    const canceled = searchParams.get('canceled');
+    if (canceled === 'true') {
+      setShowPaymentFailed(true);
+      // Clear the URL parameter after showing failure
+      window.history.replaceState({}, '', '/payment');
+    }
+  }, [searchParams]);
 
   useEffect(() => {
+    // Only proceed with navigation after animation is complete
+    if (!animationComplete) return;
+    
     if (status === 'loading') return; // Still loading
 
     if (session) {
       // User is logged in, redirect to subscription management
       router.push('/payment/subscription');
-    } else {
+      } else {
       // User is not logged in, redirect to login
       router.push('/payment/login');
     }
-  }, [session, status, router]);
+  }, [session, status, router, animationComplete]);
 
-  // Show loading state while determining redirect
+  // Show payment failed page if payment was canceled
+  if (showPaymentFailed) {
+    return <PaymentFailed error="Payment was canceled" />;
+  }
+
+  // Show intro animation first, then proceed with navigation
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-red-900 to-gray-800 flex items-center justify-center">
-      <div className="text-center">
-        <div className="w-20 h-20 bg-yellow-600 rounded-full mx-auto mb-6 flex items-center justify-center animate-pulse">
-          <span className="text-white text-3xl font-bold">TC</span>
+    <>
+      <style jsx global>{`
+        body {
+          background: linear-gradient(to right, #0f0f0f 8%, #371919 100%) !important;
+          background-color: transparent !important;
+        }
+      `}</style>
+      <IntroWrapper onAnimationComplete={handleAnimationComplete}>
+        <div className="min-h-screen flex items-center justify-center" style={{
+          background: 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)'
+        }}>
+          <div className="text-center">
+            <div className="mb-6">
+              <img src="/icon.png" alt="Logo" className="w-20 h-20 mx-auto" />
+            </div>
+            <h1 className="text-3xl font-bold text-white mb-4">The Creed</h1>
+            <p className="text-gray-300">Loading subscription portal...</p>
+          </div>
         </div>
-        <h1 className="text-3xl font-bold text-white mb-4">The Creed</h1>
-        <p className="text-gray-300">Loading subscription portal...</p>
-      </div>
-    </div>
+      </IntroWrapper>
+    </>
   );
 }
