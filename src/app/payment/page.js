@@ -1,11 +1,11 @@
 'use client';
 import { useSession } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import IntroWrapper from '../../components/IntroWrapper';
 import PaymentFailed from '../../components/PaymentFailed';
 
-export default function PaymentPage() {
+function PaymentPageContent() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -69,5 +69,25 @@ export default function PaymentPage() {
         </div>
       </IntroWrapper>
     </>
+  );
+}
+
+export default function PaymentPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center" style={{
+        background: 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)'
+      }}>
+        <div className="text-center">
+          <div className="mb-6">
+            <img src="/icon.png" alt="Logo" className="w-20 h-20 mx-auto" />
+          </div>
+          <h1 className="text-3xl font-bold text-white mb-4">The Creed</h1>
+          <p className="text-gray-300">Loading...</p>
+        </div>
+      </div>
+    }>
+      <PaymentPageContent />
+    </Suspense>
   );
 }

@@ -1,12 +1,12 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import PaymentNotification from '../../../components/PaymentNotification';
 import '../figma-styles.css';
 
-export default function SubscriptionManagement() {
+function SubscriptionManagementContent() {
   const { data: session } = useSession();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -174,5 +174,25 @@ export default function SubscriptionManagement() {
         onClose={handleNotificationClose}
       />
     </div>
+  );
+}
+
+export default function SubscriptionManagement() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
+        <div className="relative z-10 flex flex-col items-center w-full max-w-md">
+          <div className="logo-container-new">
+            <img src="/login.png" alt="Logo" className="logo-image-new" />
+          </div>
+          <div className="login-card-new rounded-3xl py-16 px-12 w-full relative text-center">
+            <h1 className="text-2xl font-light text-white mb-4">Loading...</h1>
+            <p className="text-white/60 font-light">Please wait while we load your subscription page</p>
+          </div>
+        </div>
+      </div>
+    }>
+      <SubscriptionManagementContent />
+    </Suspense>
   );
 }
