@@ -1,23 +1,24 @@
 'use client';
 import React, { useState, useEffect, useRef, useCallback } from 'react'; // Added useCallback
 import { useRouter } from 'next/navigation';
-import '../figma-styles.css';
+import './options.css';
 
 export default function SubscriptionOptions() {
-  const [amount, setAmount] = useState(10.00); // Numeric amount for logic (e.g., 10.00)
-  const [textInputValue, setTextInputValue] = useState('10.00'); // String for the input field (e.g., "10.00", "5", "5.")
+  const [amount, setAmount] = useState(0); // Numeric amount for logic (no decimals)
+  const [textInputValue, setTextInputValue] = useState('00'); // String for the input field (no decimals)
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [dragging, setDragging] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('visa'); // 'visa' or 'crypto'
   const router = useRouter();
   const inputRef = useRef(null); // Ref for the input element
 
-  // --- Utility function to format a number as a currency string ---
+  // --- Utility function to format a number as a string (no decimals) ---
   const formatAmountToString = useCallback((value) => {
     // If value is NaN or null/undefined, default to 0 for formatting purposes
-    const num = parseFloat(value);
-    if (isNaN(num)) return '0.00';
-    return num.toFixed(2);
+    const num = parseInt(value);
+    if (isNaN(num)) return '0';
+    return num.toString();
   }, []);
 
   // --- Effect to keep textInputValue in sync with amount when amount changes ---
@@ -35,54 +36,80 @@ export default function SubscriptionOptions() {
   const handleRadialDrag = (e) => {
     e.preventDefault();
     setDragging(true);
+
+    // Calculate initial position
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
+    let degrees = (angle * 180 / Math.PI + 90) % 360;
+    if (degrees < 0) degrees += 360;
+
+    let newAmount = Math.round((degrees / 360) * 100);
+    newAmount = Math.max(0, Math.min(100, newAmount));
+
+    setAmount(newAmount);
+    setTextInputValue(formatAmountToString(newAmount));
   };
 
   const handleTouchStart = (e) => {
     e.preventDefault();
     setDragging(true);
+
+    // Calculate initial position for touch
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const touch = e.touches[0];
+    const angle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
+    let degrees = (angle * 180 / Math.PI + 90) % 360;
+    if (degrees < 0) degrees += 360;
+
+    let newAmount = Math.round((degrees / 360) * 100);
+    newAmount = Math.max(0, Math.min(100, newAmount));
+
+    setAmount(newAmount);
+    setTextInputValue(formatAmountToString(newAmount));
   };
 
 
   const handleTextInput = (e) => {
     const value = e.target.value;
+    console.log('Input value:', value); // Debug log
 
-    // 1. Immediately update the input's displayed string value
+    // Immediately update the input's displayed string value
     setTextInputValue(value);
 
-    // 2. Parse and validate for the numeric `amount` state
-    const numValue = parseFloat(value);
+    // Parse the value as a number
+    const numValue = parseInt(value);
+    console.log('Parsed value:', numValue); // Debug log
 
     if (!isNaN(numValue)) {
-      // Clamp the numeric value, but don't aggressively round while typing
-      // e.g., allow "5." to be typed before "5.50"
-      let clampedValue = Math.max(1, Math.min(100, numValue));
-
-      // Only setAmount if it's a valid number and it's different enough
-      // to avoid infinite loops if it's already clamped.
-      if (amount !== clampedValue) {
-        setAmount(clampedValue);
-      }
+      // Clamp the value between 0 and 100
+      const clampedValue = Math.max(0, Math.min(100, numValue));
+      console.log('Setting amount to:', clampedValue); // Debug log
+      setAmount(clampedValue);
     } else if (value === '') {
-      // If the input is empty, reset the numeric amount to 0
+      // If empty, set to 0
+      console.log('Empty input, setting to 0'); // Debug log
       setAmount(0);
     }
-    // If `isNaN(numValue)` and `value` is not empty (e.g., typing "abc"),
-    // `amount` will retain its last valid value until `onBlur` cleans it up.
   };
 
   const handleInputBlur = (e) => {
-    let numValue = parseFloat(textInputValue);
+    let numValue = parseInt(textInputValue);
 
     // If empty or invalid, reset to default
-    if (textInputValue === '' || isNaN(numValue) || numValue < 1) {
-      setAmount(10.00);
-      setTextInputValue('10.00');
+    if (textInputValue === '' || isNaN(numValue) || numValue < 0) {
+      setAmount(0);
+      setTextInputValue('00');
     } else {
       // Ensure the amount is within bounds and formatted
-      numValue = Math.max(1, Math.min(100, numValue));
-      const finalFormattedAmount = Math.round(numValue * 100) / 100;
-      setAmount(finalFormattedAmount);
-      setTextInputValue(formatAmountToString(finalFormattedAmount));
+      numValue = Math.max(0, Math.min(100, numValue));
+      setAmount(numValue);
+      setTextInputValue(formatAmountToString(numValue));
     }
   };
 
@@ -90,9 +117,10 @@ export default function SubscriptionOptions() {
   useEffect(() => {
     const handleMouseUp = () => setDragging(false);
     const handleTouchEnd = () => setDragging(false);
+
     const handleMouseMove = (e) => {
       if (dragging) {
-        // Get the radial slider element
+        e.preventDefault();
         const radialSlider = document.querySelector('.radial-slider');
         if (radialSlider) {
           const rect = radialSlider.getBoundingClientRect();
@@ -100,19 +128,19 @@ export default function SubscriptionOptions() {
           const centerY = rect.top + rect.height / 2;
           
           const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-          let degrees = (angle * 180 / Math.PI + 90) % 360; // Start from top (90 degrees offset)
+          let degrees = (angle * 180 / Math.PI + 90) % 360;
           if (degrees < 0) degrees += 360;
           
           // Convert degrees to amount (0-360 degrees = 1-100 dollars)
-          let newAmount = (degrees / 360) * 99 + 1; // Scale from 1 to 100
+          let newAmount = Math.round((degrees / 360) * 99 + 1);
           newAmount = Math.max(1, Math.min(100, newAmount));
-          newAmount = Math.round(newAmount * 100) / 100; // Round to 2 decimal places
 
           setAmount(newAmount);
           setTextInputValue(formatAmountToString(newAmount));
         }
       }
     };
+
     const handleTouchMove = (e) => {
       if (dragging) {
         e.preventDefault();
@@ -127,9 +155,8 @@ export default function SubscriptionOptions() {
           let degrees = (angle * 180 / Math.PI + 90) % 360;
           if (degrees < 0) degrees += 360;
           
-          let newAmount = (degrees / 360) * 99 + 1;
+          let newAmount = Math.round((degrees / 360) * 99 + 1);
           newAmount = Math.max(1, Math.min(100, newAmount));
-          newAmount = Math.round(newAmount * 100) / 100;
 
           setAmount(newAmount);
           setTextInputValue(formatAmountToString(newAmount));
@@ -137,16 +164,18 @@ export default function SubscriptionOptions() {
       }
     };
     
-    document.addEventListener('mouseup', handleMouseUp);
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('touchend', handleTouchEnd);
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    if (dragging) {
+      document.addEventListener('mousemove', handleMouseMove, { passive: false });
+      document.addEventListener('mouseup', handleMouseUp);
+      document.addEventListener('touchmove', handleTouchMove, { passive: false });
+      document.addEventListener('touchend', handleTouchEnd);
+    }
     
     return () => {
-      document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('mouseup', handleMouseUp);
       document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
     };
   }, [dragging, formatAmountToString]);
 
@@ -189,92 +218,126 @@ export default function SubscriptionOptions() {
   };
 
   return (
-    <div className="min-h-screen creed-bg flex items-center justify-center py-8 px-4 relative overflow-hidden">
+    <div className="options-container">
+      {/* Top Navigation Bar */}
+      <div className="top-nav-bar">
+        <div className="nav-icon">
+          <img src="/home-icon.png" alt="Home" className="nav-icon-img" />
+        </div>
+        <div className="nav-icon nav-icon-active">
+          <img src="/payment-icon.png" alt="Payment" className="nav-icon-img" />
+        </div>
+        <div className="nav-icon">
+          <img src="/profile-icon.png" alt="Profile" className="nav-icon-img" />
+        </div>
+      </div>
 
-      {/* Main Payment Card - Pixel perfect */}
-      <div className="relative z-10 login-card-new rounded-3xl py-10 px-8 w-full max-w-xl">
-        {/* Logo - Centered, half in and half out */}
-        <div className="flex justify-center mt-[-50]">
-          <div 
-            className="logo-container-new cursor-pointer"
-            onClick={() => router.push('/payment/subscription')}
-          >
-            <img src="/login.png" alt="Logo" className="logo-image-new mt-[-50]" />
+      {/* Main Payment Card */}
+      <div className="options-card">
+        {/* Left Section - Payment Methods */}
+        <div className="payment-methods-section">
+          <div className="payment-logo">
+            <img src="/hamburger-icon.png" alt="Menu" className="payment-logo-img" />
+          </div>
+          <h2 className="payment-methods-title">PAYMENT METHODS</h2>
+
+          <div className="payment-methods-buttons">
+            <button
+              className={`payment-method-btn visa ${selectedPaymentMethod === 'visa' ? 'active' : ''}`}
+              onClick={() => setSelectedPaymentMethod('visa')}
+            >
+              <img src="/visa-logo.png" alt="VISA" className="payment-method-logo" />
+            </button>
+
+            <button
+              className={`payment-method-btn crypto ${selectedPaymentMethod === 'crypto' ? 'active' : ''}`}
+              onClick={() => setSelectedPaymentMethod('crypto')}
+            >
+              <img src="/crypto-logo.png" alt="CRYPTO" className="payment-method-logo" />
+            </button>
           </div>
         </div>
 
         {/* Center Section - Radial Amount Selection */}
-        <div className="flex justify-center mb-10">
-          <div className="relative">
-            {/* Radial instruction */}
+        <div className="radial-section">
+          <div className="radial-instruction">
+            <span>SLIDE THE DOT</span>
+          </div>
 
-            
-            {/* Radial Payment Interface */}
-            <div className="radial-payment-container">
-              <div 
-                className="radial-slider"
+          <div className="radial-payment-container">
+            <div
+              className="radial-slider"
+              onMouseDown={handleRadialDrag}
+              onTouchStart={handleTouchStart}
+            >
+              {/* Progress ring */}
+              <div
+                className="radial-progress-ring"
                 style={{
-                  background: `conic-gradient(from -90deg, #DAA520 0%, #DAA520 ${((amount - 1) / 99) * 360}deg, rgba(255,255,255,0.1) ${((amount - 1) / 99) * 360}deg, rgba(255,255,255,0.1) 360deg)`
+                  background: `conic-gradient(from -90deg, #FFC56D 0%, #FFC56D ${(amount / 100) * 360}deg, transparent ${(amount / 100) * 360}deg, transparent 360deg)`
                 }}
-                onMouseDown={handleRadialDrag}
-                onTouchStart={handleTouchStart}
-              >
-                <div className="radial-amount-display">
-                  <div className="radial-amount-value">
-                    <input
-                      ref={inputRef} // Assign the ref
-                      type="text" // Use text type for better manual input control
-                      inputMode="decimal" // Suggests a decimal keyboard on mobile
-                      min="1"
-                      max="100"
-                      step="0.01"
-                      value={textInputValue} // This is the controlled component value
-                      onChange={handleTextInput}
-                      onBlur={handleInputBlur}
-                      onClick={(e) => e.stopPropagation()} // Prevent radial drag from starting if clicking input
-                      onFocus={(e) => {
-                        e.target.select(); // Select all text on focus
-                        // Optionally, if the value is "0.00" or similar, clear it for typing
-                        if (parseFloat(textInputValue) === 0) {
-                            setTextInputValue('');
-                        }
-                      }}
-                      className="radial-center-input"
-                      placeholder="10.00"
-                    />
-                  </div>
-                  <div className="radial-amount-label font-light">Per Month</div>
-                  <div className="radial-amount-currency font-light">USD</div>
+              ></div>
+
+              <div className="radial-amount-display">
+                <div className="radial-amount-value">
+                  <input
+                    ref={inputRef}
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={textInputValue}
+                    onChange={handleTextInput}
+                    onBlur={handleInputBlur}
+                    onClick={(e) => e.stopPropagation()}
+                    onFocus={(e) => {
+                      e.target.select();
+                    }}
+                    className="radial-center-input"
+                    placeholder="00"
+                  />
                 </div>
-                <div 
-                  className="radial-handle"
-                  style={{
-                    transform: `translate(-50%, -50%) rotate(${((amount - 1) / 99) * 360 - 90}deg) translateY(-150px)`
-                  }}
-                ></div>
+                <div className="radial-amount-side">
+                  <div className="radial-amount-label">Per Month</div>
+                  <div className="radial-amount-currency">USD</div>
+                </div>
               </div>
+
+              <div
+                className="radial-handle"
+                style={{
+                  transform: `translate(-50%, -50%) rotate(${(amount / 100) * 360}deg) translateY(-150px)`
+                }}
+              ></div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Section - Only Pay Button */}
-        <div className="flex justify-center items-end">
-          {/* Pay Button - Pixel perfect with fingerprint */}
+        {/* Right Section - Action Buttons (Single Column) */}
+        <div className="action-section">
+          <button
+            className="close-button"
+            onClick={() => router.push('/payment/subscription')}
+          >
+            <img src="/close-icon.png" alt="Close" className="action-icon" />
+          </button>
+
           <button
             onClick={handleCheckout}
-            disabled={loading || amount < 1} // Disable if loading or amount is less than $1
-            className="pay-button flex flex-col items-center space-y-1 relative font-light"
+            disabled={loading || amount < 1}
+            className="pay-button"
           >
-            <svg className="fingerprint-icon" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 1a9 9 0 100 18 9 9 0 000-18zM8 6a2 2 0 114 0 2 2 0 01-4 0zm2 8a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-            </svg>
-            <span className="relative z-10 text-xl">PAY</span>
+            <img src="/fingerprint-icon.png" alt="Fingerprint" className="fingerprint-icon" />
+            <span className="pay-button-text">PAY</span>
+          </button>
+
+          <button className="profile-button">
+            <img src="/profile-icon.png" alt="Profile" className="action-icon" />
           </button>
         </div>
 
         {/* Error Message */}
         {message && (
-          <div className="mt-4 bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-xl backdrop-blur-sm text-center text-sm font-light">
+          <div className="options-error">
             {message}
           </div>
         )}

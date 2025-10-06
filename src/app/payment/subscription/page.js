@@ -4,7 +4,7 @@ import { useSession, signOut } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import PaymentNotification from '../../../components/PaymentNotification';
-import '../figma-styles.css';
+import './subscription.css';
 
 function SubscriptionManagementContent() {
   const { data: session } = useSession();
@@ -71,27 +71,27 @@ function SubscriptionManagementContent() {
 
   if (!session) {
     return (
-      <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
-        <div className="relative z-10 flex flex-col items-center w-full max-w-md">
+      <div className="subscription-container">
+        <div className="subscription-content">
           {/* Logo - Using the provided login.png */}
-          <div className="logo-container-new">
-            <img src="/login.png" alt="Logo" className="logo-image-new" />
+          <div className="subscription-logo-container">
+            <img src="/login.png" alt="Logo" className="subscription-logo-image" />
           </div>
 
           {/* Access Required Card */}
-          <div className="glass-card rounded-3xl p-8 w-full relative text-center">
-            <h1 className="text-2xl font-bold text-white mb-4">Access Required</h1>
-            <p className="text-white/60 mb-6">Please sign in to manage your subscription</p>
-            <div className="space-y-3">
+          <div className="access-card">
+            <h1 className="access-title">Access Required</h1>
+            <p className="access-message">Please sign in to manage your subscription</p>
+            <div className="access-buttons">
               <Link
                 href="/payment/login"
-                className="glass-card text-white font-semibold py-4 px-16 rounded-2xl hover:bg-opacity-20 transition-all duration-300 text-base inline-block w-full"
+                className="access-btn"
               >
                 Sign In
               </Link>
               <Link
                 href="/payment/signup"
-                className="glass-card text-white font-semibold py-4 px-16 rounded-2xl hover:bg-opacity-20 transition-all duration-300 text-base inline-block w-full"
+                className="access-btn"
               >
                 Sign Up
               </Link>
@@ -103,40 +103,40 @@ function SubscriptionManagementContent() {
   }
 
   return (
-    <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
-      <div className="relative z-10 flex flex-col items-center w-full max-w-2xl">
+    <div className="subscription-container">
+      <div className="subscription-content">
         {/* Logo - Using the provided login.png */}
-        <div className="logo-container-new">
-          <img src="/login.png" alt="Logo" className="logo-image-new" />
+        <div className="subscription-logo-container">
+          <img src="/login.png" alt="Logo" className="subscription-logo-image" />
         </div>
 
         {/* Main Subscription Card - Enhanced glassmorphism */}
-        <div className="login-card-new rounded-3xl p-8 w-full relative">
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-2">Welcome, {session.user?.name || session.user?.email}</h1>
-            <p className="text-white/60">Manage your subscription and account</p>
+        <div className="subscription-card">
+          <div className="subscription-header">
+            <h1 className="subscription-title">Welcome, {session.user?.name || session.user?.email}</h1>
+            <p className="subscription-subtitle">Manage your subscription and account</p>
           </div>
 
           {/* User Info Card */}
-          <div className="subscription-info rounded-2xl p-6 mb-8">
-            <h2 className="text-xl font-semibold text-white mb-4">Account Information</h2>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-white/70 font-medium">Email:</span>
-                <span className="text-white">{session.user?.email}</span>
+          <div className="subscription-info">
+            <h2 className="subscription-info-title">Account Information</h2>
+            <div>
+              <div className="subscription-info-row">
+                <span className="subscription-info-label">Email:</span>
+                <span className="subscription-info-value">{session.user?.email}</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-white/70 font-medium">Member Since:</span>
-                <span className="text-white">{new Date().toLocaleDateString()}</span>
+              <div className="subscription-info-row">
+                <span className="subscription-info-label">Member Since:</span>
+                <span className="subscription-info-value">{new Date().toLocaleDateString()}</span>
               </div>
             </div>
           </div>
 
           {/* Subscription Actions */}
-          <div className="space-y-6">
+          <div className="subscription-actions">
             <button
               onClick={handleRenewSubscription}
-              className="w-full subscription-btn text-white font-light py-5 px-8 rounded-2xl text-lg "
+              className="subscription-btn"
             >
               Subscribe
             </button>
@@ -144,14 +144,14 @@ function SubscriptionManagementContent() {
             <button
               onClick={handleManageBilling}
               disabled={loading}
-              className="w-full subscription-btn text-white font-light py-5 px-8 rounded-2xl disabled:opacity-50 text-lg"
+              className="subscription-btn"
             >
               {loading ? 'Loading...' : 'Manage My Subscription'}
             </button>
 
             <button
               onClick={handleLogout}
-              className="w-full subscription-btn text-white font-light py-5 px-8 rounded-2xl text-lg"
+              className="subscription-btn"
             >
               Logout
             </button>
@@ -159,11 +159,10 @@ function SubscriptionManagementContent() {
 
           {/* Error Message */}
           {message && (
-            <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-3 rounded-xl backdrop-blur-sm text-center text-sm mb-6">
+            <div className="subscription-error">
               {message}
             </div>
           )}
-
         </div>
       </div>
       
@@ -180,14 +179,14 @@ function SubscriptionManagementContent() {
 export default function SubscriptionManagement() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen creed-bg flex items-center justify-center p-6 relative overflow-hidden">
-        <div className="relative z-10 flex flex-col items-center w-full max-w-md">
-          <div className="logo-container-new">
-            <img src="/login.png" alt="Logo" className="logo-image-new" />
+      <div className="subscription-container">
+        <div className="subscription-content">
+          <div className="subscription-logo-container">
+            <img src="/login.png" alt="Logo" className="subscription-logo-image" />
           </div>
-          <div className="login-card-new rounded-3xl py-16 px-12 w-full relative text-center">
-            <h1 className="text-2xl font-light text-white mb-4">Loading...</h1>
-            <p className="text-white/60 font-light">Please wait while we load your subscription page</p>
+          <div className="subscription-card subscription-loading">
+            <h1 className="subscription-loading-title">Loading...</h1>
+            <p className="subscription-loading-message">Please wait while we load your subscription page</p>
           </div>
         </div>
       </div>

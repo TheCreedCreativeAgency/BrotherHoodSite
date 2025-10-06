@@ -564,7 +564,7 @@
 }
 
 .logo-container-new:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.05); */
 }
 
 .logo-image-new {

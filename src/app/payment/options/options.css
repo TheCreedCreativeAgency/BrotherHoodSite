@@ -1,0 +1,618 @@
+/* Options Page Styles - Exact Figma Match */
+
+/* Import Inter font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+/* Main container */
+.options-container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #371c1c 0%, #121212 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  position: relative;
+  overflow: hidden;
+  gap: 30px;
+  font-family: "Inter", sans-serif;
+}
+
+/* Top Navigation Bar */
+.top-nav-bar {
+  display: flex;
+  gap: 12px;
+  background: rgba(139, 69, 19, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(218, 165, 32, 0.4);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 8px 12px;
+  z-index: 10;
+}
+
+.nav-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(218, 165, 32, 0.9);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(218, 165, 32, 0.6);
+}
+
+.nav-icon:hover {
+  background: rgba(218, 165, 32, 1);
+  transform: scale(1.05);
+}
+
+.nav-icon-active {
+  background: rgba(218, 165, 32, 1);
+  border-color: rgba(218, 165, 32, 1);
+}
+
+.nav-icon-img {
+  width: 16px;
+  height: 16px;
+  filter: brightness(0.8);
+}
+
+/* Main payment card */
+.options-card {
+  position: relative;
+  z-index: 10;
+  background: linear-gradient(135deg, #371919 0%, #5c3c0b 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 40px;
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 280px 1fr 120px;
+  gap: 40px;
+  align-items: start;
+  min-height: 500px;
+}
+
+/* Payment Methods Section */
+.payment-methods-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.payment-logo {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payment-logo-img {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0) invert(1);
+}
+
+.payment-methods-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.payment-methods-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.payment-method-btn {
+  background: transparent;
+  border: 2px solid #daa520;
+  border-radius: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-method-btn:hover {
+  background: rgba(218, 165, 32, 0.1);
+  transform: translateY(-2px);
+}
+
+.payment-method-btn.active {
+  background: rgba(218, 165, 32, 0.2);
+  border-color: rgba(218, 165, 32, 0.8);
+}
+
+.payment-method-btn.visa {
+  background: #1e40af;
+  border-color: #1e40af;
+}
+
+.payment-method-btn.visa:hover {
+  background: #1d4ed8;
+}
+
+.payment-method-btn.crypto {
+  background: #daa520;
+  border-color: #daa520;
+  color: #000;
+}
+
+.payment-method-btn.crypto:hover {
+  background: #b8860b;
+}
+
+.payment-method-btn.crypto.active {
+  background: #b8860b;
+}
+
+.payment-method-logo {
+  max-height: 24px;
+  max-width: 80px;
+}
+
+/* Radial Section - Golden Container */
+.radial-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  flex: 1;
+  background: linear-gradient(135deg, #ffc56d 0%, #ffb84d 100%);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.radial-instruction {
+  color: rgba(255, 255, 255, 0.95);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.radial-payment-container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.radial-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  border: 2px solid #ffc56d;
+  background: transparent;
+}
+
+.radial-slider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  background: linear-gradient(135deg, #371c1c 0%, #121212 100%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Progress ring - Thin gold ring */
+.radial-progress-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  border: 1px solid #ffc56d;
+  background: conic-gradient(
+    from -90deg,
+    #ffc56d 0%,
+    #ffc56d 0%,
+    transparent 0%,
+    transparent 360deg
+  );
+}
+
+/* Amount display */
+.radial-amount-display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.radial-amount-value {
+  font-family: "Inter", sans-serif;
+  font-size: 47.03px;
+  font-weight: 500;
+  line-height: 1;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: #ffc56d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+}
+
+/* Center input styles */
+.radial-center-input {
+  background: transparent;
+  border: none;
+  color: #ffc56d;
+  font-family: "Inter", sans-serif;
+  font-size: 47.03px;
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  outline: none;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  cursor: text;
+  user-select: text;
+  letter-spacing: 0;
+}
+
+.radial-center-input::-webkit-outer-spin-button,
+.radial-center-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.radial-center-input:focus {
+  background: rgba(255, 197, 109, 0.1);
+  border-radius: 8px;
+  padding: 4px;
+  border: 1px solid rgba(255, 197, 109, 0.3);
+  box-shadow: 0 0 0 2px rgba(255, 197, 109, 0.2);
+}
+
+.radial-center-input::placeholder {
+  color: rgba(255, 197, 109, 0.4);
+}
+
+/* Side labels */
+.radial-amount-side {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.radial-amount-label {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: rgba(255, 197, 109, 0.8);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.radial-amount-currency {
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffc56d;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0;
+}
+
+.radial-handle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #ffc56d;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(-150px);
+  z-index: 4;
+  cursor: grab;
+  box-shadow: 0 2px 8px rgba(255, 197, 109, 0.4);
+  transition: all 0.2s ease;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.radial-handle:hover {
+  transform: translate(-50%, -50%) translateY(-150px) scale(1.2);
+  box-shadow: 0 4px 12px rgba(255, 197, 109, 0.6);
+}
+
+.radial-handle:active {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) translateY(-150px) scale(1.1);
+}
+
+/* Action Section - Single Column */
+.action-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+
+.close-button:hover {
+  background: rgba(220, 38, 38, 0.1);
+}
+
+.action-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.close-button .action-icon {
+  filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(7500%)
+    hue-rotate(0deg) brightness(100%) contrast(100%);
+}
+
+.profile-button {
+  background: transparent;
+  border: 2px solid #daa520;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 12px;
+  transition: all 0.3s ease;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+.profile-button:hover {
+  background: rgba(218, 165, 32, 0.1);
+}
+
+.profile-button .action-icon {
+  filter: brightness(0) saturate(100%) invert(67%) sepia(100%) saturate(500%)
+    hue-rotate(35deg) brightness(100%) contrast(100%);
+}
+
+/* Pay button with fingerprint */
+.pay-button {
+  background: linear-gradient(
+    135deg,
+    rgba(55, 28, 28, 0.9) 0%,
+    rgba(18, 18, 18, 0.9) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(218, 165, 32, 0.6);
+  padding: 20px 24px;
+  border-radius: 16px;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #daa520;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  outline: none;
+  width: 100%;
+  min-height: 80px;
+  justify-content: center;
+}
+
+.pay-button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(218, 165, 32, 0.2) 0%,
+    rgba(184, 134, 11, 0.2) 100%
+  );
+  border-color: rgba(218, 165, 32, 0.8);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.pay-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.fingerprint-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  opacity: 0.3;
+}
+
+.pay-button-text {
+  position: relative;
+  z-index: 10;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Error message */
+.options-error {
+  margin-top: 16px;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #fecaca;
+  padding: 12px 16px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .options-card {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 600px;
+  }
+
+  .top-nav-bar {
+    gap: 10px;
+    padding: 6px 10px;
+  }
+
+  .nav-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .radial-amount-display {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .options-container {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+
+  .options-card {
+    padding: 30px 20px;
+    gap: 25px;
+  }
+
+  .radial-payment-container {
+    width: 280px;
+    height: 280px;
+  }
+
+  .radial-slider::before {
+    width: 200px;
+    height: 200px;
+  }
+
+  .radial-progress-ring {
+    width: 260px;
+    height: 260px;
+  }
+
+  .radial-amount-value {
+    font-size: 36px;
+  }
+
+  .radial-center-input {
+    font-size: 36px;
+  }
+
+  .top-nav-bar {
+    gap: 8px;
+    padding: 6px 8px;
+  }
+
+  .nav-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-icon-img {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .options-card {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+
+  .radial-payment-container {
+    width: 240px;
+    height: 240px;
+  }
+
+  .radial-slider::before {
+    width: 180px;
+    height: 180px;
+  }
+
+  .radial-progress-ring {
+    width: 220px;
+    height: 220px;
+  }
+
+  .radial-amount-value {
+    font-size: 28px;
+  }
+
+  .radial-center-input {
+    font-size: 28px;
+  }
+
+  .pay-button {
+    padding: 16px 20px;
+    font-size: 14px;
+    min-height: 60px;
+  }
+
+  .payment-methods-buttons {
+    gap: 8px;
+  }
+
+  .payment-method-btn {
+    padding: 12px 16px;
+    min-height: 50px;
+  }
+}

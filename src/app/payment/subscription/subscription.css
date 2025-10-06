@@ -1,0 +1,335 @@
+/* Subscription Page Styles - Vanilla CSS Only */
+
+/* Main container */
+.subscription-container {
+  min-height: 100vh;
+  background: linear-gradient(90deg, #121212 0%, #371c1c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Content wrapper */
+.subscription-content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 672px;
+}
+
+/* Logo container */
+.subscription-logo-container {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: -52px;
+  z-index: 20;
+  transition: transform 0.3s ease;
+}
+
+.subscription-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.4));
+}
+
+/* Main subscription card */
+.subscription-card {
+  background: linear-gradient(135deg, #371919 0%, #5c3c0b 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  width: 100%;
+  position: relative;
+  z-index: 10;
+}
+
+/* Header section */
+.subscription-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.subscription-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.subscription-subtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+}
+
+/* User info card */
+.subscription-info {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.02) 0%,
+    rgba(255, 255, 255, 0.01) 100%
+  );
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 32px;
+}
+
+.subscription-info-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.subscription-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.subscription-info-row:last-child {
+  margin-bottom: 0;
+}
+
+.subscription-info-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+}
+
+.subscription-info-value {
+  color: white;
+  font-weight: 300;
+}
+
+/* Actions section */
+.subscription-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Subscription buttons */
+.subscription-btn {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 69, 19, 0.3) 0%,
+    rgba(160, 82, 45, 0.2) 50%,
+    rgba(218, 165, 32, 0.15) 100%
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px 32px;
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  outline: none;
+}
+
+.subscription-btn:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 69, 19, 0.4) 0%,
+    rgba(160, 82, 45, 0.3) 50%,
+    rgba(218, 165, 32, 0.25) 100%
+  );
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.subscription-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.subscription-btn:disabled:hover {
+  transform: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Error message */
+.subscription-error {
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #fecaca;
+  padding: 12px 16px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+/* Access required card */
+.access-card {
+  background: linear-gradient(
+    135deg,
+    rgba(55, 28, 28, 0.25) 0%,
+    rgba(18, 18, 18, 0.15) 50%,
+    rgba(218, 165, 32, 0.1) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 32px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.access-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.access-message {
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+.access-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.access-btn {
+  background: linear-gradient(
+    135deg,
+    rgba(55, 28, 28, 0.25) 0%,
+    rgba(18, 18, 18, 0.15) 50%,
+    rgba(218, 165, 32, 0.1) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 16px 64px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  outline: none;
+}
+
+.access-btn:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(55, 28, 28, 0.35) 0%,
+    rgba(18, 18, 18, 0.25) 50%,
+    rgba(218, 165, 32, 0.2) 100%
+  );
+  opacity: 0.8;
+}
+
+/* Loading state */
+.subscription-loading {
+  text-align: center;
+}
+
+.subscription-loading-title {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.subscription-loading-message {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 300;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .subscription-container {
+    padding: 16px;
+  }
+  
+  .subscription-content {
+    max-width: 448px;
+  }
+  
+  .subscription-card {
+    padding: 24px;
+  }
+  
+  .subscription-title {
+    font-size: 1.5rem;
+  }
+  
+  .subscription-logo-container {
+    width: 100px;
+    height: 100px;
+    margin-bottom: -40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .subscription-card {
+    padding: 20px;
+  }
+  
+  .subscription-title {
+    font-size: 1.25rem;
+  }
+  
+  .subscription-info {
+    padding: 16px;
+  }
+  
+  .subscription-btn {
+    padding: 16px 24px;
+    font-size: 1rem;
+  }
+  
+  .subscription-logo-container {
+    width: 80px;
+    height: 80px;
+    margin-bottom: -30px;
+  }
+  
+  .access-card {
+    padding: 24px;
+  }
+  
+  .access-btn {
+    padding: 14px 32px;
+    font-size: 14px;
+  }
+}
