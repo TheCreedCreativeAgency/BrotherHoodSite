@@ -1,5 +1,3 @@
-/* Options Page Styles - Exact Figma Match */
-
 /* Import Inter font */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
@@ -22,55 +20,53 @@
 .top-nav-bar {
   display: flex;
   gap: 12px;
-  background: rgba(139, 69, 19, 0.8);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(218, 165, 32, 0.4);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  background: transparent; /* No background as per image */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   padding: 8px 12px;
   z-index: 10;
 }
 
 .nav-icon {
-  width: 32px;
-  height: 32px;
-  background: rgba(218, 165, 32, 0.9);
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: 1px solid rgba(218, 165, 32, 0.6);
 }
 
 .nav-icon:hover {
-  background: rgba(218, 165, 32, 1);
+  background: rgba(212, 175, 55, 0.1); /* Lighter hover */
   transform: scale(1.05);
 }
 
 .nav-icon-active {
-  background: rgba(218, 165, 32, 1);
-  border-color: rgba(218, 165, 32, 1);
+  background: rgba(212, 175, 55, 0.2); /* Lighter active background */
+  border-color: #D4AF37; /* Gold border for active */
 }
 
 .nav-icon-img {
-  width: 16px;
-  height: 16px;
-  filter: brightness(0.8);
+  width: 20px;
+  height: 20px;
+  /* Adjust filter to match the gold/light color of icons in the image */
+  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%) hue-rotate(35deg) brightness(120%) contrast(120%);
 }
 
 /* Main payment card */
 .options-card {
   position: relative;
   z-index: 10;
-  background: linear-gradient(135deg, #371919 0%, #5c3c0b 100%);
+  background: linear-gradient(135deg, #3F2323 0%, #2A1414 100%); /* Darker red-brown gradient */
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle border */
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
   border-radius: 24px;
   padding: 40px;
   width: 100%;
@@ -88,6 +84,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 20px;
+  position: relative; /* For absolute positioning of elements if needed */
 }
 
 .payment-logo {
@@ -96,36 +93,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 25px; /* Spacing from the top of the card */
+  margin-left: -5px; /* Adjust slightly left to match image */
 }
 
 .payment-logo-img {
   width: 100%;
   height: 100%;
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1); /* Keep white */
 }
 
 .payment-methods-title {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.6); /* Lighter text color */
   font-family: "Inter", sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   margin: 0;
+  margin-bottom: 15px; /* Space between title and buttons */
+  position: absolute; /* Position relative to the section */
+  top: 100px; /* Adjust based on exact image positioning */
+  left: 0;
+  white-space: nowrap; /* Prevent wrapping */
 }
+
 
 .payment-methods-buttons {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 100%;
+  position: absolute; /* Position relative to the section */
+  top: 150px; /* Adjust based on exact image positioning */
+  left: 0;
 }
 
 .payment-method-btn {
   background: transparent;
-  border: 2px solid #daa520;
-  border-radius: 12px;
-  padding: 16px 20px;
+  border: none;
+  border-radius: 8px;
+  padding: 0;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -134,44 +142,24 @@
   min-height: 60px;
   position: relative;
   overflow: hidden;
+  width: 100%;
 }
 
 .payment-method-btn:hover {
-  background: rgba(218, 165, 32, 0.1);
   transform: translateY(-2px);
+  filter: brightness(1.1);
 }
 
 .payment-method-btn.active {
-  background: rgba(218, 165, 32, 0.2);
-  border-color: rgba(218, 165, 32, 0.8);
-}
-
-.payment-method-btn.visa {
-  background: #1e40af;
-  border-color: #1e40af;
-}
-
-.payment-method-btn.visa:hover {
-  background: #1d4ed8;
-}
-
-.payment-method-btn.crypto {
-  background: #daa520;
-  border-color: #daa520;
-  color: #000;
-}
-
-.payment-method-btn.crypto:hover {
-  background: #b8860b;
-}
-
-.payment-method-btn.crypto.active {
-  background: #b8860b;
+  transform: translateY(-2px);
+  filter: brightness(1.1);
 }
 
 .payment-method-logo {
-  max-height: 24px;
-  max-width: 80px;
+  width: 100%;
+  height: 60px; /* Maintain aspect ratio */
+  object-fit: contain;
+  border-radius: 8px;
 }
 
 /* Radial Section - Golden Container */
@@ -181,21 +169,29 @@
   align-items: center;
   gap: 20px;
   flex: 1;
-  background: linear-gradient(135deg, #ffc56d 0%, #ffb84d 100%);
+  background: #382A1B; /* Darker, solid background as in image */
   border-radius: 20px;
   padding: 30px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0,0,0,0.5); /* Inner shadow for depth */
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
+  justify-content: center; /* Center content vertically */
 }
 
 .radial-instruction {
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.4); /* Much lighter, subtle */
   font-family: "Inter", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1.2px;
+  font-size: 9px; /* Smaller font size */
+  font-weight: 500; /* Lighter weight */
+  letter-spacing: 1px; /* Slightly tighter spacing */
   text-transform: uppercase;
   margin-bottom: 10px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: none; /* No text shadow */
+  position: absolute;
+  top: 30px; /* Adjust for exact image positioning */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5; /* Ensure it's above the main circle */
 }
 
 .radial-payment-container {
@@ -210,45 +206,46 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  cursor: pointer;
+  cursor: grab; /* Initial grab cursor */
   transition: all 0.1s ease;
   user-select: none;
-  border: 2px solid #ffc56d;
+  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle outer border */
   background: transparent;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow for depth */
 }
+
+.radial-slider:active {
+  cursor: grabbing; /* Grabbing cursor when active */
+}
+
 
 .radial-slider::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 240px;
-  height: 240px;
-  background: linear-gradient(135deg, #371c1c 0%, #121212 100%);
+  width: 250px; /* Slightly smaller inner circle */
+  height: 250px; /* Slightly smaller inner circle */
+  background: linear-gradient(135deg, #1C1111 0%, #000000 100%); /* Darker gradient for the inner circle */
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Less pronounced shadow */
 }
 
-/* Progress ring - Thin gold ring */
+/* Progress ring - Very thin gold ring */
 .radial-progress-ring {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 280px;
-  height: 280px;
+  width: 290px; /* Slightly smaller to create a gap */
+  height: 290px; /* Slightly smaller to create a gap */
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 0;
-  border: 1px solid #ffc56d;
-  background: conic-gradient(
-    from -90deg,
-    #ffc56d 0%,
-    #ffc56d 0%,
-    transparent 0%,
-    transparent 360deg
-  );
+  border: 2px solid #D4AF37; /* More prominent gold border */
+  background: transparent;
+  box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.5); /* Inner glow */
 }
 
 /* Amount display */
@@ -262,30 +259,30 @@
   color: white;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .radial-amount-value {
   font-family: "Inter", sans-serif;
-  font-size: 47.03px;
-  font-weight: 500;
+  font-size: 64px;
+  font-weight: 700;
   line-height: 1;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  color: #ffc56d;
+  color: #D4AF37;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100px;
+  width: 120px; /* Wider to accommodate "00" centered */
 }
 
 /* Center input styles */
 .radial-center-input {
   background: transparent;
   border: none;
-  color: #ffc56d;
+  color: #D4AF37;
   font-family: "Inter", sans-serif;
-  font-size: 47.03px;
-  font-weight: 500;
+  font-size: 64px;
+  font-weight: 700;
   text-align: center;
   width: 100%;
   outline: none;
@@ -293,6 +290,7 @@
   cursor: text;
   user-select: text;
   letter-spacing: 0;
+  caret-color: #D4AF37; /* Gold blinking cursor */
 }
 
 .radial-center-input::-webkit-outer-spin-button,
@@ -302,15 +300,15 @@
 }
 
 .radial-center-input:focus {
-  background: rgba(255, 197, 109, 0.1);
+  background: rgba(212, 175, 55, 0.1);
   border-radius: 8px;
   padding: 4px;
-  border: 1px solid rgba(255, 197, 109, 0.3);
-  box-shadow: 0 0 0 2px rgba(255, 197, 109, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
 }
 
 .radial-center-input::placeholder {
-  color: rgba(255, 197, 109, 0.4);
+  color: rgba(212, 175, 55, 0.4);
 }
 
 /* Side labels */
@@ -318,59 +316,62 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  align-items: flex-start;
 }
 
 .radial-amount-label {
   font-family: "Inter", sans-serif;
   font-size: 14px;
-  color: rgba(255, 197, 109, 0.8);
+  color: rgba(212, 175, 55, 0.9);
   font-weight: 400;
   letter-spacing: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.2;
 }
 
 .radial-amount-currency {
   font-family: "Inter", sans-serif;
   font-size: 18px;
   font-weight: 600;
-  color: #ffc56d;
+  color: #D4AF37;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   letter-spacing: 0;
 }
 
 .radial-handle {
   position: absolute;
-  width: 12px;
-  height: 12px;
-  background: #ffc56d;
+  width: 10px; /* Slightly larger handle */
+  height: 10px; /* Slightly larger handle */
+  background: white;
   border-radius: 50%;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) translateY(-150px);
+  transform: translate(-50%, -50%);
   z-index: 4;
   cursor: grab;
-  box-shadow: 0 2px 8px rgba(255, 197, 109, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease;
-  border: 2px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(212, 175, 55, 0.8);
 }
 
 .radial-handle:hover {
-  transform: translate(-50%, -50%) translateY(-150px) scale(1.2);
-  box-shadow: 0 4px 12px rgba(255, 197, 109, 0.6);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .radial-handle:active {
   cursor: grabbing;
-  transform: translate(-50%, -50%) translateY(-150px) scale(1.1);
 }
 
 /* Action Section - Single Column */
 .action-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 16px;
+  align-items: flex-end;
+  gap: 40px;
   width: 100%;
+  justify-content: space-between;
+  height: 100%;
+  padding: 20px 0;
 }
 
 .close-button {
@@ -381,11 +382,11 @@
   border-radius: 8px;
   transition: all 0.3s ease;
   align-self: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .close-button:hover {
-  background: rgba(220, 38, 38, 0.1);
+  background: rgba(255, 0, 0, 0.1);
 }
 
 .action-icon {
@@ -395,45 +396,44 @@
 
 .close-button .action-icon {
   filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(7500%)
-    hue-rotate(0deg) brightness(100%) contrast(100%);
+    hue-rotate(0deg) brightness(100%) contrast(100%); /* Reddish tint for close */
 }
 
 .profile-button {
   background: transparent;
-  border: 2px solid #daa520;
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
   border-radius: 8px;
   cursor: pointer;
   padding: 12px;
   transition: all 0.3s ease;
   align-self: flex-end;
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .profile-button:hover {
-  background: rgba(218, 165, 32, 0.1);
+  background: rgba(212, 175, 55, 0.1);
 }
 
 .profile-button .action-icon {
-  filter: brightness(0) saturate(100%) invert(67%) sepia(100%) saturate(500%)
-    hue-rotate(35deg) brightness(100%) contrast(100%);
+  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%) hue-rotate(35deg) brightness(120%) contrast(120%); /* Gold color for profile */
 }
 
 /* Pay button with fingerprint */
 .pay-button {
   background: linear-gradient(
     135deg,
-    rgba(55, 28, 28, 0.9) 0%,
-    rgba(18, 18, 18, 0.9) 100%
+    #1F1212 0%, /* Darker background, almost black */
+    #000000 100%
   );
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 2px solid rgba(218, 165, 32, 0.6);
+  border: 2px solid rgba(212, 175, 55, 0.6);
   padding: 20px 24px;
   border-radius: 16px;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 16px;
-  color: #daa520;
+  color: #D4AF37;
   letter-spacing: 0.5px;
   position: relative;
   transition: all 0.3s ease;
@@ -443,18 +443,20 @@
   align-items: center;
   gap: 4px;
   outline: none;
-  width: 100%;
+  width: 80px;
   min-height: 80px;
   justify-content: center;
+  margin: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer shadow */
 }
 
 .pay-button:hover {
   background: linear-gradient(
     135deg,
-    rgba(218, 165, 32, 0.2) 0%,
-    rgba(184, 134, 11, 0.2) 100%
+    rgba(212, 175, 55, 0.2) 0%,
+    rgba(184, 155, 110, 0.2) 100%
   );
-  border-color: rgba(218, 165, 32, 0.8);
+  border-color: rgba(212, 175, 55, 0.8);
   color: white;
   transform: translateY(-2px);
 }
@@ -470,9 +472,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 24px;
-  height: 24px;
-  opacity: 0.3;
+  width: 32px; /* Slightly larger fingerprint */
+  height: 32px; /* Slightly larger fingerprint */
+  opacity: 0.15; /* More subtle opacity */
+  filter: invert(1); /* Ensure it's white */
 }
 
 .pay-button-text {
@@ -496,6 +499,8 @@
   font-size: 14px;
   font-weight: 400;
   font-family: "Inter", sans-serif;
+  grid-column: 1 / -1;
+  grid-column: 1 / -1; /* Spans across all columns in the grid */
 }
 
 /* Responsive design */
@@ -506,19 +511,90 @@
     max-width: 600px;
   }
 
-  .top-nav-bar {
-    gap: 10px;
-    padding: 6px 10px;
+  .payment-methods-section {
+    align-items: center; /* Center items in stacked layout */
   }
 
-  .nav-icon {
-    width: 28px;
-    height: 28px;
+  .payment-logo {
+    margin-left: 0;
   }
 
-  .radial-amount-display {
-    flex-direction: column;
-    gap: 10px;
+  .payment-methods-title {
+    position: static; /* Remove absolute positioning */
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .payment-methods-buttons {
+    position: static; /* Remove absolute positioning */
+    flex-direction: row; /* Layout buttons horizontally on smaller screens */
+    flex-wrap: wrap; /* Allow wrapping */
+    justify-content: center; /* Center buttons */
+  }
+
+  .payment-method-btn {
+    width: 48%; /* Occupy half width */
+    max-width: 200px; /* Limit individual button width */
+  }
+
+  .radial-section {
+    padding: 20px; /* Adjust padding */
+  }
+
+  .radial-instruction {
+    top: 20px; /* Adjust top positioning */
+  }
+
+  .radial-payment-container {
+    width: 280px;
+    height: 280px;
+  }
+
+  .radial-slider::before {
+    width: 220px;
+    height: 220px;
+  }
+
+  .radial-progress-ring {
+    width: 270px;
+    height: 270px;
+  }
+
+  .radial-amount-value {
+    font-size: 50px;
+    width: 90px;
+  }
+
+  .radial-center-input {
+    font-size: 50px;
+  }
+
+  .radial-amount-side {
+    gap: 2px;
+  }
+
+  .radial-amount-label {
+    font-size: 12px;
+  }
+
+  .radial-amount-currency {
+    font-size: 16px;
+  }
+
+  .action-section {
+    flex-direction: row; /* Layout action buttons horizontally */
+    justify-content: center; /* Center buttons */
+    gap: 20px; /* Smaller gap */
+    padding: 0; /* Remove vertical padding */
+  }
+
+  .close-button, .profile-button {
+    align-self: center; /* Align to center */
+  }
+
+  .pay-button {
+    width: 100px; /* Larger width for pay button in horizontal layout */
+    height: 100px; /* Larger height for pay button */
   }
 }
 
@@ -534,26 +610,27 @@
   }
 
   .radial-payment-container {
-    width: 280px;
-    height: 280px;
+    width: 240px;
+    height: 240px;
   }
 
   .radial-slider::before {
-    width: 200px;
-    height: 200px;
+    width: 190px;
+    height: 190px;
   }
 
   .radial-progress-ring {
-    width: 260px;
-    height: 260px;
+    width: 230px;
+    height: 230px;
   }
 
   .radial-amount-value {
-    font-size: 36px;
+    font-size: 38px;
+    width: 70px;
   }
 
   .radial-center-input {
-    font-size: 36px;
+    font-size: 38px;
   }
 
   .top-nav-bar {
@@ -562,13 +639,35 @@
   }
 
   .nav-icon {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
 
   .nav-icon-img {
-    width: 12px;
-    height: 12px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .payment-method-btn {
+    width: 100%; /* Stack buttons vertically again if too narrow */
+    max-width: none;
+  }
+
+  .action-section {
+    gap: 15px;
+  }
+
+  .pay-button {
+    width: 80px;
+    height: 80px;
+    padding: 15px;
+  }
+  .pay-button-text {
+    font-size: 14px;
+  }
+  .fingerprint-icon {
+    width: 28px;
+    height: 28px;
   }
 }
 
@@ -579,40 +678,65 @@
   }
 
   .radial-payment-container {
-    width: 240px;
-    height: 240px;
+    width: 200px;
+    height: 200px;
   }
 
   .radial-slider::before {
-    width: 180px;
-    height: 180px;
+    width: 160px;
+    height: 160px;
   }
 
   .radial-progress-ring {
-    width: 220px;
-    height: 220px;
+    width: 190px;
+    height: 190px;
+    border-width: 1px; /* Thinner border for small screens */
   }
 
   .radial-amount-value {
-    font-size: 28px;
+    font-size: 30px;
+    width: 60px;
   }
 
   .radial-center-input {
-    font-size: 28px;
+    font-size: 30px;
+  }
+
+  .radial-amount-side {
+    gap: 1px;
+  }
+  .radial-amount-label {
+    font-size: 10px;
+  }
+  .radial-amount-currency {
+    font-size: 14px;
+  }
+
+  .radial-handle {
+    width: 6px;
+    height: 6px;
+    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) translateY(-90px); /* Adjust handle position */
   }
 
   .pay-button {
-    padding: 16px 20px;
-    font-size: 14px;
-    min-height: 60px;
+    width: 70px;
+    height: 70px;
+    padding: 12px;
+  }
+  .pay-button-text {
+    font-size: 12px;
+  }
+  .fingerprint-icon {
+    width: 24px;
+    height: 24px;
   }
 
-  .payment-methods-buttons {
-    gap: 8px;
+  .close-button, .profile-button {
+    padding: 6px;
   }
-
-  .payment-method-btn {
-    padding: 12px 16px;
-    min-height: 50px;
+  .action-icon {
+    width: 16px;
+    height: 16px;
   }
 }
+
