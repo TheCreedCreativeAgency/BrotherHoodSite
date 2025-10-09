@@ -395,13 +395,14 @@ margin-top: 15px;
 .radial-amount-side {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0px;
 
   align-items: flex-start;
   justify-content: center;
   height: 100%;
   /* width: 100%; */
-  margin-left: -10px;
+  margin-top: 30px;
+  margin-left: -20px;
 }
 
 .radial-amount-label {
@@ -472,18 +473,21 @@ margin-top: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* align-items: flex-end; */
   gap: 0;
   width: 100px;
-  justify-content: center;
-  height: 380px;
+  justify-content: space-around;
+  /* height: 380px; */
   padding: 0;
   background: #371c1c;
   position: relative;
   z-index: 20;
+  box-shadow: -28px 0px 34.1px rgba(0, 0, 0, 0.36);
+
 }
 
 .close-button {
-  background: transparent;
+  /* background: transparent; */
   border: none;
   cursor: pointer;
   padding: 8px;
@@ -491,22 +495,22 @@ margin-top: 15px;
   transition: all 0.3s ease;
   position: relative;
   margin: 0;
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3); */
   order: 1;
+  stroke: #8E0000;
 }
 
 .close-button:hover {
-  background: rgba(255, 0, 0, 0.1);
+  /* background: rgba(255, 0, 0, 0.1); */
+  transform: scale(1.1);
 }
 
-.action-icon {
+/* .action-icon {
   width: 20px;
   height: 20px;
-}
+} */
 
-.close-button .action-icon {
-  filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(7500%)
-    hue-rotate(0deg) brightness(100%) contrast(100%);
-}
+
 
 .profile-button {
   background: transparent;
@@ -518,27 +522,28 @@ margin-top: 15px;
   position: relative;
   margin: 0;
   order: 3;
+  stroke:#FFC56D;
+  fill:#FFC56D;
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3); */
 }
 
 .profile-button:hover {
-  background: rgba(212, 175, 55, 0.1);
+  /* background: rgba(212, 175, 55, 0.1); */
+  transform: scale(1.1);
 }
 
-.profile-button .action-icon {
-  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%)
-    hue-rotate(35deg) brightness(120%) contrast(120%);
-}
+
 
 .pay-button {
-  background: #371c1c;
+  /* background: #371c1c; */
   border: none;
   padding: 0;
   border-radius: 0;
   font-family: "Inter", sans-serif;
   font-weight: 600;
-  font-size: 16px;
-  color: #bd9861;
-  letter-spacing: 0.5px;
+  font-size: 30px;
+  /* color: #bd9861; */
+  /* letter-spacing: 0.5px; */
   position: relative;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -547,8 +552,7 @@ margin-top: 15px;
   align-items: center;
   gap: 0;
   outline: none;
-  width: 101px;
-  height: 150px;
+
   justify-content: center;
   margin: 0;
   box-shadow: none;
@@ -556,9 +560,7 @@ margin-top: 15px;
 }
 
 .pay-button:hover {
-  background: #371c1c;
-  color: #bd9861;
-  transform: none;
+  transform: scale(1.1);
 }
 
 .pay-button:disabled {
@@ -572,20 +574,19 @@ margin-top: 15px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px;
-  height: 40px;
-  opacity: 0.2;
-  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%)
-    hue-rotate(35deg) brightness(120%) contrast(120%);
+  width: 65px;
+  height: 65px;
+  /* opacity: 0.2; */
+
 }
 
 .pay-button-text {
   position: relative;
   z-index: 10;
   font-family: "Inter", sans-serif;
-  font-size: 16px;
+  font-size: 27px;
   font-weight: 600;
-  color: #bd9861;
+  color: #FFC56D;
   text-align: center;
   width: 100%;
 }

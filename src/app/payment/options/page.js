@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import "./options.css";
+import Link from "next/link";
 
 export default function SubscriptionOptions() {
   const [amount, setAmount] = useState(0);
@@ -163,6 +164,33 @@ export default function SubscriptionOptions() {
     };
   }, [dragging, formatAmountToString]);
 
+  const handleManageBilling = async () => {
+    setLoading(true);
+    setMessage("");
+
+    try {
+      const res = await fetch("/api/create-customer-portal-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.url) {
+        window.location.href = data.url;
+      } else {
+        setMessage(
+          data.details ||
+            data.error ||
+            "Failed to create customer portal session."
+        );
+      }
+    } catch (err) {
+      setMessage(`Error: ${err.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleCheckout = async () => {
     setLoading(true);
     setMessage("");
@@ -205,15 +233,33 @@ export default function SubscriptionOptions() {
       <div className="top-nav-bar">
         <div className="nav-icon">
           {/* Replace with actual paths to your icons */}
-          <img src="/home-icon.png" alt="Home" className="nav-icon-img" />
+          <Link href="/payment">
+            <img src="/home-icon.png" alt="Home" className="nav-icon-img" />
+          </Link>
         </div>
         <div className="nav-icon nav-icon-active">
           {/* Replace with actual paths to your icons */}
-          <img src="/payment-icon.png" alt="Payment" className="nav-icon-img" />
+          <Link href="/payment/options">
+            <img
+              src="/payment-icon.png"
+              alt="Payment"
+              className="nav-icon-img"
+            />
+          </Link>
         </div>
         <div className="nav-icon">
           {/* Replace with actual paths to your icons */}
-          <img src="/profile-icon.png" alt="Profile" className="nav-icon-img" />
+          <button
+            target="_blank"
+            onClick={handleManageBilling}
+            href="/payment/profile"
+          >
+            <img
+              src="/profile-icon.png"
+              alt="Profile"
+              className="nav-icon-img"
+            />
+          </button>
         </div>
       </div>
 
@@ -280,8 +326,13 @@ export default function SubscriptionOptions() {
                   />
                 </defs>
                 <text>
-                  <textPath href="#curve" textAnchor="middle" startOffset="0%">
-                  slide the dot
+                  <textPath
+                    href="#curve"
+                    textAnchor="start"
+                    startOffset="0%"
+                    endOffset="100%"
+                  >
+                    slide the dot
                   </textPath>
                 </text>
               </svg>
@@ -341,7 +392,7 @@ export default function SubscriptionOptions() {
             onClick={() => router.push("/payment/subscription")}
           >
             {/* Replace with actual paths to your icons */}
-            <img src="/close-icon.png" alt="Close" className="action-icon" />
+            <img src="/Vector 35.png" alt="Close" className="action-icon" />
           </button>
 
           <button
@@ -351,7 +402,7 @@ export default function SubscriptionOptions() {
           >
             {/* Replace with actual paths to your icons */}
             <img
-              src="/icons/fingerprint-icon.png"
+              src="/fingerprint-icon.png"
               alt="Fingerprint"
               className="fingerprint-icon"
             />

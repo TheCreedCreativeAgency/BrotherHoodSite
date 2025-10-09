@@ -71,7 +71,9 @@ function SubscriptionManagementContent() {
 
   if (!session) {
     return (
+
       <div className="subscription-container">
+
         <div className="subscription-content">
           {/* Logo - Using the provided login.png */}
           <div className="subscription-logo-container">
@@ -104,6 +106,38 @@ function SubscriptionManagementContent() {
 
   return (
     <div className="subscription-container">
+       <div className="top-nav-bar">
+        <div className="nav-icon">
+          {/* Replace with actual paths to your icons */}
+          <Link href="/payment">
+            <img src="/home-icon.png" alt="Home" className="nav-icon-img" />
+          </Link>
+        </div>
+        <div className="nav-icon nav-icon-active">
+          {/* Replace with actual paths to your icons */}
+          <Link href="/payment/options">
+            <img
+              src="/payment-icon.png"
+              alt="Payment"
+              className="nav-icon-img"
+            />
+          </Link>
+        </div>
+        <div className="nav-icon">
+          {/* Replace with actual paths to your icons */}
+          <button
+            target="_blank"
+            onClick={handleManageBilling}
+            href="/payment/profile"
+          >
+            <img
+              src="/profile-icon.png"
+              alt="Profile"
+              className="nav-icon-img"
+            />
+          </button>
+        </div>
+      </div>
       <div className="subscription-content">
         {/* Logo - Using the provided login.png */}
         <div className="subscription-logo-container">
