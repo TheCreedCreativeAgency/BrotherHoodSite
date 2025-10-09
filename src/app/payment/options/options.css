@@ -1,10 +1,8 @@
-/* Import Inter font */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
-/* Main container */
 .options-container {
   min-height: 100vh;
-  background: linear-gradient(180deg, #371c1c 0%, #121212 100%);
+  background: linear-gradient(90deg, #121212 0%, #371c1c 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,12 +14,13 @@
   font-family: "Inter", sans-serif;
 }
 
-/* Top Navigation Bar */
 .top-nav-bar {
+  background: linear-gradient(135deg, #371919 0%, #5c3c0b 100%);
+
   display: flex;
   gap: 12px;
-  background: transparent; /* No background as per image */
-  border: none; /* Remove border */
+  /* background: transparent; */
+  border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   padding: 8px 12px;
@@ -29,10 +28,10 @@
 }
 
 .nav-icon {
-  width: 36px;
-  height: 36px;
-  background: transparent;
-  border: none; /* Remove border */
+  width: 40px;
+  height: 40px;
+  /* background: transparent; */
+  border: none;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -42,54 +41,53 @@
 }
 
 .nav-icon:hover {
-  background: rgba(212, 175, 55, 0.1); /* Lighter hover */
+  background: rgba(212, 175, 55, 0.1);
   transform: scale(1.05);
 }
 
 .nav-icon-active {
-  background: rgba(212, 175, 55, 0.2); /* Lighter active background */
-  border-color: #D4AF37; /* Gold border for active */
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #D9A455;
 }
 
 .nav-icon-img {
-  width: 20px;
-  height: 20px;
-  /* Adjust filter to match the gold/light color of icons in the image */
-  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%) hue-rotate(35deg) brightness(120%) contrast(120%);
+
+  width: 24px;
+  height: 24px;
 }
 
-/* Main payment card */
 .options-card {
   position: relative;
   z-index: 10;
-  background: #371C1C; /* Exact red color from design */
-  border-radius: 6px; /* Match the corner radius from Figma */
-  padding: 0;
+  background: #371c1c;
+  border-radius: 10px;
+  padding: 5px;
   width: 100%;
-  max-width: 900px; /* More compact for 1920x1080 */
+  max-width: 750px;
   display: grid;
-  grid-template-columns: 220px 1fr 100px; /* More compact columns */
+  grid-template-columns: 220px 1fr 100px;
   gap: 0;
   align-items: stretch;
-  min-height: 420px; /* More compact height */
+  min-height: 420px;
   overflow: hidden;
-  margin: 0 auto; /* Center the card */
+  margin: 0 auto;
 }
 
-/* Payment Methods Section */
 .payment-methods-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0;
+  align-items: center;
+  gap: 65px;
+  /* justify-content: center; */
   position: relative;
-  padding: 15px 10px; /* More compact padding */
-  background: #371C1C;
+  padding: 15px 0px;
+  /* width: 200px; */
+  /* width: 50%; */
+  background: #371c1c;
 }
 
 .payment-logo {
-  width: 32px;
-  height: 32px;
+margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -98,20 +96,20 @@
 }
 
 .payment-logo-img {
-  width: 100%;
-  height: 100%;
-  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%) hue-rotate(35deg) brightness(120%) contrast(120%); /* Golden gradient */
+  width: 95%;
+  height: 95%;
 }
 
 .payment-methods-title {
-  color: #FFC56D; /* Golden color from design */
+  color: #ffc56d;
   font-family: "Inter", sans-serif;
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 300;
+  font-style: italic;
   letter-spacing: 1px;
   text-transform: uppercase;
   margin: 0;
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
   position: relative;
   white-space: nowrap;
   text-align: center;
@@ -125,18 +123,27 @@
 .payment-methods-buttons {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  width: 100%;
+  /* gap: 12px; */
+  /* width: 100%; */
   position: static;
-  border: 2px solid #FFC56D; /* Golden border around both cards */
+  /* border: 1px solid #ffc56d; */
   border-radius: 8px;
-  padding: 15px;
-  margin-top: 10px; /* Add margin to separate from title */
+  padding: 3px;
+  /* margin-top: 10px; */
+}
+.payment-methods-buttons-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  width: 100%;
+  padding:3px;
+  border-radius: 8px;
+  border: 1px solid #ffc56d;
 }
 
 .payment-method-btn {
   background: transparent;
-  border: none; /* Remove individual borders since we have container border */
+  border: none;
   border-radius: 8px;
   padding: 0;
   cursor: pointer;
@@ -162,55 +169,55 @@
 
 .payment-method-logo {
   width: 100%;
-  height: 60px; /* Maintain aspect ratio */
+  height: 60px;
   object-fit: contain;
   border-radius: 8px;
-  border: none; /* Remove any borders from logos */
+  border: none;
 }
 
-/* Radial Section - Golden Container */
 .radial-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0;
   flex: 1;
-  background: linear-gradient(135deg, #BD9861 0%, #311E00 100%); /* Golden gradient from Figma */
+  background: linear-gradient(190deg, #bd9861 0%, #311e00 100%);
   border-radius: 6px;
-  padding: 10px; /* More compact padding */
+  padding: 10px;
   position: relative;
   justify-content: center;
-  height: 380px; /* More compact height */
-  margin: 15px 0; /* More compact margin */
+  height: 400px;
+  margin: 10px 0;
 }
 
 .radial-instruction {
-  color: #BD9861; /* Golden color to match gradient */
+  color: #bd9861;
   font-family: "Inter", sans-serif;
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   text-transform: uppercase;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 10; /* Higher z-index to ensure visibility */
-  width: 400px; /* Reduced size */
-  height: 400px;
+  z-index: 10;
+  width: 350px;
+  height: 350px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding-top: 10px;
+  /* padding-top: 10px; */
 }
 
 .radial-instruction-text {
   position: absolute;
   top: 0;
+  color: #371919;
   left: 50%;
   transform: translateX(-50%);
-  width: 400px; /* Match new SVG size */
-  height: 400px; /* Match new SVG size */
+  width: 400px;
+  height: 400px;
   border-radius: 50%;
   display: flex;
   align-items: flex-start;
@@ -238,17 +245,17 @@
 
 .radial-instruction-curved text {
   font-family: "Inter", sans-serif;
-  font-size: 10px;
-  font-weight: 300; /* Light weight */
-  letter-spacing: 0.5px; /* Small letter spacing for better visibility */
-  text-transform: none; /* No uppercase */
-  fill: #371919; /* Dark reddish-brown color */
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 6px;
+  text-transform: none;
+  /* fill: #371919; */
 }
 
 .radial-payment-container {
   position: relative;
-  width: 350px; /* Increased for better interaction */
-  height: 350px; /* Increased for better interaction */
+  width: 350px;
+  height: 350px;
   margin: 0 auto;
 }
 
@@ -260,11 +267,11 @@
   cursor: grab;
   transition: all 0.1s ease;
   user-select: none;
-  border: 3px solid #BD9861; /* Golden border for the circle */
-  background: rgba(189, 152, 97, 0.05); /* Slight background for visibility */
-  box-shadow: 0 0 0 2px rgba(189, 152, 97, 0.3); /* Additional border effect */
-  pointer-events: auto; /* Ensure it can receive pointer events */
-  z-index: 10; /* Higher z-index to ensure it's above other elements */
+  /* border: 2px solid #bd9861; */
+  background: rgba(189, 152, 97, 0.05);
+  box-shadow: 0 0 0 2px rgba(189, 152, 97, 0.3);
+  pointer-events: auto;
+  z-index: 10;
 }
 
 .radial-slider::before {
@@ -277,8 +284,8 @@
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: -1;
-  background: linear-gradient(135deg, rgba(255, 197, 109, 0.25) 0%, rgba(189, 152, 97, 0.15) 100%);
-  pointer-events: none; /* Ensure it doesn't block pointer events */
+
+  pointer-events: none;
 }
 
 .radial-slider::after {
@@ -286,28 +293,33 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 380px; /* Increased outer circle */
+  width: 380px;
   height: 380px;
-  border: 2px solid #FFC56D; /* Golden border matching theme */
+  /* border: 2px solid #ffc56d; */
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  pointer-events: none; /* Ensure it doesn't block pointer events */
-  background: conic-gradient(from 0deg, rgba(255, 197, 109, 0.4) 0deg, rgba(189, 152, 97, 0.3) 180deg, rgba(255, 197, 109, 0.4) 360deg);
-  mask: radial-gradient(circle, transparent 175px, black 175px, black 190px, transparent 190px); /* Adjusted for larger container */
-  -webkit-mask: radial-gradient(circle, transparent 175px, black 175px, black 190px, transparent 190px);
+  pointer-events: none;
+  background: #523100;
+  opacity: 48%;
+
+  -webkit-mask: radial-gradient(
+    circle,
+    transparent 175px,
+    black 175px,
+    black 190px,
+    transparent 190px
+  );
 }
 
 .radial-slider:active {
-  cursor: grabbing; /* Grabbing cursor when active */
+  cursor: grabbing;
 }
 
-/* Progress ring - Remove this as it's not in the design */
 .radial-progress-ring {
   display: none;
 }
 
-/* Amount display */
 .radial-amount-display {
   position: absolute;
   top: 50%;
@@ -315,45 +327,51 @@
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
-  color: #BD9861;
+  color: #bd9861;
   display: flex;
   align-items: center;
-  gap: 20px;
-  pointer-events: none; /* Don't block pointer events */
+  gap: 10px;
+  pointer-events: none;
+  padding:2px;
 }
 
 .radial-amount-value {
   font-family: "Inter", sans-serif;
-  font-size: 105.82px; /* Exact font size from Figma */
-  font-weight: 500; /* Medium weight as per Figma */
+  font-size: 105.82px;
+  font-weight: 500;
   line-height: 1;
-  color: #FFC56D; /* Golden color from design */
+  color: #ffc56d;
+  opacity: 0.3;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 205.76px; /* Exact width from Figma */
-  height: 79.36px; /* Exact height from Figma */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Drop shadow effect */
+  width: 205.76px;
+  height: 79.36px;
+  /* padding:10px; */
+  padding:5px 0px;
+  /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); */
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 
-/* Center input styles */
 .radial-center-input {
   background: transparent;
   border: none;
-  color: #FFC56D; /* Golden color from design */
+  color: #ffc56d;
   font-family: "Inter", sans-serif;
-  font-size: 105.82px; /* Match the exact font size */
-  font-weight: 500; /* Medium weight */
+  font-size: 105.82px;
+  font-weight: 500;
   text-align: center;
   width: 100%;
   outline: none;
   cursor: text;
   user-select: text;
   letter-spacing: 0;
-  caret-color: #FFC56D;
-  height: 79.36px; /* Match exact height */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Drop shadow effect */
-  pointer-events: auto; /* Allow input to receive events */
+  caret-color: #ffc56d;
+  height: 79.36px;
+  padding:5px 0px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  pointer-events: auto;
 }
 
 .radial-center-input::-webkit-outer-spin-button,
@@ -371,35 +389,40 @@
 }
 
 .radial-center-input::placeholder {
-  color: #FFC56D;
+  color: #ffc56d;
 }
 
-/* Side labels */
 .radial-amount-side {
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   align-items: flex-start;
   justify-content: center;
   height: 100%;
-  margin-left: 5px; /* Reduced from 10px to move even closer */
+  /* width: 100%; */
+  margin-left: -10px;
 }
 
 .radial-amount-label {
   font-family: "Inter", sans-serif;
-  font-size: 14px;
-  color: #FFC56D; /* Golden color from design */
+  font-size: 20px;
+  color: #ffc56d;
+  opacity: 0.62;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.2;
-  white-space: nowrap; /* Keep "Per Month" on single line */
+  white-space: nowrap;
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 .radial-amount-currency {
   font-family: "Inter", sans-serif;
-  font-size: 22px; /* Bigger USD text */
-  font-weight: 600;
-  color: #FFC56D; /* Golden color from design */
+  font-size: 26px;
+  font-weight: 500;
+  color: #ffc56d;
+  opacity: 0.62;
   letter-spacing: 0;
 }
 
@@ -416,19 +439,20 @@
   cursor: grab;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease;
-  border: 1px solid #BD9861;
+  border: 1px solid #bd9861;
   animation: none;
 }
 
 @keyframes slideTextRotation {
-  0%, 60% {
-    transform: rotate(0deg); /* Top - wait */
+  0%,
+  60% {
+    transform: rotate(0deg);
   }
   70% {
-    transform: rotate(180deg); /* Bottom - fall */
+    transform: rotate(180deg);
   }
   100% {
-    transform: rotate(360deg); /* Back to top - rise */
+    transform: rotate(360deg);
   }
 }
 
@@ -444,19 +468,18 @@
   cursor: grabbing;
 }
 
-/* Action Section - Single Column */
 .action-section {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0;
-  width: 100px; /* More compact width */
+  width: 100px;
   justify-content: center;
-  height: 380px; /* More compact height */
+  height: 380px;
   padding: 0;
-  background: #371C1C; /* Match the red background */
+  background: #371c1c;
   position: relative;
-  z-index: 20; /* Higher z-index than other sections */
+  z-index: 20;
 }
 
 .close-button {
@@ -482,12 +505,12 @@
 
 .close-button .action-icon {
   filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(7500%)
-    hue-rotate(0deg) brightness(100%) contrast(100%); /* Reddish tint for close */
+    hue-rotate(0deg) brightness(100%) contrast(100%);
 }
 
 .profile-button {
   background: transparent;
-  border: none; /* Remove border */
+  border: none;
   border-radius: 8px;
   cursor: pointer;
   padding: 12px;
@@ -502,19 +525,19 @@
 }
 
 .profile-button .action-icon {
-  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%) hue-rotate(35deg) brightness(120%) contrast(120%); /* Gold color for profile */
+  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%)
+    hue-rotate(35deg) brightness(120%) contrast(120%);
 }
 
-/* Pay button with fingerprint */
 .pay-button {
-  background: #371C1C; /* Match the exact red background */
+  background: #371c1c;
   border: none;
   padding: 0;
   border-radius: 0;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 16px;
-  color: #BD9861;
+  color: #bd9861;
   letter-spacing: 0.5px;
   position: relative;
   transition: all 0.3s ease;
@@ -524,8 +547,8 @@
   align-items: center;
   gap: 0;
   outline: none;
-  width: 101px; /* Full width of the section */
-  height: 150px; /* Adjusted height */
+  width: 101px;
+  height: 150px;
   justify-content: center;
   margin: 0;
   box-shadow: none;
@@ -533,8 +556,8 @@
 }
 
 .pay-button:hover {
-  background: #371C1C;
-  color: #BD9861;
+  background: #371c1c;
+  color: #bd9861;
   transform: none;
 }
 
@@ -549,10 +572,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 40px; /* Larger fingerprint for visibility */
-  height: 40px; /* Larger fingerprint for visibility */
-  opacity: 0.2; /* Subtle but visible */
-  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%) hue-rotate(35deg) brightness(120%) contrast(120%); /* Golden color */
+  width: 40px;
+  height: 40px;
+  opacity: 0.2;
+  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%)
+    hue-rotate(35deg) brightness(120%) contrast(120%);
 }
 
 .pay-button-text {
@@ -561,12 +585,11 @@
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 600;
-  color: #BD9861;
+  color: #bd9861;
   text-align: center;
   width: 100%;
 }
 
-/* Error message */
 .options-error {
   margin-top: 16px;
   background: rgba(239, 68, 68, 0.2);
@@ -580,10 +603,9 @@
   font-weight: 400;
   font-family: "Inter", sans-serif;
   grid-column: 1 / -1;
-  grid-column: 1 / -1; /* Spans across all columns in the grid */
+  grid-column: 1 / -1;
 }
 
-/* Responsive design */
 @media (max-width: 1024px) {
   .options-card {
     grid-template-columns: 1fr;
@@ -595,7 +617,7 @@
   .payment-methods-section {
     align-items: center;
     padding: 30px 20px;
-    background: #371C1C;
+    background: #371c1c;
   }
 
   .payment-logo {
@@ -667,10 +689,11 @@
     padding: 20px;
     height: auto;
     width: 100%;
-    background: #371C1C;
+    background: #371c1c;
   }
 
-  .close-button, .profile-button {
+  .close-button,
+  .profile-button {
     position: static;
   }
 
@@ -808,7 +831,8 @@
     height: 24px;
   }
 
-  .close-button, .profile-button {
+  .close-button,
+  .profile-button {
     padding: 6px;
   }
   .action-icon {
@@ -816,4 +840,3 @@
     height: 16px;
   }
 }
-

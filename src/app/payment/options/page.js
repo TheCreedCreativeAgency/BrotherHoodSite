@@ -1,28 +1,28 @@
-'use client';
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
-import './options.css';
+"use client";
+import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
+import "./options.css";
 
 export default function SubscriptionOptions() {
   const [amount, setAmount] = useState(0);
-  const [textInputValue, setTextInputValue] = useState('00');
+  const [textInputValue, setTextInputValue] = useState("00");
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [dragging, setDragging] = useState(false);
-  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('visa');
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("visa");
   const router = useRouter();
   const inputRef = useRef(null);
 
   const formatAmountToString = useCallback((value) => {
     const num = parseInt(value);
-    if (isNaN(num)) return '0';
-    return num.toString().padStart(2, '0'); // Ensure two digits
+    if (isNaN(num)) return "0";
+    return num.toString().padStart(2, "0"); // Ensure two digits
   }, []);
 
   useEffect(() => {
     const formattedAmount = formatAmountToString(amount);
     if (!dragging && textInputValue !== formattedAmount) {
-        setTextInputValue(formattedAmount);
+      setTextInputValue(formattedAmount);
     }
   }, [amount, dragging, textInputValue, formatAmountToString]);
 
@@ -35,7 +35,7 @@ export default function SubscriptionOptions() {
     const centerY = rect.top + rect.height / 2;
 
     const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-    let degrees = (angle * 180 / Math.PI + 90) % 360;
+    let degrees = ((angle * 180) / Math.PI + 90) % 360;
     if (degrees < 0) degrees += 360;
 
     let newAmount = Math.round((degrees / 360) * 100);
@@ -55,7 +55,7 @@ export default function SubscriptionOptions() {
 
     const touch = e.touches[0];
     const angle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
-    let degrees = (angle * 180 / Math.PI + 90) % 360;
+    let degrees = ((angle * 180) / Math.PI + 90) % 360;
     if (degrees < 0) degrees += 360;
 
     let newAmount = Math.round((degrees / 360) * 100);
@@ -70,11 +70,11 @@ export default function SubscriptionOptions() {
     setTextInputValue(value);
 
     const numValue = parseInt(value);
-    
+
     if (!isNaN(numValue)) {
       const clampedValue = Math.max(0, Math.min(100, numValue));
       setAmount(clampedValue);
-    } else if (value === '') {
+    } else if (value === "") {
       setAmount(0);
     }
   };
@@ -82,16 +82,15 @@ export default function SubscriptionOptions() {
   const handleInputBlur = (e) => {
     let numValue = parseInt(textInputValue);
 
-    if (textInputValue === '' || isNaN(numValue) || numValue < 0) {
+    if (textInputValue === "" || isNaN(numValue) || numValue < 0) {
       setAmount(0);
-      setTextInputValue('00');
+      setTextInputValue("00");
     } else {
       numValue = Math.max(0, Math.min(100, numValue));
       setAmount(numValue);
       setTextInputValue(formatAmountToString(numValue));
     }
   };
-
 
   useEffect(() => {
     const handleMouseUp = () => setDragging(false);
@@ -100,16 +99,16 @@ export default function SubscriptionOptions() {
     const handleMouseMove = (e) => {
       if (dragging) {
         e.preventDefault();
-        const radialSlider = document.querySelector('.radial-slider');
+        const radialSlider = document.querySelector(".radial-slider");
         if (radialSlider) {
           const rect = radialSlider.getBoundingClientRect();
           const centerX = rect.left + rect.width / 2;
           const centerY = rect.top + rect.height / 2;
-          
+
           const angle = Math.atan2(e.clientY - centerY, e.clientX - centerX);
-          let degrees = (angle * 180 / Math.PI + 90) % 360;
+          let degrees = ((angle * 180) / Math.PI + 90) % 360;
           if (degrees < 0) degrees += 360;
-          
+
           let newAmount = Math.round((degrees / 360) * 100);
           newAmount = Math.max(0, Math.min(100, newAmount));
 
@@ -122,17 +121,20 @@ export default function SubscriptionOptions() {
     const handleTouchMove = (e) => {
       if (dragging) {
         e.preventDefault();
-        const radialSlider = document.querySelector('.radial-slider');
+        const radialSlider = document.querySelector(".radial-slider");
         if (radialSlider) {
           const rect = radialSlider.getBoundingClientRect();
           const centerX = rect.left + rect.width / 2;
           const centerY = rect.top + rect.height / 2;
-          
+
           const touch = e.touches[0];
-          const angle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
-          let degrees = (angle * 180 / Math.PI + 90) % 360;
+          const angle = Math.atan2(
+            touch.clientY - centerY,
+            touch.clientX - centerX
+          );
+          let degrees = ((angle * 180) / Math.PI + 90) % 360;
           if (degrees < 0) degrees += 360;
-          
+
           let newAmount = Math.round((degrees / 360) * 100);
           newAmount = Math.max(0, Math.min(100, newAmount));
 
@@ -141,48 +143,54 @@ export default function SubscriptionOptions() {
         }
       }
     };
-    
+
     if (dragging) {
-      document.addEventListener('mousemove', handleMouseMove, { passive: false });
-      document.addEventListener('mouseup', handleMouseUp);
-      document.addEventListener('touchmove', handleTouchMove, { passive: false });
-      document.addEventListener('touchend', handleTouchEnd);
+      document.addEventListener("mousemove", handleMouseMove, {
+        passive: false,
+      });
+      document.addEventListener("mouseup", handleMouseUp);
+      document.addEventListener("touchmove", handleTouchMove, {
+        passive: false,
+      });
+      document.addEventListener("touchend", handleTouchEnd);
     }
-    
+
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-      document.removeEventListener('touchmove', handleTouchMove);
-      document.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("touchmove", handleTouchMove);
+      document.removeEventListener("touchend", handleTouchEnd);
     };
   }, [dragging, formatAmountToString]);
 
   const handleCheckout = async () => {
     setLoading(true);
-    setMessage('');
+    setMessage("");
 
     const finalAmount = Math.max(1, Math.min(100, amount));
     const amountInCents = Math.round(finalAmount * 100);
 
     if (amountInCents < 100) {
-      setMessage('Subscription amount must be at least $1.00');
+      setMessage("Subscription amount must be at least $1.00");
       setLoading(false);
       return;
     }
 
     try {
-      const res = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount: amountInCents }),
       });
-      
+
       const data = await res.json();
-      
+
       if (data.url) {
         window.location.href = data.url;
       } else {
-        setMessage(data.error || 'Failed to create checkout session. Please try again.');
+        setMessage(
+          data.error || "Failed to create checkout session. Please try again."
+        );
       }
     } catch (err) {
       setMessage(`Network error: ${err.message}`);
@@ -215,27 +223,45 @@ export default function SubscriptionOptions() {
         <div className="payment-methods-section">
           <div className="payment-logo">
             {/* Replace with actual paths to your icons */}
-            <img src="/chevron-icon.png" alt="Chevron" className="payment-logo-img" />
+            <img
+              src="/Vector 36.png"
+              alt="Chevron"
+              className="payment-logo-img"
+            />
           </div>
           {/* Moved the title to match the image positioning */}
-
           <div className="payment-methods-buttons">
-             <h2 className="payment-methods-title">PAYMENT METHODS</h2> {/* Title moved here */}
-            <button
-              className={`payment-method-btn visa ${selectedPaymentMethod === 'visa' ? 'active' : ''}`}
-              onClick={() => setSelectedPaymentMethod('visa')}
-            >
-              {/* Replace with actual paths to your icons */}
-              <img src="/visa-icon.png" alt="VISA" className="payment-method-logo" />
-            </button>
+            <h2 className="payment-methods-title">PAYMENT METHODS</h2>
+            {/* Title moved here */}
+            <div className="payment-methods-buttons-inner">
+              <button
+                className={`payment-method-btn visa ${
+                  selectedPaymentMethod === "visa" ? "active" : ""
+                }`}
+                onClick={() => setSelectedPaymentMethod("visa")}
+              >
+                {/* Replace with actual paths to your icons */}
+                <img
+                  src="/visa-icon.png"
+                  alt="VISA"
+                  className="payment-method-logo"
+                />
+              </button>
 
-            <button
-              className={`payment-method-btn crypto ${selectedPaymentMethod === 'crypto' ? 'active' : ''}`}
-              onClick={() => setSelectedPaymentMethod('crypto')}
-            >
-              {/* Replace with actual paths to your icons */}
-              <img src="/crypto-icon.png" alt="CRYPTO" className="payment-method-logo" />
-            </button>
+              <button
+                className={`payment-method-btn crypto ${
+                  selectedPaymentMethod === "crypto" ? "active" : ""
+                }`}
+                onClick={() => setSelectedPaymentMethod("crypto")}
+              >
+                {/* Replace with actual paths to your icons */}
+                <img
+                  src="/crypto-icon.png"
+                  alt="CRYPTO"
+                  className="payment-method-logo"
+                />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -243,13 +269,19 @@ export default function SubscriptionOptions() {
         <div className="radial-section">
           <div className="radial-instruction">
             <div className="radial-instruction-curved">
-              <svg viewBox="0 0 400 400" style={{ width: '100%', height: '100%' }}>
+              <svg
+                viewBox="0 0 400 400"
+                style={{ width: "100%", height: "100%" }}
+              >
                 <defs>
-                  <path id="curve" d="M 200,15 a 185,185 0 1,1 0,370 a 185,185 0 1,1 0,-370" />
+                  <path
+                    id="curve"
+                    d="M 200,15 a 185,185 0 1,1 0,370 a 185,185 0 1,1 0,-370"
+                  />
                 </defs>
                 <text>
                   <textPath href="#curve" textAnchor="middle" startOffset="0%">
-                    slide the dot
+                  slide the dot
                   </textPath>
                 </text>
               </svg>
@@ -261,7 +293,7 @@ export default function SubscriptionOptions() {
               className="radial-slider"
               onMouseDown={handleRadialDrag}
               onTouchStart={handleTouchStart}
-              style={{ userSelect: 'none' }}
+              style={{ userSelect: "none" }}
             >
               {/* Progress ring - removed to match design */}
 
@@ -285,18 +317,19 @@ export default function SubscriptionOptions() {
                   />
                 </div>
                 <div className="radial-amount-side">
-                  <div className="radial-amount-label">Per</div>
-                  <div className="radial-amount-label">Month</div>
+                  <div className="radial-amount-label">Per Month</div>
                   <div className="radial-amount-currency">USD</div>
                 </div>
               </div>
 
-            <div
-              className="radial-handle"
-              style={{
-                transform: `translate(-50%, -50%) rotate(${(amount / 100) * 360}deg) translateY(-190px)`
-              }}
-            ></div>
+              <div
+                className="radial-handle"
+                style={{
+                  transform: `translate(-50%, -50%) rotate(${
+                    (amount / 100) * 360
+                  }deg) translateY(-190px)`,
+                }}
+              ></div>
             </div>
           </div>
         </div>
@@ -305,7 +338,7 @@ export default function SubscriptionOptions() {
         <div className="action-section">
           <button
             className="close-button"
-            onClick={() => router.push('/payment/subscription')}
+            onClick={() => router.push("/payment/subscription")}
           >
             {/* Replace with actual paths to your icons */}
             <img src="/close-icon.png" alt="Close" className="action-icon" />
@@ -317,22 +350,26 @@ export default function SubscriptionOptions() {
             className="pay-button"
           >
             {/* Replace with actual paths to your icons */}
-            <img src="/icons/fingerprint-icon.png" alt="Fingerprint" className="fingerprint-icon" />
+            <img
+              src="/icons/fingerprint-icon.png"
+              alt="Fingerprint"
+              className="fingerprint-icon"
+            />
             <span className="pay-button-text">PAY</span>
           </button>
 
           <button className="profile-button">
             {/* Replace with actual paths to your icons */}
-            <img src="/profile-icon.png" alt="Profile" className="action-icon" />
+            <img
+              src="/profile-icon.png"
+              alt="Profile"
+              className="action-icon"
+            />
           </button>
         </div>
 
         {/* Error Message */}
-        {message && (
-          <div className="options-error">
-            {message}
-          </div>
-        )}
+        {message && <div className="options-error">{message}</div>}
       </div>
     </div>
   );
