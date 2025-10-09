@@ -21,7 +21,7 @@
   display: flex;
   gap: 12px;
   background: transparent; /* No background as per image */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
+  border: none; /* Remove border */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   padding: 8px 12px;
@@ -32,7 +32,7 @@
   width: 36px;
   height: 36px;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
+  border: none; /* Remove border */
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -62,20 +62,18 @@
 .options-card {
   position: relative;
   z-index: 10;
-  background: linear-gradient(135deg, #3F2323 0%, #2A1414 100%); /* Darker red-brown gradient */
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle border */
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  border-radius: 24px;
-  padding: 40px;
+  background: #371C1C; /* Exact red color from design */
+  border-radius: 6px; /* Match the corner radius from Figma */
+  padding: 0;
   width: 100%;
-  max-width: 1200px;
+  max-width: 900px; /* More compact for 1920x1080 */
   display: grid;
-  grid-template-columns: 280px 1fr 120px;
-  gap: 40px;
-  align-items: start;
-  min-height: 500px;
+  grid-template-columns: 220px 1fr 100px; /* More compact columns */
+  gap: 0;
+  align-items: stretch;
+  min-height: 420px; /* More compact height */
+  overflow: hidden;
+  margin: 0 auto; /* Center the card */
 }
 
 /* Payment Methods Section */
@@ -83,55 +81,62 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 20px;
-  position: relative; /* For absolute positioning of elements if needed */
+  gap: 0;
+  position: relative;
+  padding: 15px 10px; /* More compact padding */
+  background: #371C1C;
 }
 
 .payment-logo {
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 25px; /* Spacing from the top of the card */
-  margin-left: -5px; /* Adjust slightly left to match image */
+  margin-bottom: 20px;
+  margin-left: 0;
 }
 
 .payment-logo-img {
   width: 100%;
   height: 100%;
-  filter: brightness(0) invert(1); /* Keep white */
+  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%) hue-rotate(35deg) brightness(120%) contrast(120%); /* Golden gradient */
 }
 
 .payment-methods-title {
-  color: rgba(255, 255, 255, 0.6); /* Lighter text color */
+  color: #FFC56D; /* Golden color from design */
   font-family: "Inter", sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.2px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-transform: uppercase;
   margin: 0;
-  margin-bottom: 15px; /* Space between title and buttons */
-  position: absolute; /* Position relative to the section */
-  top: 100px; /* Adjust based on exact image positioning */
-  left: 0;
-  white-space: nowrap; /* Prevent wrapping */
+  margin-bottom: 15px;
+  position: relative;
+  white-space: nowrap;
+  text-align: center;
+  width: 100%;
+  z-index: 10;
+  background: transparent;
+  padding: 0;
+  border: none;
 }
-
 
 .payment-methods-buttons {
   display: flex;
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  position: absolute; /* Position relative to the section */
-  top: 150px; /* Adjust based on exact image positioning */
-  left: 0;
+  position: static;
+  border: 2px solid #FFC56D; /* Golden border around both cards */
+  border-radius: 8px;
+  padding: 15px;
+  margin-top: 10px; /* Add margin to separate from title */
 }
 
 .payment-method-btn {
   background: transparent;
-  border: none;
+  border: none; /* Remove individual borders since we have container border */
   border-radius: 8px;
   padding: 0;
   cursor: pointer;
@@ -160,6 +165,7 @@
   height: 60px; /* Maintain aspect ratio */
   object-fit: contain;
   border-radius: 8px;
+  border: none; /* Remove any borders from logos */
 }
 
 /* Radial Section - Golden Container */
@@ -167,37 +173,82 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 0;
   flex: 1;
-  background: #382A1B; /* Darker, solid background as in image */
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0,0,0,0.5); /* Inner shadow for depth */
+  background: linear-gradient(135deg, #BD9861 0%, #311E00 100%); /* Golden gradient from Figma */
+  border-radius: 6px;
+  padding: 10px; /* More compact padding */
   position: relative;
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Subtle border */
-  justify-content: center; /* Center content vertically */
+  justify-content: center;
+  height: 380px; /* More compact height */
+  margin: 15px 0; /* More compact margin */
 }
 
 .radial-instruction {
-  color: rgba(255, 255, 255, 0.4); /* Much lighter, subtle */
+  color: #BD9861; /* Golden color to match gradient */
   font-family: "Inter", sans-serif;
-  font-size: 9px; /* Smaller font size */
-  font-weight: 500; /* Lighter weight */
-  letter-spacing: 1px; /* Slightly tighter spacing */
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  margin-bottom: 10px;
-  text-shadow: none; /* No text shadow */
   position: absolute;
-  top: 30px; /* Adjust for exact image positioning */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10; /* Higher z-index to ensure visibility */
+  width: 400px; /* Reduced size */
+  height: 400px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.radial-instruction-text {
+  position: absolute;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 5; /* Ensure it's above the main circle */
+  width: 400px; /* Match new SVG size */
+  height: 400px; /* Match new SVG size */
+  border-radius: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.radial-instruction-curved {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0px;
+}
+
+.radial-instruction-curved svg {
+  width: 100%;
+  height: 100%;
+}
+
+.radial-instruction-curved text {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 300; /* Light weight */
+  letter-spacing: 0.5px; /* Small letter spacing for better visibility */
+  text-transform: none; /* No uppercase */
+  fill: #371919; /* Dark reddish-brown color */
 }
 
 .radial-payment-container {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 350px; /* Increased for better interaction */
+  height: 350px; /* Increased for better interaction */
   margin: 0 auto;
 }
 
@@ -206,46 +257,54 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  cursor: grab; /* Initial grab cursor */
+  cursor: grab;
   transition: all 0.1s ease;
   user-select: none;
-  border: 1px solid rgba(255, 255, 255, 0.05); /* Very subtle outer border */
-  background: transparent;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); /* Inner shadow for depth */
+  border: 3px solid #BD9861; /* Golden border for the circle */
+  background: rgba(189, 152, 97, 0.05); /* Slight background for visibility */
+  box-shadow: 0 0 0 2px rgba(189, 152, 97, 0.3); /* Additional border effect */
+  pointer-events: auto; /* Ensure it can receive pointer events */
+  z-index: 10; /* Higher z-index to ensure it's above other elements */
 }
-
-.radial-slider:active {
-  cursor: grabbing; /* Grabbing cursor when active */
-}
-
 
 .radial-slider::before {
   content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 250px; /* Slightly smaller inner circle */
-  height: 250px; /* Slightly smaller inner circle */
-  background: linear-gradient(135deg, #1C1111 0%, #000000 100%); /* Darker gradient for the inner circle */
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  z-index: 1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Less pronounced shadow */
+  z-index: -1;
+  background: linear-gradient(135deg, rgba(255, 197, 109, 0.25) 0%, rgba(189, 152, 97, 0.15) 100%);
+  pointer-events: none; /* Ensure it doesn't block pointer events */
 }
 
-/* Progress ring - Very thin gold ring */
-.radial-progress-ring {
+.radial-slider::after {
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 290px; /* Slightly smaller to create a gap */
-  height: 290px; /* Slightly smaller to create a gap */
+  width: 380px; /* Increased outer circle */
+  height: 380px;
+  border: 2px solid #FFC56D; /* Golden border matching theme */
   border-radius: 50%;
   transform: translate(-50%, -50%);
-  z-index: 0;
-  border: 2px solid #D4AF37; /* More prominent gold border */
-  background: transparent;
-  box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.5); /* Inner glow */
+  z-index: 1;
+  pointer-events: none; /* Ensure it doesn't block pointer events */
+  background: conic-gradient(from 0deg, rgba(255, 197, 109, 0.4) 0deg, rgba(189, 152, 97, 0.3) 180deg, rgba(255, 197, 109, 0.4) 360deg);
+  mask: radial-gradient(circle, transparent 175px, black 175px, black 190px, transparent 190px); /* Adjusted for larger container */
+  -webkit-mask: radial-gradient(circle, transparent 175px, black 175px, black 190px, transparent 190px);
+}
+
+.radial-slider:active {
+  cursor: grabbing; /* Grabbing cursor when active */
+}
+
+/* Progress ring - Remove this as it's not in the design */
+.radial-progress-ring {
+  display: none;
 }
 
 /* Amount display */
@@ -256,41 +315,45 @@
   transform: translate(-50%, -50%);
   z-index: 2;
   text-align: center;
-  color: white;
+  color: #BD9861;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
+  pointer-events: none; /* Don't block pointer events */
 }
 
 .radial-amount-value {
   font-family: "Inter", sans-serif;
-  font-size: 64px;
-  font-weight: 700;
+  font-size: 105.82px; /* Exact font size from Figma */
+  font-weight: 500; /* Medium weight as per Figma */
   line-height: 1;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-  color: #D4AF37;
+  color: #FFC56D; /* Golden color from design */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 120px; /* Wider to accommodate "00" centered */
+  width: 205.76px; /* Exact width from Figma */
+  height: 79.36px; /* Exact height from Figma */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Drop shadow effect */
 }
 
 /* Center input styles */
 .radial-center-input {
   background: transparent;
   border: none;
-  color: #D4AF37;
+  color: #FFC56D; /* Golden color from design */
   font-family: "Inter", sans-serif;
-  font-size: 64px;
-  font-weight: 700;
+  font-size: 105.82px; /* Match the exact font size */
+  font-weight: 500; /* Medium weight */
   text-align: center;
   width: 100%;
   outline: none;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   cursor: text;
   user-select: text;
   letter-spacing: 0;
-  caret-color: #D4AF37; /* Gold blinking cursor */
+  caret-color: #FFC56D;
+  height: 79.36px; /* Match exact height */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Drop shadow effect */
+  pointer-events: auto; /* Allow input to receive events */
 }
 
 .radial-center-input::-webkit-outer-spin-button,
@@ -300,15 +363,15 @@
 }
 
 .radial-center-input:focus {
-  background: rgba(212, 175, 55, 0.1);
-  border-radius: 8px;
-  padding: 4px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+  border: none;
+  box-shadow: none;
 }
 
 .radial-center-input::placeholder {
-  color: rgba(212, 175, 55, 0.4);
+  color: #FFC56D;
 }
 
 /* Side labels */
@@ -317,41 +380,60 @@
   flex-direction: column;
   gap: 4px;
   align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  margin-left: 5px; /* Reduced from 10px to move even closer */
 }
 
 .radial-amount-label {
   font-family: "Inter", sans-serif;
   font-size: 14px;
-  color: rgba(212, 175, 55, 0.9);
+  color: #FFC56D; /* Golden color from design */
   font-weight: 400;
   letter-spacing: 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   line-height: 1.2;
+  white-space: nowrap; /* Keep "Per Month" on single line */
 }
 
 .radial-amount-currency {
   font-family: "Inter", sans-serif;
-  font-size: 18px;
+  font-size: 22px; /* Bigger USD text */
   font-weight: 600;
-  color: #D4AF37;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: #FFC56D; /* Golden color from design */
   letter-spacing: 0;
 }
 
 .radial-handle {
   position: absolute;
-  width: 10px; /* Slightly larger handle */
-  height: 10px; /* Slightly larger handle */
+  width: 12px;
+  height: 12px;
   background: white;
   border-radius: 50%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 4;
+  z-index: 6;
   cursor: grab;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
   transition: all 0.2s ease;
-  border: 1px solid rgba(212, 175, 55, 0.8);
+  border: 1px solid #BD9861;
+  animation: none;
+}
+
+@keyframes slideTextRotation {
+  0%, 60% {
+    transform: rotate(0deg); /* Top - wait */
+  }
+  70% {
+    transform: rotate(180deg); /* Bottom - fall */
+  }
+  100% {
+    transform: rotate(360deg); /* Back to top - rise */
+  }
+}
+
+.radial-instruction-curved {
+  animation: slideTextRotation 3s ease-in-out infinite;
 }
 
 .radial-handle:hover {
@@ -366,12 +448,15 @@
 .action-section {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 40px;
-  width: 100%;
-  justify-content: space-between;
-  height: 100%;
-  padding: 20px 0;
+  align-items: center;
+  gap: 0;
+  width: 100px; /* More compact width */
+  justify-content: center;
+  height: 380px; /* More compact height */
+  padding: 0;
+  background: #371C1C; /* Match the red background */
+  position: relative;
+  z-index: 20; /* Higher z-index than other sections */
 }
 
 .close-button {
@@ -381,8 +466,9 @@
   padding: 8px;
   border-radius: 8px;
   transition: all 0.3s ease;
-  align-self: flex-end;
-  margin-bottom: 0;
+  position: relative;
+  margin: 0;
+  order: 1;
 }
 
 .close-button:hover {
@@ -401,13 +487,14 @@
 
 .profile-button {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
+  border: none; /* Remove border */
   border-radius: 8px;
   cursor: pointer;
   padding: 12px;
   transition: all 0.3s ease;
-  align-self: flex-end;
-  margin-top: 0;
+  position: relative;
+  margin: 0;
+  order: 3;
 }
 
 .profile-button:hover {
@@ -420,20 +507,14 @@
 
 /* Pay button with fingerprint */
 .pay-button {
-  background: linear-gradient(
-    135deg,
-    #1F1212 0%, /* Darker background, almost black */
-    #000000 100%
-  );
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 2px solid rgba(212, 175, 55, 0.6);
-  padding: 20px 24px;
-  border-radius: 16px;
+  background: #371C1C; /* Match the exact red background */
+  border: none;
+  padding: 0;
+  border-radius: 0;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 16px;
-  color: #D4AF37;
+  color: #BD9861;
   letter-spacing: 0.5px;
   position: relative;
   transition: all 0.3s ease;
@@ -441,24 +522,20 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 0;
   outline: none;
-  width: 80px;
-  min-height: 80px;
+  width: 101px; /* Full width of the section */
+  height: 150px; /* Adjusted height */
   justify-content: center;
   margin: 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Softer shadow */
+  box-shadow: none;
+  order: 2;
 }
 
 .pay-button:hover {
-  background: linear-gradient(
-    135deg,
-    rgba(212, 175, 55, 0.2) 0%,
-    rgba(184, 155, 110, 0.2) 100%
-  );
-  border-color: rgba(212, 175, 55, 0.8);
-  color: white;
-  transform: translateY(-2px);
+  background: #371C1C;
+  color: #BD9861;
+  transform: none;
 }
 
 .pay-button:disabled {
@@ -472,10 +549,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 32px; /* Slightly larger fingerprint */
-  height: 32px; /* Slightly larger fingerprint */
-  opacity: 0.15; /* More subtle opacity */
-  filter: invert(1); /* Ensure it's white */
+  width: 40px; /* Larger fingerprint for visibility */
+  height: 40px; /* Larger fingerprint for visibility */
+  opacity: 0.2; /* Subtle but visible */
+  filter: brightness(0) saturate(100%) invert(80%) sepia(10%) saturate(1000%) hue-rotate(35deg) brightness(120%) contrast(120%); /* Golden color */
 }
 
 .pay-button-text {
@@ -484,6 +561,9 @@
   font-family: "Inter", sans-serif;
   font-size: 16px;
   font-weight: 600;
+  color: #BD9861;
+  text-align: center;
+  width: 100%;
 }
 
 /* Error message */
@@ -507,12 +587,15 @@
 @media (max-width: 1024px) {
   .options-card {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 0;
     max-width: 600px;
+    min-height: auto;
   }
 
   .payment-methods-section {
-    align-items: center; /* Center items in stacked layout */
+    align-items: center;
+    padding: 30px 20px;
+    background: #371C1C;
   }
 
   .payment-logo {
@@ -520,29 +603,30 @@
   }
 
   .payment-methods-title {
-    position: static; /* Remove absolute positioning */
+    position: static;
     margin-bottom: 20px;
     text-align: center;
   }
 
   .payment-methods-buttons {
-    position: static; /* Remove absolute positioning */
-    flex-direction: row; /* Layout buttons horizontally on smaller screens */
-    flex-wrap: wrap; /* Allow wrapping */
-    justify-content: center; /* Center buttons */
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .payment-method-btn {
-    width: 48%; /* Occupy half width */
-    max-width: 200px; /* Limit individual button width */
+    width: 48%;
+    max-width: 200px;
   }
 
   .radial-section {
-    padding: 20px; /* Adjust padding */
+    padding: 20px;
+    height: 400px;
   }
 
   .radial-instruction {
-    top: 20px; /* Adjust top positioning */
+    top: 20px;
   }
 
   .radial-payment-container {
@@ -555,18 +639,13 @@
     height: 220px;
   }
 
-  .radial-progress-ring {
-    width: 270px;
-    height: 270px;
-  }
-
   .radial-amount-value {
-    font-size: 50px;
-    width: 90px;
+    font-size: 60px;
+    width: 120px;
   }
 
   .radial-center-input {
-    font-size: 50px;
+    font-size: 60px;
   }
 
   .radial-amount-side {
@@ -582,19 +661,22 @@
   }
 
   .action-section {
-    flex-direction: row; /* Layout action buttons horizontally */
-    justify-content: center; /* Center buttons */
-    gap: 20px; /* Smaller gap */
-    padding: 0; /* Remove vertical padding */
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    height: auto;
+    width: 100%;
+    background: #371C1C;
   }
 
   .close-button, .profile-button {
-    align-self: center; /* Align to center */
+    position: static;
   }
 
   .pay-button {
-    width: 100px; /* Larger width for pay button in horizontal layout */
-    height: 100px; /* Larger height for pay button */
+    width: 100px;
+    height: 100px;
   }
 }
 
@@ -605,8 +687,11 @@
   }
 
   .options-card {
-    padding: 30px 20px;
-    gap: 25px;
+    gap: 0;
+  }
+
+  .radial-section {
+    height: 350px;
   }
 
   .radial-payment-container {
@@ -619,18 +704,13 @@
     height: 190px;
   }
 
-  .radial-progress-ring {
-    width: 230px;
-    height: 230px;
-  }
-
   .radial-amount-value {
-    font-size: 38px;
-    width: 70px;
+    font-size: 50px;
+    width: 100px;
   }
 
   .radial-center-input {
-    font-size: 38px;
+    font-size: 50px;
   }
 
   .top-nav-bar {
@@ -649,12 +729,13 @@
   }
 
   .payment-method-btn {
-    width: 100%; /* Stack buttons vertically again if too narrow */
+    width: 100%;
     max-width: none;
   }
 
   .action-section {
     gap: 15px;
+    padding: 15px;
   }
 
   .pay-button {
@@ -673,8 +754,11 @@
 
 @media (max-width: 480px) {
   .options-card {
-    padding: 20px 16px;
-    gap: 20px;
+    gap: 0;
+  }
+
+  .radial-section {
+    height: 300px;
   }
 
   .radial-payment-container {
@@ -687,19 +771,13 @@
     height: 160px;
   }
 
-  .radial-progress-ring {
-    width: 190px;
-    height: 190px;
-    border-width: 1px; /* Thinner border for small screens */
-  }
-
   .radial-amount-value {
-    font-size: 30px;
-    width: 60px;
+    font-size: 40px;
+    width: 80px;
   }
 
   .radial-center-input {
-    font-size: 30px;
+    font-size: 40px;
   }
 
   .radial-amount-side {
@@ -713,9 +791,8 @@
   }
 
   .radial-handle {
-    width: 6px;
-    height: 6px;
-    transform: translate(-50%, -50%) rotate(var(--rotation, 0deg)) translateY(-90px); /* Adjust handle position */
+    width: 8px;
+    height: 8px;
   }
 
   .pay-button {

@@ -92,6 +92,7 @@ export default function SubscriptionOptions() {
     }
   };
 
+
   useEffect(() => {
     const handleMouseUp = () => setDragging(false);
     const handleTouchEnd = () => setDragging(false);
@@ -241,7 +242,18 @@ export default function SubscriptionOptions() {
         {/* Center Section - Radial Amount Selection */}
         <div className="radial-section">
           <div className="radial-instruction">
-            <span>SLIDE THE DOT</span>
+            <div className="radial-instruction-curved">
+              <svg viewBox="0 0 400 400" style={{ width: '100%', height: '100%' }}>
+                <defs>
+                  <path id="curve" d="M 200,15 a 185,185 0 1,1 0,370 a 185,185 0 1,1 0,-370" />
+                </defs>
+                <text>
+                  <textPath href="#curve" textAnchor="middle" startOffset="0%">
+                    slide the dot
+                  </textPath>
+                </text>
+              </svg>
+            </div>
           </div>
 
           <div className="radial-payment-container">
@@ -249,14 +261,9 @@ export default function SubscriptionOptions() {
               className="radial-slider"
               onMouseDown={handleRadialDrag}
               onTouchStart={handleTouchStart}
+              style={{ userSelect: 'none' }}
             >
-              {/* Progress ring */}
-              <div
-                className="radial-progress-ring"
-                style={{
-                  background: `conic-gradient(from -90deg, #D4AF37 0%, #D4AF37 ${(amount / 100) * 360}deg, transparent ${(amount / 100) * 360}deg, transparent 360deg)`
-                }}
-              ></div>
+              {/* Progress ring - removed to match design */}
 
               <div className="radial-amount-display">
                 <div className="radial-amount-value">
@@ -284,12 +291,12 @@ export default function SubscriptionOptions() {
                 </div>
               </div>
 
-              <div
-                className="radial-handle"
-                style={{
-                  transform: `translate(-50%, -50%) rotate(${(amount / 100) * 360}deg) translateY(-150px)`
-                }}
-              ></div>
+            <div
+              className="radial-handle"
+              style={{
+                transform: `translate(-50%, -50%) rotate(${(amount / 100) * 360}deg) translateY(-190px)`
+              }}
+            ></div>
             </div>
           </div>
         </div>
@@ -306,7 +313,7 @@ export default function SubscriptionOptions() {
 
           <button
             onClick={handleCheckout}
-            disabled={loading || amount < 1}
+            disabled={loading}
             className="pay-button"
           >
             {/* Replace with actual paths to your icons */}
