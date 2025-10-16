@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import useWindowSize from "../hooks/useWindowSize";
 
 const LogoIntroAnimation = ({
   onAnimationComplete,
-  fontFamily = "'Times New Roman', serif",
+  fontFamily = "'Cormorant Garamond', serif",
 }) => {
   const { isMobile } = useWindowSize();
   const [showText, setShowText] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible] = useState(true);
 
   useEffect(() => {
     // Set the gradient background immediately and prevent any flashing
@@ -17,25 +17,17 @@ const LogoIntroAnimation = ({
     document.body.style.transition = 'none'; // Prevent transitions that cause flashing
     
     const sequence = async () => {
-      // Wait for logo animation
-      await new Promise((resolve) => setTimeout(resolve, 800));
-      
-      // Show text
+      // Reveal text a bit after logo starts scaling
+      await new Promise((resolve) => setTimeout(resolve, 1700));
       setShowText(true);
-      
-      // Wait for text to be visible
-      await new Promise((resolve) => setTimeout(resolve, 1600));
-      
-      // Start exit
-      setIsVisible(false);
-      
-      // Wait for exit animation
-      await new Promise((resolve) => setTimeout(resolve, 600));
-      
+
       // Keep the gradient background - don't restore original
       document.body.style.backgroundImage = 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)';
       document.body.style.backgroundColor = 'transparent';
-      
+
+      // Total animation time should be ~3s
+      await new Promise((resolve) => setTimeout(resolve, 1700));
+
       onAnimationComplete();
     };
     
@@ -54,80 +46,88 @@ const LogoIntroAnimation = ({
         zIndex: 9999,
       }}
       initial={{ opacity: 0 }}
-      animate={{ opacity: isVisible ? 1 : 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      animate={{ opacity: isVisible ? 1 : 1 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
     >
       <div
         style={{
           display: "flex",
           alignItems: "center",
-          flexDirection: isMobile ? "column" : "row",
+          flexDirection: "column",
+          gap: isMobile ? "28px" : "40px",
         }}
       >
-        {/* Logo with pop-in animation */}
+        {/* Logo grows smoothly with large start-to-end difference */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ 
-            type: "spring", 
-            stiffness: 120, 
-            damping: 15,
-            delay: 0.2
-          }}
+          initial={{ opacity: 0, scale: 0.01 }}
+          animate={{ opacity: 1, scale: 1.7 }}
+          transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            width: isMobile ? "60px" : "120px",
-            height: isMobile ? "60px" : "120px",
+            width: isMobile ? "84px" : "220px",
+            height: isMobile ? "84px" : "220px",
             borderRadius: "50%",
             backgroundColor: "#381e1e",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            boxShadow: "0 0 20px rgba(0,0,0,0.5)",
-            marginRight: isMobile ? "0px" : "30px",
-            marginBottom: isMobile ? "30px" : "0px",
+            boxShadow: "0 14px 40px rgba(0,0,0,0.5)",
+            willChange: 'transform, filter, opacity',
           }}
         >
           <img
-            src="/icon3.png"
+            src="/Vector 36.png"
             alt="Logo Icon"
-            style={{ width: isMobile ? "30px" : "65px", height: "auto" }}
+            style={{ width: isMobile ? "34px" : "58px", height: "auto" }}
           />
         </motion.div>
 
-        <AnimatePresence>
-          {showText && (
+        {/* Text slides down from beneath the logo using a reveal container */}
+        {showText && (
+          <div
+            style={{
+              overflow: 'hidden',
+              height: isMobile ? 34 : 64,
+            }}
+          >
             <motion.div
-              style={{ display: "flex", gap: "1rem" }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, y: '-110%' }}
+              animate={{ opacity: 1, y: '0%' }}
+              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+              style={{ display: "flex", gap: isMobile ? "8px" : "12px" }}
             >
-              {/* Only "The Creed" - removed "Creatives" */}
-              {["The", "Creed"].map((word, index) => (
-                <motion.span
-                  key={index}
-                  style={{
-                    color: "#d2ad75",
-                    fontSize: isMobile ? "2.25rem" : "4rem",
-                    fontFamily: fontFamily,
-                    fontWeight: 500,
-                    whiteSpace: "nowrap",
-                    display: "inline-block",
-                  }}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    type: "spring", 
-                    stiffness: 100,
-                    delay: index * 0.2
-                  }}
-                >
-                  {word}
-                </motion.span>
-              ))}
+              <span
+                style={{
+                  color: "#FFC400",
+                  opacity: 0.75,
+                  fontSize: isMobile ? "28px" : "48px",
+                  fontFamily: fontFamily,
+                  fontWeight: 600,
+                  fontStyle: 'italic',
+                  whiteSpace: "nowrap",
+                  letterSpacing: isMobile ? "0.3px" : "0.6px",
+                  textShadow: '0 2px 8px rgba(0,0,0,0.35)',
+                }}
+              >
+                The
+              </span>
+              <span
+                style={{
+                  color: "#FFC400",
+                  opacity: 0.75,
+                  fontSize: isMobile ? "28px" : "48px",
+                  fontFamily: fontFamily,
+                  fontWeight: 600,
+                  fontStyle: 'italic',
+                  whiteSpace: "nowrap",
+                  letterSpacing: isMobile ? "0.3px" : "0.6px",
+                  textShadow: '0 2px 8px rgba(0,0,0,0.35)',
+                }}
+              >
+                Creed
+              </span>
             </motion.div>
-          )}
-        </AnimatePresence>
+          </div>
+        )}
       </div>
     </motion.div>
   );

@@ -39,12 +39,18 @@
   background: rgba(212, 175, 55, 0.2);
   border-color: #D9A455;
 }
+.nav-icon-active:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: unset;
+  transform: unset;
+}
 
 .nav-icon-img {
-
   width: 24px;
   height: 24px;
 }
+
+
 .subscription-container {
   min-height: 100vh;
   background: linear-gradient(90deg, #121212 0%, #371c1c 100%);

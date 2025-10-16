@@ -8,6 +8,7 @@ export default function Home() {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
+  const [shouldShowIntro, setShouldShowIntro] = useState(true);
 
   // Video control functions
   const togglePlayPause = () => {
@@ -81,8 +82,24 @@ export default function Home() {
     }
   }, []);
 
-  return (
-    <IntroWrapper>
+  // Only show intro once per session/tab on the homepage
+  useEffect(() => {
+    try {
+      const seen = sessionStorage.getItem('homeIntroSeen');
+      if (seen === '1') {
+        setShouldShowIntro(false);
+      }
+    } catch {}
+  }, []);
+
+  const handleHomeIntroComplete = () => {
+    try {
+      sessionStorage.setItem('homeIntroSeen', '1');
+    } catch {}
+    setShouldShowIntro(false);
+  };
+
+  const pageContent = (
       <div>
         {/* Top Section */}
         <div className="top">
@@ -442,6 +459,11 @@ export default function Home() {
         </div>
       </footer>
       </div>
-    </IntroWrapper>
+  );
+
+  return shouldShowIntro ? (
+    <IntroWrapper onAnimationComplete={handleHomeIntroComplete}>{pageContent}</IntroWrapper>
+  ) : (
+    pageContent
   );
 }

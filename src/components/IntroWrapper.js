@@ -10,13 +10,13 @@ const IntroWrapper = ({ children, onAnimationComplete }) => {
     document.body.style.backgroundImage = 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)';
     document.body.style.backgroundColor = 'transparent';
     document.body.style.transition = 'none'; // Prevent flashing
-    
+
     // Keep the gradient background even after animation
     const interval = setInterval(() => {
       document.body.style.backgroundImage = 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)';
       document.body.style.backgroundColor = 'transparent';
     }, 100);
-    
+
     // Cleanup function
     return () => {
       clearInterval(interval);
@@ -47,7 +47,7 @@ const IntroWrapper = ({ children, onAnimationComplete }) => {
         <div key="main-content" style={{ 
           opacity: 1,
           minHeight: '100vh',
-          background: 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)'
+          // background: 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)'
         }}>
           {children}
         </div>

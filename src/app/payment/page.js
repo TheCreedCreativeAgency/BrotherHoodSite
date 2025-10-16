@@ -10,11 +10,27 @@ function PaymentPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [animationComplete, setAnimationComplete] = useState(false);
+  const [shouldShowIntro, setShouldShowIntro] = useState(true);
   const [showPaymentFailed, setShowPaymentFailed] = useState(false);
 
   const handleAnimationComplete = () => {
+    try {
+      sessionStorage.setItem('paymentIntroSeen', '1');
+    } catch {}
     setAnimationComplete(true);
+    setShouldShowIntro(false);
   };
+
+  // Decide whether to show the intro (only first visit per tab/session)
+  useEffect(() => {
+    try {
+      const seen = sessionStorage.getItem('paymentIntroSeen');
+      if (seen === '1') {
+        setShouldShowIntro(false);
+        setAnimationComplete(true);
+      }
+    } catch {}
+  }, []);
 
   // Check for payment cancellation parameter
   useEffect(() => {
@@ -29,7 +45,7 @@ function PaymentPageContent() {
   useEffect(() => {
     // Only proceed with navigation after animation is complete
     if (!animationComplete) return;
-    
+
     if (status === 'loading') return; // Still loading
 
     if (session) {
@@ -46,28 +62,23 @@ function PaymentPageContent() {
     return <PaymentFailed error="Payment was canceled" />;
   }
 
-  // Show intro animation first, then proceed with navigation
+  // Show intro only on first visit. Otherwise, render minimal placeholder while redirecting
   return (
     <>
-      <style jsx global>{`
-        body {
-          background: linear-gradient(to right, #0f0f0f 8%, #371919 100%) !important;
-          background-color: transparent !important;
-        }
-      `}</style>
-      <IntroWrapper onAnimationComplete={handleAnimationComplete}>
+      {shouldShowIntro ? (
+        <IntroWrapper onAnimationComplete={handleAnimationComplete}>
+          <div className="min-h-screen flex items-center justify-center" style={{
+            background: 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)'
+          }}>
+            </div>
+        </IntroWrapper>
+      ) : (
         <div className="min-h-screen flex items-center justify-center" style={{
           background: 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)'
         }}>
-          <div className="text-center">
-            <div className="mb-6">
-              <img src="/icon.png" alt="Logo" className="w-20 h-20 mx-auto" />
-            </div>
-            <h1 className="text-3xl font-bold text-white mb-4">The Creed</h1>
-            <p className="text-gray-300">Loading subscription portal...</p>
-          </div>
+
         </div>
-      </IntroWrapper>
+      )}
     </>
   );
 }
@@ -78,13 +89,7 @@ export default function PaymentPage() {
       <div className="min-h-screen flex items-center justify-center" style={{
         background: 'linear-gradient(to right, #0f0f0f 8%, #371919 100%)'
       }}>
-        <div className="text-center">
-          <div className="mb-6">
-            <img src="/icon.png" alt="Logo" className="w-20 h-20 mx-auto" />
-          </div>
-          <h1 className="text-3xl font-bold text-white mb-4">The Creed</h1>
-          <p className="text-gray-300">Loading...</p>
-        </div>
+
       </div>
     }>
       <PaymentPageContent />

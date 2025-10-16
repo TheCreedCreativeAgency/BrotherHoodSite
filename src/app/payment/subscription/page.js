@@ -107,13 +107,13 @@ function SubscriptionManagementContent() {
   return (
     <div className="subscription-container">
        <div className="top-nav-bar">
-        <div className="nav-icon">
+        <div className="nav-icon nav-icon-active">
           {/* Replace with actual paths to your icons */}
-          <Link href="/payment">
+          <Link href="#" >
             <img src="/home-icon.png" alt="Home" className="nav-icon-img" />
           </Link>
         </div>
-        <div className="nav-icon nav-icon-active">
+        <div className="nav-icon">
           {/* Replace with actual paths to your icons */}
           <Link href="/payment/options">
             <img
