@@ -19,7 +19,7 @@
 
   display: flex;
   gap: 12px;
-  /* background: transparent; */
+
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
@@ -30,7 +30,7 @@
 .nav-icon {
   width: 40px;
   height: 40px;
-  /* background: transparent; */
+
   border: none;
   border-radius: 8px;
   display: flex;
@@ -47,11 +47,10 @@
 
 .nav-icon-active {
   background: rgba(212, 175, 55, 0.2);
-  border-color: #D9A455;
+  border-color: #d9a455;
 }
 
 .nav-icon-img {
-
   width: 24px;
   height: 24px;
 }
@@ -78,16 +77,15 @@
   flex-direction: column;
   align-items: center;
   gap: 65px;
-  /* justify-content: center; */
+
   position: relative;
   padding: 15px 0px;
-  /* width: 200px; */
-  /* width: 50%; */
+
   background: #371c1c;
 }
 
 .payment-logo {
-margin-top: 15px;
+  margin-top: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -109,7 +107,7 @@ margin-top: 15px;
   letter-spacing: 1px;
   text-transform: uppercase;
   margin: 0;
-  /* margin-bottom: 15px; */
+
   position: relative;
   white-space: nowrap;
   text-align: center;
@@ -123,20 +121,18 @@ margin-top: 15px;
 .payment-methods-buttons {
   display: flex;
   flex-direction: column;
-  /* gap: 12px; */
-  /* width: 100%; */
+
   position: static;
-  /* border: 1px solid #ffc56d; */
+
   border-radius: 8px;
   padding: 3px;
-  /* margin-top: 10px; */
 }
 .payment-methods-buttons-inner {
   display: flex;
   flex-direction: column;
   gap: 13px;
   width: 100%;
-  padding:3px;
+  padding: 3px;
   border-radius: 8px;
   border: 1px solid #ffc56d;
 }
@@ -207,7 +203,6 @@ margin-top: 15px;
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* padding-top: 10px; */
 }
 
 .radial-instruction-text {
@@ -249,7 +244,6 @@ margin-top: 15px;
   font-weight: 400;
   letter-spacing: 6px;
   text-transform: none;
-  /* fill: #371919; */
 }
 
 .radial-payment-container {
@@ -267,7 +261,7 @@ margin-top: 15px;
   cursor: grab;
   transition: all 0.1s ease;
   user-select: none;
-  /* border: 2px solid #bd9861; */
+
   background: rgba(189, 152, 97, 0.05);
   box-shadow: 0 0 0 2px rgba(189, 152, 97, 0.3);
   pointer-events: auto;
@@ -295,7 +289,7 @@ margin-top: 15px;
   left: 50%;
   width: 380px;
   height: 380px;
-  /* border: 2px solid #ffc56d; */
+
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
@@ -332,7 +326,7 @@ margin-top: 15px;
   align-items: center;
   gap: 10px;
   pointer-events: none;
-  padding:2px;
+  padding: 2px;
 }
 
 .radial-amount-value {
@@ -347,11 +341,10 @@ margin-top: 15px;
   justify-content: center;
   width: 205.76px;
   height: 79.36px;
-  /* padding:10px; */
-  padding:5px 0px;
-  /* text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); */
-  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 
+  padding: 5px 0px;
+
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .radial-center-input {
@@ -369,7 +362,7 @@ margin-top: 15px;
   letter-spacing: 0;
   caret-color: #ffc56d;
   height: 79.36px;
-  padding:5px 0px;
+  padding: 5px 0px;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   pointer-events: auto;
 }
@@ -400,7 +393,7 @@ margin-top: 15px;
   align-items: flex-start;
   justify-content: center;
   height: 100%;
-  /* width: 100%; */
+
   margin-top: 30px;
   margin-left: -20px;
 }
@@ -415,7 +408,6 @@ margin-top: 15px;
   line-height: 1.2;
   white-space: nowrap;
   text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-
 }
 
 .radial-amount-currency {
@@ -445,22 +437,24 @@ margin-top: 15px;
 }
 
 @keyframes slideTextRotation {
-  0%,
-  60% {
+  /* Hold at the top for a moment */
+  0%, 50% {
     transform: rotate(0deg);
   }
-  70% {
+  /* The "fall" happens quickly over 15% of the animation time */
+  65% {
     transform: rotate(180deg);
   }
+  /* The "rise" is slower, taking the remaining 35% of the time */
   100% {
     transform: rotate(360deg);
   }
 }
 
 .radial-instruction-curved {
-  animation: slideTextRotation 3s ease-in-out infinite;
+  /* Increased duration for a slower feel and applied the new keyframes */
+  animation: slideTextRotation 5s ease-in-out infinite;
 }
-
 .radial-handle:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
@@ -473,21 +467,19 @@ margin-top: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* align-items: flex-end; */
+
   gap: 0;
   width: 100px;
   justify-content: space-around;
-  /* height: 380px; */
+
   padding: 0;
   background: #371c1c;
   position: relative;
   z-index: 20;
   box-shadow: -28px 0px 34.1px rgba(0, 0, 0, 0.36);
-
 }
 
 .close-button {
-  /* background: transparent; */
   border: none;
   cursor: pointer;
   padding: 8px;
@@ -495,22 +487,14 @@ margin-top: 15px;
   transition: all 0.3s ease;
   position: relative;
   margin: 0;
-  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3); */
+
   order: 1;
-  stroke: #8E0000;
+  stroke: #8e0000;
 }
 
 .close-button:hover {
-  /* background: rgba(255, 0, 0, 0.1); */
   transform: scale(1.1);
 }
-
-/* .action-icon {
-  width: 20px;
-  height: 20px;
-} */
-
-
 
 .profile-button {
   background: transparent;
@@ -522,28 +506,22 @@ margin-top: 15px;
   position: relative;
   margin: 0;
   order: 3;
-  stroke:#FFC56D;
-  fill:#FFC56D;
-  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3); */
+  stroke: #ffc56d;
+  fill: #ffc56d;
 }
 
 .profile-button:hover {
-  /* background: rgba(212, 175, 55, 0.1); */
   transform: scale(1.1);
 }
 
-
-
 .pay-button {
-  /* background: #371c1c; */
   border: none;
   padding: 0;
   border-radius: 0;
   font-family: "Inter", sans-serif;
   font-weight: 600;
   font-size: 30px;
-  /* color: #bd9861; */
-  /* letter-spacing: 0.5px; */
+
   position: relative;
   transition: all 0.3s ease;
   cursor: pointer;
@@ -576,8 +554,6 @@ margin-top: 15px;
   transform: translate(-50%, -50%);
   width: 65px;
   height: 65px;
-  /* opacity: 0.2; */
-
 }
 
 .pay-button-text {
@@ -586,7 +562,7 @@ margin-top: 15px;
   font-family: "Inter", sans-serif;
   font-size: 27px;
   font-weight: 600;
-  color: #FFC56D;
+  color: #ffc56d;
   text-align: center;
   width: 100%;
 }
@@ -656,6 +632,9 @@ margin-top: 15px;
     width: 280px;
     height: 280px;
   }
+  .radial-handle {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-152px);
+  }
 
   .radial-slider::before {
     width: 220px;
@@ -721,6 +700,9 @@ margin-top: 15px;
   .radial-payment-container {
     width: 240px;
     height: 240px;
+  }
+  .radial-handle {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-132px);
   }
 
   .radial-slider::before {
@@ -788,6 +770,12 @@ margin-top: 15px;
   .radial-payment-container {
     width: 200px;
     height: 200px;
+  }
+  /* ... other styles ... */
+  .radial-handle {
+    width: 8px;
+    height: 8px;
+    transform: translate(-50%, -50%) rotate(0deg) translateY(-110px);
   }
 
   .radial-slider::before {

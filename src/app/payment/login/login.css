@@ -157,6 +157,7 @@
   border-radius: 23px;
   padding: 20px 128px;
   color: white;
+
   font-size: 16px;
   font-weight: 300;
   cursor: pointer;
@@ -204,7 +205,6 @@
   font-size: 14px;
   font-weight: 300;
 }
-
 .login-signup-link {
   color: #daa520;
   font-weight: 300;
@@ -225,24 +225,21 @@
     padding: 64px 32px 32px 32px;
   }
 
-  .login-button {
-    padding: 20px 64px;
-  }
-
   .login-logo-container {
-    width: 80px;
-    height: 80px;
-    margin-bottom: -20px;
+    width: 90px;
+    height: 90px;
+    margin-bottom: -35px;
+  }
+  .login-button {
+    margin-top: -19px;
+    padding: 16px 48px;
+    padding-top: 28px;
   }
 }
 
 @media (max-width: 480px) {
   .login-card {
     padding: 48px 24px 24px 24px;
-  }
-
-  .login-button {
-    padding: 16px 48px;
   }
 
   .login-input {
@@ -253,11 +250,5 @@
     left: 12px;
     width: 16px;
     height: 16px;
-  }
-
-  .login-logo-container {
-    width: 72px;
-    height: 72px;
-    margin-bottom: -16px;
   }
 }

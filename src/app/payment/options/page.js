@@ -11,13 +11,41 @@ export default function SubscriptionOptions() {
   const [message, setMessage] = useState("");
   const [dragging, setDragging] = useState(false);
   const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("visa");
+
+  // State to hold the dynamically calculated radius for the handle's orbit
+  const [handleRadius, setHandleRadius] = useState(183);
+
   const router = useRouter();
   const inputRef = useRef(null);
+
+  // Ref to measure the slider's container element
+  const radialContainerRef = useRef(null);
+
+  // --- UPDATED LOGIC TO MAKE THE HANDLE FULLY RESPONSIVE ---
+  useEffect(() => {
+    const calculateRadius = () => {
+      if (radialContainerRef.current) {
+        const containerWidth = radialContainerRef.current.clientWidth;
+        // The original design has a 190px radius for a 350px container.
+        // This calculates the new radius proportionally to maintain the same look.
+        const newRadius = (containerWidth / 350) * 183;
+        setHandleRadius(newRadius);
+      }
+    };
+
+    calculateRadius(); // Calculate on initial render
+    window.addEventListener('resize', calculateRadius);
+
+    // Cleanup the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', calculateRadius);
+    };
+  }, []); // Empty dependency array ensures this runs only on mount and unmount
 
   const formatAmountToString = useCallback((value) => {
     const num = parseInt(value);
     if (isNaN(num)) return "0";
-    return num.toString().padStart(2, "0"); // Ensure two digits
+    return num.toString().padStart(2, "0");
   }, []);
 
   useEffect(() => {
@@ -27,6 +55,7 @@ export default function SubscriptionOptions() {
     }
   }, [amount, dragging, textInputValue, formatAmountToString]);
 
+  // All your other handler functions (handleRadialDrag, handleCheckout, etc.) remain unchanged...
   const handleRadialDrag = (e) => {
     e.preventDefault();
     setDragging(true);
@@ -191,6 +220,7 @@ export default function SubscriptionOptions() {
       setLoading(false);
     }
   };
+
   const handleCheckout = async () => {
     setLoading(true);
     setMessage("");
@@ -229,16 +259,14 @@ export default function SubscriptionOptions() {
 
   return (
     <div className="options-container">
-      {/* Top Navigation Bar */}
-      <div className="top-nav-bar">
+      {/* ... your top-nav-bar ... */}
+       <div className="top-nav-bar">
         <div className="nav-icon">
-          {/* Replace with actual paths to your icons */}
           <Link href="/payment">
             <img src="/home-icon.png" alt="Home" className="nav-icon-img" />
           </Link>
         </div>
         <div className="nav-icon nav-icon-active">
-          {/* Replace with actual paths to your icons */}
           <Link href="/payment/options">
             <img
               src="/payment-icon.png"
@@ -248,7 +276,6 @@ export default function SubscriptionOptions() {
           </Link>
         </div>
         <div className="nav-icon">
-          {/* Replace with actual paths to your icons */}
           <button
             target="_blank"
             onClick={handleManageBilling}
@@ -263,22 +290,19 @@ export default function SubscriptionOptions() {
         </div>
       </div>
 
-      {/* Main Payment Card */}
+
       <div className="options-card">
-        {/* Left Section - Payment Methods */}
+        {/* ... your payment-methods-section ... */}
         <div className="payment-methods-section">
           <div className="payment-logo">
-            {/* Replace with actual paths to your icons */}
             <img
               src="/Vector 36.png"
               alt="Chevron"
               className="payment-logo-img"
             />
           </div>
-          {/* Moved the title to match the image positioning */}
           <div className="payment-methods-buttons">
             <h2 className="payment-methods-title">PAYMENT METHODS</h2>
-            {/* Title moved here */}
             <div className="payment-methods-buttons-inner">
               <button
                 className={`payment-method-btn visa ${
@@ -286,7 +310,6 @@ export default function SubscriptionOptions() {
                 }`}
                 onClick={() => setSelectedPaymentMethod("visa")}
               >
-                {/* Replace with actual paths to your icons */}
                 <img
                   src="/visa-icon.png"
                   alt="VISA"
@@ -300,7 +323,6 @@ export default function SubscriptionOptions() {
                 }`}
                 onClick={() => setSelectedPaymentMethod("crypto")}
               >
-                {/* Replace with actual paths to your icons */}
                 <img
                   src="/crypto-icon.png"
                   alt="CRYPTO"
@@ -311,10 +333,9 @@ export default function SubscriptionOptions() {
           </div>
         </div>
 
-        {/* Center Section - Radial Amount Selection */}
         <div className="radial-section">
           <div className="radial-instruction">
-            <div className="radial-instruction-curved">
+              <div className="radial-instruction-curved">
               <svg
                 viewBox="0 0 400 400"
                 style={{ width: "100%", height: "100%" }}
@@ -322,15 +343,14 @@ export default function SubscriptionOptions() {
                 <defs>
                   <path
                     id="curve"
-                    d="M 200,15 a 185,185 0 1,1 0,370 a 185,185 0 1,1 0,-370"
+                    d="M 15,200 a 185,185 0 1,1 370,0 a 185,185 0 1,1 -370,0"
                   />
                 </defs>
                 <text>
                   <textPath
                     href="#curve"
-                    textAnchor="start"
-                    startOffset="0%"
-                    endOffset="100%"
+                    textAnchor="middle"
+                    startOffset="26%"
                   >
                     slide the dot
                   </textPath>
@@ -339,30 +359,27 @@ export default function SubscriptionOptions() {
             </div>
           </div>
 
-          <div className="radial-payment-container">
+          {/* --- ATTACH THE REF HERE --- */}
+          <div ref={radialContainerRef} className="radial-payment-container">
             <div
               className="radial-slider"
               onMouseDown={handleRadialDrag}
               onTouchStart={handleTouchStart}
               style={{ userSelect: "none" }}
             >
-              {/* Progress ring - removed to match design */}
-
               <div className="radial-amount-display">
                 <div className="radial-amount-value">
                   <input
                     ref={inputRef}
-                    type="text" // Changed to text to handle '00' formatting better
-                    pattern="[0-9]*" // Restrict to numeric input visually
+                    type="text"
+                    pattern="[0-9]*"
                     min="0"
                     max="100"
                     value={textInputValue}
                     onChange={handleTextInput}
                     onBlur={handleInputBlur}
                     onClick={(e) => e.stopPropagation()}
-                    onFocus={(e) => {
-                      e.target.select();
-                    }}
+                    onFocus={(e) => e.target.select()}
                     className="radial-center-input"
                     placeholder="00"
                   />
@@ -376,22 +393,22 @@ export default function SubscriptionOptions() {
               <div
                 className="radial-handle"
                 style={{
+                  // --- USE THE DYNAMIC STATE VARIABLE FOR THE TRANSFORM ---
                   transform: `translate(-50%, -50%) rotate(${
                     (amount / 100) * 360
-                  }deg) translateY(-190px)`,
+                  }deg) translateY(-${handleRadius}px)`,
                 }}
               ></div>
             </div>
           </div>
         </div>
 
-        {/* Right Section - Action Buttons (Single Column) */}
+        {/* ... your action-section ... */}
         <div className="action-section">
           <button
             className="close-button"
             onClick={() => router.push("/payment/subscription")}
           >
-            {/* Replace with actual paths to your icons */}
             <img src="/Vector 35.png" alt="Close" className="action-icon" />
           </button>
 
@@ -400,7 +417,6 @@ export default function SubscriptionOptions() {
             disabled={loading}
             className="pay-button"
           >
-            {/* Replace with actual paths to your icons */}
             <img
               src="/fingerprint-icon.png"
               alt="Fingerprint"
@@ -410,7 +426,6 @@ export default function SubscriptionOptions() {
           </button>
 
           <button className="profile-button">
-            {/* Replace with actual paths to your icons */}
             <img
               src="/profile-icon.png"
               alt="Profile"
@@ -419,7 +434,6 @@ export default function SubscriptionOptions() {
           </button>
         </div>
 
-        {/* Error Message */}
         {message && <div className="options-error">{message}</div>}
       </div>
     </div>
