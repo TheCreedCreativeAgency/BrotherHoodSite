@@ -25,7 +25,7 @@ export default function SubscriptionOptions() {
   useEffect(() => {
     const calculateRadius = () => {
       if (radialContainerRef.current) {
-        const containerWidth = radialContainerRef.current.clientWidth;
+        const containerWidth = radialContainerRef.current.clientWidth ;
         // The original design has a 190px radius for a 350px container.
         // This calculates the new radius proportionally to maintain the same look.
         const newRadius = (containerWidth / 350) * 183;
