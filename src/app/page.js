@@ -250,7 +250,7 @@ export default function Home() {
         </header>
 
         <main>
-          <section className="newsletter-signup">
+          <section id="newsletter" className="newsletter-signup">
             <h1>SIGN UP FOR THE CREED&apos;S</h1>
             <h2 className="subtitle"><span>Newsletter</span>...</h2>
 
@@ -354,7 +354,7 @@ export default function Home() {
                 onClick={() => toggleAccordion(2)}
               >
                 <div className="accordion-header">
-                  <span>Why are we different</span>
+                  <span>Why are we different?</span>
                   <span className="plus-icon">+</span>
                 </div>
                 <div className="accordion-content">
@@ -362,7 +362,7 @@ export default function Home() {
                     We arent a brotherhood limited to just &ldquo;talk&rdquo; we take actionable steps across the world
                     to make sure we become an immovable object where evil is concerned. <br />
                     We will not hesitate to lay down our lives and love for our brothers - the elites have
-                    pioneered against us to be in a state of disunity and and distrustful ness - while they
+                    pioneered against us to be in a state of disunity and and distrustfulness - while they
                     sit united in there throne of lies. <br />
                     You must be united, you must fight or you will be forgotten. <br />
 
@@ -383,7 +383,7 @@ export default function Home() {
                 </div>
                 <div className="accordion-content">
                   <p>
-                    Click on our self hosted Space where you can learn more about the application process: <br />
+                    Click on our self-hosted Space where you can learn more about the application process: <br />
                     <a href="https://matrix.to/#/#the-creed-landing:matrix.the-creed.org">Click Here to Apply</a>
                   </p>
                 </div>
@@ -415,7 +415,7 @@ export default function Home() {
                 </div>
                 <div className="accordion-content">
                   <p>
-                    We have paypal. <br />
+                    We have paypal and stripe (Credit Card). <br />
                     We have crypto <b>(RECOMMENDED)</b>. <br />
                     And for big amounts (500 plus) we have also have Western Union Cash.
                   </p>
@@ -437,7 +437,7 @@ export default function Home() {
           <div className="footer-center-area">
             <nav className="footer-nav">
               <ul>
-                <li><a href="#">Newsletter</a></li>
+                <li><a href="#newsletter">Newsletter</a></li>
                 <li><a href="#">ToC</a></li>
                 <li><a href="#">Our Policies</a></li>
                 <li><a href="#">Our Laws</a></li>
